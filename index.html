@@ -2040,12 +2040,12 @@ function _showAppAndRun(){
       // Token expired and refresh failed — back to login
       _hide('app-wrap');
       _show('login-screen');
-      document.getElementById('login-email').value='ruteshshirodkar@outlook.com';
+      var _le=document.getElementById('login-email');if(_le)_le.value='ruteshshirodkar@outlook.com';
       window._quickAuth=false;
       return;
     }
     _show('mfa-btn');
-    await _runApp();
+    try{await _runApp();}catch(e){console.error(e);}
     return;
   }
 
@@ -2054,34 +2054,34 @@ function _showAppAndRun(){
     _show('app-wrap');
     _hide('login-screen');
     _show('mfa-btn');
-    await _runApp();
+    try{await _runApp();}catch(e){console.error(e);}
   }else{
-    document.getElementById('login-email').value='ruteshshirodkar@outlook.com';
+    var _le=document.getElementById('login-email');if(_le)_le.value='ruteshshirodkar@outlook.com';
   }
 })();
 
 
 // Called from login flow — show app then run init
-function _showAppAndRun(){
+async function _showAppAndRun(){
   _hide('login-screen');
   _show('app-wrap');
   _show('mfa-btn');
-  _runApp();
+  await _runApp();
 }
 // Called after successful login
 async function _runApp(){
   if(window._appInited)return;
   window._appInited=true;
+  // Each step independent — one failure won't block the rest
+  try{await initData();}catch(e){console.error('initData failed:',e);}
+  try{setToday('d-date');}catch(e){}
+  try{var _fd=document.getElementById('f-date');if(_fd)_fd.value=today();}catch(e){}
+  try{var _fl=document.getElementById('f-label');if(_fl)_fl.textContent=fmtL(today());}catch(e){}
+  try{renderDash();}catch(e){console.error('renderDash failed:',e);}
   try{
-    await initData();
-      setToday('d-date');
-      document.getElementById('f-date').value=today();
-      document.getElementById('f-label').textContent=fmtL(today());
-      renderDash();
-      // Wire import input via JS — inline onchange is unreliable in sandboxed iframes
-      var importEl=document.getElementById('import-input');
-      if(importEl)importEl.addEventListener('change',function(e){importData(e);});
-  }catch(err){console.error('Launch error:',err);}
+    var _ie=document.getElementById('import-input');
+    if(_ie)_ie.addEventListener('change',function(e){importData(e);});
+  }catch(e){}
 }
 </script>
 <div id="scanner-overlay" style="display:none" class="scanner-overlay">
