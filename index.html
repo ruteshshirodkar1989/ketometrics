@@ -543,7 +543,6 @@ button,input,select,a{touch-action:manipulation}
 .chg-pass-box{background:#fff;border-radius:16px;padding:24px;width:100%;max-width:360px}
 .chg-pass-box h3{margin:0 0 16px;font-size:16px;color:#0d3d25;display:flex;justify-content:space-between;align-items:center}
 
-#app-wrap{display:none}
 </style>
 </head>
 <body>
@@ -763,7 +762,7 @@ var SB_URL='https://xhqotxzwcadumfhnhmkp.supabase.co/rest/v1/';
 var AUTH_URL='https://xhqotxzwcadumfhnhmkp.supabase.co/auth/v1';
 var SESSION=null;
 function _el(id){return document.getElementById(id);}
-function _show(id){var e=_el(id);if(e)e.style.display='';}
+function _show(id,disp){var e=_el(id);if(e)e.style.display=disp||'block';}
 function _hide(id){var e=_el(id);if(e)e.style.display='none';}
 var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhocW90eHp3Y2FkdW1maG5obWtwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwMTgzMjYsImV4cCI6MjA5NTU5NDMyNn0.T6M3CyCWMLsNso5DUdDPgYOLq3vhznVeD-HdD3FfSZU';
 
@@ -1873,7 +1872,7 @@ function doLogout(){
     fetch(AUTH_URL+'/logout',{method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SESSION.access_token}}).catch(function(){});
   }
   _clearSession();
-  _show('login-screen');
+  _show('login-screen','flex');
   document.getElementById('login-form').style.display='';
   document.getElementById('mfa-form').style.display='none';
   document.getElementById('login-pass').value='';
@@ -2039,7 +2038,7 @@ function _showAppAndRun(){
     if(!ok){
       // Token expired and refresh failed — back to login
       _hide('app-wrap');
-      _show('login-screen');
+      _show('login-screen','flex');
       var _le=document.getElementById('login-email');if(_le)_le.value='ruteshshirodkar@outlook.com';
       window._quickAuth=false;
       return;
