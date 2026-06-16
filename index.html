@@ -852,6 +852,7 @@ tr:hover td{background:#f9fafb}
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 var _s=JSON.parse(document.getElementById('_seed').textContent);
@@ -948,7 +949,7 @@ function sw(tab){
   document.querySelectorAll('#bottom-nav button').forEach(function(b){
     b.classList.toggle('active',b.dataset.tab===tab);
   });
-  if(tab==='invest')setTimeout(initVestedModule,50);
+  if(tab==='invest')setTimeout(function(){initVestedModule();},50);
 }
 function today(){return new Date().toISOString().split('T')[0];}
 function setToday(id){document.getElementById(id).value=today();}
@@ -2378,8 +2379,8 @@ var _VTX=[
   {d:'2023-07-26',tp:'CSR', a:150,    bl:150,    ds:'Deposit'},
   {d:'2023-07-26',tp:'SPUR',a:148.61, bl:1.39,   ds:'BNO Market Buy'},
 ];
-var _V_VDEPS=5121.46,_V_VCOMM=14.83,_V_VREAL=118.81,_V_VCASH=13.52;
-var _V_VCLR=['#2563eb','#16a34a','#9333ea','#ea580c','#0891b2','#ca8a04','#16a34a','#7c3aed','#db2777','#059669','#d97706','#64748b'];
+var _VDEPS=5121.46,_VCOMM=14.83,_VREAL=118.81,_VCASH=13.52;
+var _VCLR=['#2563eb','#16a34a','#9333ea','#ea580c','#0891b2','#ca8a04','#16a34a','#7c3aed','#db2777','#059669','#d97706','#64748b'];
 var _vPC=null,_vSC=null,_vPLC=null;
 var _v$=function(id){return document.getElementById(id);};
 var _vff=n=>'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
@@ -2396,7 +2397,7 @@ function vSw(name,btn){
   if(name==='vn')vRNR();
 }
 function vRH(){
-  const tv=_VH.reduce((s,h)=>s+h.val,0);
+  var tv=_VH.reduce((s,h)=>s+h.val,0);
   _v$('hb').innerHTML=_VH.map((h,i)=>{
     const wt=(h.val/tv*100).toFixed(1),rc=h.ret>=0?'g':'r',dc=h.dc>=0?'g':'r';
     return `<tr>
@@ -2414,13 +2415,13 @@ function vRH(){
   vRK();
 }
 function vUP(i,v){
-  const p=parseFloat(v);if(!p||p<=0)return;
+  var p=parseFloat(v);if(!p||p<=0)return;
   _VH[i].c=p;_VH[i].val=+(_VH[i].s*p).toFixed(2);
   _VH[i].ret=+(_VH[i].val-_VH[i].inv).toFixed(2);_VH[i].rp=+(_VH[i].ret/_VH[i].inv*100).toFixed(2);
   vRH();if(_v$('pg-vn').classList.contains('von'))vRNR();if(_v$('pg-vc').classList.contains('von'))vRCh();
 }
 function vRK(){
-  const tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),ret=tv-tc,rp=ret/tc*100;
+  var tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),ret=tv-tc,rp=ret/tc*100;
   _v$('kpis').innerHTML=`
     <div class="kpi"><label>Portfolio value</label><div class="v g">${_vff(tv)}</div><div class="s">Jun 2, 2026 live</div></div>
     <div class="kpi"><label>Total invested</label><div class="v">${_vff(tc)}</div><div class="s">12 open positions</div></div>
@@ -2430,7 +2431,7 @@ function vRK(){
     <div class="kpi"><label>Commission paid</label><div class="v r">−${_vff(_VCOMM)}</div><div class="s">All 20 trades</div></div>`;
 }
 function vRT(){
-  const lb={CSR:'dp',SPUR:'by',SSAL:'sl'},lt={CSR:'Deposit',SPUR:'Buy',SSAL:'Sell'};
+  var lb={CSR:'dp',SPUR:'by',SSAL:'sl'},lt={CSR:'Deposit',SPUR:'Buy',SSAL:'Sell'};
   _v$('tb').innerHTML=_VTX.map(t=>`<tr>
     <td>${t.d}</td><td><span class="bd ${lb[t.tp]||''}">${lt[t.tp]||t.tp}</span></td>
     <td style="color:#6b7280">${t.ds}</td>
@@ -2440,12 +2441,12 @@ function vRT(){
   </tr>`).join('');
 }
 function vRNR(){
-  const br=parseInt(_v$('tbr').value),cess=_v$('cess').checked;
-  const rate=parseFloat(_v$('inr').value)||84,af=parseFloat(_v$('aum').value)||0;
-  const eff=br*(cess?1.04:1)/100;
-  const tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),unr=tv-tc;
-  const rTax=_VREAL*eff,uTax=Math.max(0,unr)*eff,nn=tv+_VCASH-uTax-rTax-af,roc=(nn-_VDEPS)/_VDEPS*100;
-  const wr=(ic,lbl,sub,amt,cls,bg)=>`<div class="wr">
+  var br=parseInt(_v$('tbr').value),cess=_v$('cess').checked;
+  var rate=parseFloat(_v$('inr').value)||84,af=parseFloat(_v$('aum').value)||0;
+  var eff=br*(cess?1.04:1)/100;
+  var tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),unr=tv-tc;
+  var rTax=_VREAL*eff,uTax=Math.max(0,unr)*eff,nn=tv+_VCASH-uTax-rTax-af,roc=(nn-_VDEPS)/_VDEPS*100;
+  var wr=(ic,lbl,sub,amt,cls,bg)=>`<div class="wr">
     <div class="wi" style="background:${bg}">${ic}</div>
     <div class="wl"><strong>${lbl}</strong>${sub}</div>
     <div class="wa ${cls}">${amt}</div></div>`;
@@ -2477,33 +2478,33 @@ function vRNR(){
   }).join('');
 }
 function vRCh(){
-  if(_vPC)_vPC.destroy();if(_vSC)_vSC.destroy();if(_vPLC)_vPLC.destroy();
-  const tv=_VH.reduce((s,h)=>s+h.val,0);
-  const so=[..._VH].sort((a,b)=>b.val-a.val);
-  _vPC=new Chart(_v$('piec'),{type:'doughnut',data:{labels:so.map(h=>h.t),datasets:[{data:so.map(h=>+(h.val/tv*100).toFixed(1)),backgroundColor:_VCLR,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
+  if(_vPC)_v_vPC.destroy();if(_vSC)_v_vSC.destroy();if(_vPLC)_v_vPLC.destroy();
+  var tv=_VH.reduce((s,h)=>s+h.val,0);
+  var so=[..._VH].sort((a,b)=>b.val-a.val);
+  _v_vPC=new Chart(_v$('piec'),{type:'doughnut',data:{labels:so.map(h=>h.t),datasets:[{data:so.map(h=>+(h.val/tv*100).toFixed(1)),backgroundColor:_VCLR,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
   _v$('pl').innerHTML=so.map((h,i)=>`<span><span class="ld" style="background:${_VCLR[i]}"></span>${h.t} ${(h.val/tv*100).toFixed(1)}%</span>`).join('');
-  const sm={};H.forEach(h=>{sm[h.sec]=(sm[h.sec]||0)+h.val});
-  const sk=Object.keys(sm).sort((a,b)=>sm[b]-sm[a]);
-  _vSC=new Chart(_v$('secc'),{type:'bar',data:{labels:sk,datasets:[{data:sk.map(s=>+(sm[s]/tv*100).toFixed(1)),backgroundColor:['#2563eb','#16a34a','#ea580c','#9333ea'],borderRadius:6,borderSkipped:false}]},
+  var sm={};_VH.forEach(function(h){sm[h.sec]=(sm[h.sec]||0)+h.val;});
+  var sk=Object.keys(sm).sort((a,b)=>sm[b]-sm[a]);
+  _v_vSC=new Chart(_v$('secc'),{type:'bar',data:{labels:sk,datasets:[{data:sk.map(s=>+(sm[s]/tv*100).toFixed(1)),backgroundColor:['#2563eb','#16a34a','#ea580c','#9333ea'],borderRadius:6,borderSkipped:false}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:11}},grid:{color:'#f3f4f6'}},y:{ticks:{callback:v=>v+'%',font:{size:11}},grid:{color:'#f3f4f6'}}}}});
-  const sp=[..._VH].sort((a,b)=>b.ret-a.ret);
+  var sp=[..._VH].sort((a,b)=>b.ret-a.ret);
   _v$('pw').style.height=Math.max(260,_VH.length*40+60)+'px';
-  _vPLC=new Chart(_v$('pnlc'),{type:'bar',data:{labels:sp.map(h=>h.t),datasets:[{data:sp.map(h=>h.ret),backgroundColor:sp.map(h=>h.ret>=0?'#16a34a':'#dc2626'),borderRadius:4,borderSkipped:false}]},
+  _v_vPLC=new Chart(_v$('pnlc'),{type:'bar',data:{labels:sp.map(h=>h.t),datasets:[{data:sp.map(h=>h.ret),backgroundColor:sp.map(h=>h.ret>=0?'#16a34a':'#dc2626'),borderRadius:4,borderSkipped:false}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${_vff(ctx.raw)} (${_vfp(sp[ctx.dataIndex].rp)})`}}},
       scales:{x:{ticks:{callback:v=>'$'+v,font:{size:11}},grid:{color:'#f3f4f6'}},y:{ticks:{font:{size:11,weight:'bold'}},grid:{display:false}}}}});
 }
 async function vRAI(type){
   ['ba','bb','bc','bd'].forEach(function(b){var el=_v$(b);if(el)el.disabled=true;});
-  const o=_v$('ao');o.style.color='#6b7280';
+  var o=_v$('ao');o.style.color='#6b7280';
   o.textContent={analyze:'🔍 Analyzing your portfolio…',rebalance:'⚖️ Building rebalancing plan…',risk:'🛡️ Running risk assessment…',trends:'📈 Fetching market trends…'}[type];
-  const tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0);
-  const sum=`Vested portfolio (live Jun 2 2026) — Ramnath Udai Shirodkar, Pune, India. VSUT000394.
+  var tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0);
+  var sum=`Vested portfolio (live Jun 2 2026) — Ramnath Udai Shirodkar, Pune, India. VSUT000394.
 12 holdings · Value:${_vff(tv)} · Invested:${_vff(tc)} · Unrealized:+${_vff(tv-tc)}(+${((tv-tc)/tc*100).toFixed(2)}%)
 Deposits:${_vff(_VDEPS)} Cash:${_vff(_VCASH)} Commission:-${_vff(_VCOMM)} Realized(BNO):+${_vff(_VREAL)} STCG
 ${_VH.map(h=>`${h.t}@$${h.c}|${h.ret>=0?'+':''}${_vff(h.ret)}(${_vfp(h.rp)})|today:${h.dc>=0?'+':''}$${h.dc.toFixed(2)}`).join(' ')}
 Sectors: Tech ~77% | Healthcare ~11% | Consumer Disc ~6% | Energy ~4%
 All STCG (<24mo). Only NVO in loss (-3.51%).`;
-  const P={
+  var P={
     analyze:`${sum}\n\n1)Overall health 2)Best/worst performers 3)Sector concentration risk 4)Buy/Hold/Sell each of 12 stocks 5)Top 3 priority actions. Note STCG tax cost of selling.`,
     rebalance:`${sum}\n\nRebalancing: 1)Current vs ideal weights 2)Positions to trim vs add 3)Specific $ amounts 4)STCG tax-efficient rebalancing order.`,
     risk:`${sum}\n\nRisk: 1)Tech concentration (77%) 2)NVO loss -3.51% 3)EOSE/CLPT small-cap risk 4)USD/INR for Indian LRS investor 5)Downside -20% and -40% scenarios 6)Risk score 1-10.`,
@@ -2526,6 +2527,221 @@ All STCG (<24mo). Only NVO in loss (-3.51%).`;
 }
 // init moved to initVestedModule()
 
+
+// ── INVEST SUPABASE PERSISTENCE ──────────────────────────────────────────
+async function savePortfolioToSupabase(){
+  try{
+    var payload={
+      id:1,
+      holdings:_VH,
+      transactions:_VTX,
+      deps:_VDEPS,
+      comm:_VCOMM,
+      real_gain:_VREAL,
+      cash:_VCASH,
+      updated_at:new Date().toISOString()
+    };
+    await sbUpsert('invest_portfolio', payload);
+    console.log('Portfolio saved to Supabase');
+  }catch(e){
+    console.warn('Could not save portfolio to Supabase:',e.message);
+  }
+}
+
+async function loadPortfolioFromSupabase(){
+  try{
+    var rows=await sbGet('invest_portfolio?id=eq.1');
+    if(!Array.isArray(rows)||!rows.length)return false;
+    var row=rows[0];
+    if(!row.holdings||!row.holdings.length)return false;
+    _VH=row.holdings;
+    _VTX=row.transactions||_VTX;
+    _VDEPS=row.deps||_VDEPS;
+    _VCOMM=row.comm||_VCOMM;
+    _VREAL=row.real_gain||_VREAL;
+    _VCASH=row.cash||_VCASH;
+    // Also load cached live prices if available
+    if(row.prices&&Object.keys(row.prices).length){
+      var cachedPrices={ts:row.prices.ts||0,prices:row.prices};
+      try{localStorage.setItem(AV_CACHE_KEY,JSON.stringify(cachedPrices));}catch(e){}
+    }
+    var lbl=document.getElementById('v-last-update');
+    var ago=row.updated_at?new Date(row.updated_at).toLocaleString():'unknown';
+    if(lbl)lbl.textContent='Loaded from Supabase · '+ago;
+    return true;
+  }catch(e){
+    console.warn('Could not load from Supabase:',e.message);
+    return false;
+  }
+}
+
+async function saveLivePricesToSupabase(prices){
+  try{
+    await fetch(SB_URL+'invest_portfolio?id=eq.1',{
+      method:'PATCH',
+      headers:sbH(),
+      body:JSON.stringify({prices:Object.assign({ts:Date.now()},prices)})
+    });
+  }catch(e){}
+}
+
+// ── VESTED XLSX IMPORTER ─────────────────────────────────────────────────
+var V_SECTOR_MAP={
+  PLTR:'Technology',NVDA:'Technology',MSFT:'Technology',NOW:'Technology',
+  NVO:'Healthcare',AMD:'Technology',EOSE:'Energy',GOOGL:'Communication',
+  AMZN:'Consumer',TSLA:'Consumer',META:'Communication',CLPT:'Healthcare',
+  BNO:'Energy'
+};
+
+async function parseVestedFile(evt){
+  var file=evt.target.files[0];
+  evt.target.value='';
+  if(!file)return;
+  if(typeof XLSX==='undefined'){alert('Excel library not loaded. Check internet connection.');return;}
+
+  var lbl=document.getElementById('v-last-update');
+  if(lbl)lbl.textContent='Parsing file...';
+
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var wb=XLSX.read(new Uint8Array(e.target.result),{type:'array'});
+
+      // ── Parse Trades sheet → calculate holdings ───────────────────────
+      var tradesWS=wb.Sheets['Trades'];
+      var trades=XLSX.utils.sheet_to_json(tradesWS);
+      var holdMap={};
+
+      trades.forEach(function(row){
+        var ticker=row['Ticker'];
+        if(!ticker)return;
+        var qty=parseFloat(row['Quantity'])||0;
+        var price=parseFloat(row['Price Per Share (in USD)'])||0;
+        var amount=parseFloat(row['Cash Amount (in USD)'])||0;
+        var comm=parseFloat(row['Commission Charges (in USD)'])||0;
+        var isBuy=row['Activity']==='Buy';
+
+        if(!holdMap[ticker]){
+          holdMap[ticker]={
+            t:ticker,n:row['Name'],s:0,totalCost:0,
+            sec:V_SECTOR_MAP[ticker]||'Other',
+            commissions:0,realizedPL:0
+          };
+        }
+        var h=holdMap[ticker];
+        if(isBuy){
+          h.totalCost+=amount;
+          h.s+=qty;
+          h.commissions+=comm;
+        }else{
+          // Average cost method: reduce cost basis proportionally
+          if(h.s>0){
+            var avgCost=h.totalCost/h.s;
+            h.realizedPL+=(price-avgCost)*qty-comm;
+            h.totalCost-=avgCost*qty;
+          }
+          h.s-=qty;
+          h.commissions+=comm;
+        }
+      });
+
+      // Build _VH — only open positions
+      var newVH=[];
+      Object.values(holdMap).forEach(function(h){
+        if(h.s>0.0001){
+          var avgBuy=h.s>0?+(h.totalCost/h.s).toFixed(2):0;
+          newVH.push({
+            t:h.t, n:h.n, s:+h.s.toFixed(8),
+            b:avgBuy, inv:+h.totalCost.toFixed(2),
+            sec:h.sec,
+            c:avgBuy,   // placeholder until refresh
+            val:+h.totalCost.toFixed(2),
+            ret:0, rp:0, dc:0, dcp:0
+          });
+        }
+      });
+      newVH.sort(function(a,b){return b.inv-a.inv;});
+
+      // ── Parse All Transactions → _VTX ────────────────────────────────
+      var txWS=wb.Sheets['All Transactions'];
+      var txRows=XLSX.utils.sheet_to_json(txWS);
+      var newTX=txRows.map(function(row){
+        return {
+          d:row['Date']||'',
+          tp:row['Type']||'',
+          amt:parseFloat(row['Amount'])||0,
+          bal:parseFloat(row['Account Balance ']||row['Account Balance'])||0,
+          comment:row['Comment  ']||row['Comment']||''
+        };
+      }).filter(function(r){return r.d&&r.tp;});
+
+      // ── Parse Transfers → _VDEPS ──────────────────────────────────────
+      var trWS=wb.Sheets['Transfers'];
+      var transfers=XLSX.utils.sheet_to_json(trWS);
+      var totalDeps=transfers.reduce(function(s,r){
+        return s+(parseFloat(r['Cash Amount (in USD)'])||0);
+      },0);
+
+      // ── Parse Income → dividends ──────────────────────────────────────
+      var incWS=wb.Sheets['Income'];
+      var income=XLSX.utils.sheet_to_json(incWS);
+      var totalDiv=income.filter(function(r){return r['Activity']==='Dividend';})
+        .reduce(function(s,r){return s+(parseFloat(r['Gross Cash Amount (in USD)'])||0);},0);
+      var totalDivTax=income.filter(function(r){return r['Activity']==='Tax';})
+        .reduce(function(s,r){return s+Math.abs(parseFloat(r['Gross Cash Amount (in USD)'])||0);},0);
+
+      // ── Update global arrays ──────────────────────────────────────────
+      _VH=newVH;
+      _VTX=newTX;
+      _VDEPS=+totalDeps.toFixed(2);
+      _VCOMM=+Object.values(holdMap).reduce(function(s,h){return s+h.commissions;},0).toFixed(2);
+
+      // ── Persist to localStorage ───────────────────────────────────────
+      try{
+        localStorage.setItem('km_vested_data',JSON.stringify({
+          VH:_VH, VTX:_VTX, DEPS:_VDEPS, COMM:_VCOMM,
+          DIV:+totalDiv.toFixed(2), DIVTAX:+totalDivTax.toFixed(2),
+          importedAt:Date.now()
+        }));
+      }catch(e){}
+
+      // ── Re-render ─────────────────────────────────────────────────────
+      vRH(); vRT(); vRNR();
+      if(lbl){
+        var d=new Date();
+        lbl.textContent='Imported '+newVH.length+' holdings, '+newTX.length+' transactions · '+d.toLocaleTimeString();
+      }
+
+      // Offer to refresh live prices
+      var msg=newVH.length+' holdings loaded from Excel.\n\nDo you want to fetch live prices now?';
+      if(confirm(msg))fetchLivePrices();
+
+    }catch(err){
+      alert('Error parsing file: '+err.message);
+      console.error('Vested import error:',err);
+      if(lbl)lbl.textContent='Import failed';
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// Load persisted vested data from localStorage
+function loadPersistedVestedData(){
+  try{
+    var saved=JSON.parse(localStorage.getItem('km_vested_data')||'null');
+    if(saved&&saved.VH&&saved.VH.length>0){
+      _VH=saved.VH;
+      _VTX=saved.VTX||_VTX;
+      _VDEPS=saved._VDEPS||_VDEPS;
+      _VCOMM=saved._VCOMM||_VCOMM;
+      var age=Math.round((Date.now()-saved.importedAt)/60000);
+      var lbl=document.getElementById('v-last-update');
+      if(lbl)lbl.textContent='Data from '+age+'m ago · click Refresh for live prices';
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
 
 // ── ALPHA VANTAGE LIVE PRICES ─────────────────────────────────────────────
 var AV_KEY='VY6VN4YQ06EC8JGY';
@@ -2587,9 +2803,10 @@ async function fetchLivePrices(){
     }
   }
 
-  // Cache results
+  // Cache results locally and in Supabase
   var cached={ts:Date.now(),prices:prices};
   try{localStorage.setItem(AV_CACHE_KEY,JSON.stringify(cached));}catch(e){}
+  saveLivePricesToSupabase(prices);
 
   applyLivePrices(prices);
   var fetchedCount=Object.keys(prices).length;
@@ -2630,13 +2847,16 @@ function loadCachedPrices(){
   }catch(e){}
 }
 
-function initVestedModule(){
+async function initVestedModule(){
   if(window._vestedInited)return;
   window._vestedInited=true;
   try{
     var hbEl=document.getElementById('hb');
     var kpisEl=document.getElementById('kpis');
     if(!hbEl||!kpisEl){console.warn('Invest DOM not ready');window._vestedInited=false;return;}
+    // Load from Supabase first, then localStorage, then hardcoded
+    var sbLoaded=await loadPortfolioFromSupabase();
+    if(!sbLoaded)loadPersistedVestedData();
     vRH();vRT();loadCachedPrices();
   }catch(e){console.error('Vested init error:',e);window._vestedInited=false;}
 }
@@ -2856,7 +3076,10 @@ async function _runApp(){
 <div id="pg-vp" class="vpg von">
   <div class="kpis" id="kpis"></div>
   <div class="vpanel">
-    <div class="vph"><span>Open Positions — 12 Holdings</span><div style="display:flex;align-items:center;gap:8px"><span class="gt" id="v-last-update">Static prices · click Refresh</span><button id="v-refresh-btn" onclick="fetchLivePrices()" style="background:#1a6b4a;color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600">🔄 Refresh</button></div></div>
+    <div class="vph"><span>Open Positions — 12 Holdings</span><div style="display:flex;align-items:center;gap:8px"><span class="gt" id="v-last-update">Static prices · click Refresh</span><button id="v-refresh-btn" onclick="fetchLivePrices()" style="background:#1a6b4a;color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600">🔄 Refresh</button>
+<button onclick="document.getElementById('v-upload-input').click()" style="background:#4f46e5;color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600">📤 Import Excel</button>
+<input type="file" id="v-upload-input" accept=".xlsx,.xls" style="display:none" onchange="parseVestedFile(event)">
+</div></div>
     <table><thead><tr>
       <th style="width:10%">Ticker</th><th style="width:16%">Name</th><th style="width:8%">Sector</th>
       <th style="width:8%">Shares</th><th style="width:9%">Avg cost</th><th style="width:10%">Price</th>
@@ -2948,8 +3171,9 @@ async function _runApp(){
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
-const H=[
+var _VH=[
   {t:'PLTR',n:'Palantir Technologies',  s:8.05527001,  b:135.82,inv:1094.05,sec:'Technology',   c:160.65,ret:200.03, rp:18.28, dc:33.11, dcp:2.63,  val:1294.08},
   {t:'NVDA',n:'NVIDIA Corporation',      s:5.41103441,  b:215.87,inv:1168.08,sec:'Technology',   c:224.36,ret:45.94,  rp:3.93,  dc:71.53, dcp:6.26,  val:1214.02},
   {t:'MSFT',n:'Microsoft Corp',          s:1.87293099,  b:401.61,inv:752.18, sec:'Technology',   c:460.52,ret:110.34, rp:14.67, dc:19.25, dcp:2.28,  val:862.52},
@@ -2963,7 +3187,7 @@ const H=[
   {t:'META',n:'Meta Platforms Inc',      s:0.30310663,  b:537.27,inv:162.85, sec:'Technology',   c:600.48,ret:19.16,  rp:11.77, dc:-9.71, dcp:-5.07, val:182.01},
   {t:'CLPT',n:'ClearPoint Neuro Inc',    s:13.1080806,  b:9.85,  inv:129.12, sec:'Healthcare',   c:12.64, ret:36.57,  rp:28.32, dc:-0.39, dcp:-0.24, val:165.69},
 ];
-const TX=[
+var _VTX=[
   {d:'2026-06-01',tp:'CSR', a:1179.36,bl:1184.44,ds:'Deposit'},
   {d:'2026-06-01',tp:'SPUR',a:1171,   bl:13.52,  ds:'NVIDIA Corporation Market Buy'},
   {d:'2026-05-29',tp:'CSR', a:514.08, bl:514.08, ds:'Deposit'},
@@ -2991,88 +3215,91 @@ const TX=[
   {d:'2023-07-26',tp:'CSR', a:150,    bl:150,    ds:'Deposit'},
   {d:'2023-07-26',tp:'SPUR',a:148.61, bl:1.39,   ds:'BNO Market Buy'},
 ];
-const DEPS=5121.46,COMM=14.83,REAL=118.81,CASH=13.52;
-const CLR=['#2563eb','#16a34a','#9333ea','#ea580c','#0891b2','#ca8a04','#16a34a','#7c3aed','#db2777','#059669','#d97706','#64748b'];
+var _VDEPS=5121.46,_VCOMM=14.83,_VREAL=118.81,_VCASH=13.52;
+var _VCLR=['#2563eb','#16a34a','#9333ea','#ea580c','#0891b2','#ca8a04','#16a34a','#7c3aed','#db2777','#059669','#d97706','#64748b'];
 let PC,SC,PLC;
-const $=id=>document.getElementById(id);
-const ff=n=>'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fp=n=>(n>=0?'+':'')+n.toFixed(2)+'%';
-const fi=(n,r)=>'₹'+Math.round(n*r).toLocaleString('en-IN');
+var _v$=function(id){return document.getElementById(id);};
+var _vff=n=>'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+var _vfp=n=>(n>=0?'+':'')+n.toFixed(2)+'%';
+var _vfi=(n,r)=>'₹'+Math.round(n*r).toLocaleString('en-IN');
 
-function sw(name,btn){
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
-  $('pg-'+name).classList.add('on'); btn.classList.add('active');
-  if(name==='c')rCh();if(name==='n')rNR();
+function vSw(name,btn){
+  document.querySelectorAll('#sec-invest .vpg').forEach(function(p){p.classList.remove('von');});
+  document.querySelectorAll('#sec-invest .vnb').forEach(function(b){b.classList.remove('active');});
+  var pg=document.getElementById('pg-'+name);
+  if(pg)pg.classList.add('von');
+  if(btn)btn.classList.add('active');
+  if(name==='vc')vRCh();
+  if(name==='vn')vRNR();
 }
-function rH(){
-  const tv=H.reduce((s,h)=>s+h.val,0);
-  _v$('hb').innerHTML=H.map((h,i)=>{
+function vRH(){
+  const tv=_VH.reduce((s,h)=>s+h.val,0);
+  _v$('hb').innerHTML=_VH.map((h,i)=>{
     const wt=(h.val/tv*100).toFixed(1),rc=h.ret>=0?'g':'r',dc=h.dc>=0?'g':'r';
     return `<tr>
       <td><span class="tk">${h.t}</span><span class="lt">LIVE</span></td>
       <td style="color:#6b7280;font-size:11px">${h.n}</td>
       <td style="color:#9ca3af;font-size:10px">${h.sec}</td>
-      <td>${h.s.toFixed(4)}</td><td>${ff(h.b)}</td>
-      <td><input class="pinp" type="number" value="${h.c.toFixed(2)}" step="0.01" min="0" onchange="uP(${i},this.value)"></td>
-      <td style="font-weight:700">${ff(h.val)}<br><span style="font-size:9px;color:#9ca3af">${wt}%</span></td>
-      <td class="${rc}" style="font-weight:700">${h.ret>=0?'+':'-'}${ff(h.ret)}</td>
-      <td class="${rc}" style="font-weight:700">${fp(h.rp)}</td>
-      <td class="${dc}">${h.dc>=0?'+':''}${h.dc.toFixed(2)}<br><span style="font-size:9px">${fp(h.dcp)}</span></td>
+      <td>${h.s.toFixed(4)}</td><td>${_vff(h.b)}</td>
+      <td><input class="pinp" type="number" value="${h.c.toFixed(2)}" step="0.01" min="0" onchange="vUP(${i},this.value)"></td>
+      <td style="font-weight:700">${_vff(h.val)}<br><span style="font-size:9px;color:#9ca3af">${wt}%</span></td>
+      <td class="${rc}" style="font-weight:700">${h.ret>=0?'+':'-'}${_vff(h.ret)}</td>
+      <td class="${rc}" style="font-weight:700">${_vfp(h.rp)}</td>
+      <td class="${dc}">${h.dc>=0?'+':''}${h.dc.toFixed(2)}<br><span style="font-size:9px">${_vfp(h.dcp)}</span></td>
     </tr>`;
   }).join('');
-  rK();
+  vRK();
 }
-function uP(i,v){
+function vUP(i,v){
   const p=parseFloat(v);if(!p||p<=0)return;
-  H[i].c=p;H[i].val=+(H[i].s*p).toFixed(2);
-  H[i].ret=+(H[i].val-H[i].inv).toFixed(2);H[i].rp=+(H[i].ret/H[i].inv*100).toFixed(2);
-  rH();if(_v$('pg-n').classList.contains('von'))rNR();if(_v$('pg-c').classList.contains('von'))rCh();
+  _VH[i].c=p;_VH[i].val=+(_VH[i].s*p).toFixed(2);
+  _VH[i].ret=+(_VH[i].val-_VH[i].inv).toFixed(2);_VH[i].rp=+(_VH[i].ret/_VH[i].inv*100).toFixed(2);
+  vRH();if(_v$('pg-n').classList.contains('von'))vRNR();if(_v$('pg-c').classList.contains('von'))vRCh();
 }
-function rK(){
-  const tv=H.reduce((s,h)=>s+h.val,0),tc=H.reduce((s,h)=>s+h.inv,0),ret=tv-tc,rp=ret/tc*100;
+function vRK(){
+  const tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),ret=tv-tc,rp=ret/tc*100;
   _v$('kpis').innerHTML=`
-    <div class="kpi"><label>Portfolio value</label><div class="v g">${ff(tv)}</div><div class="s">Jun 2, 2026 live</div></div>
-    <div class="kpi"><label>Total invested</label><div class="v">${ff(tc)}</div><div class="s">12 open positions</div></div>
-    <div class="kpi"><label>Unrealized P&L</label><div class="v ${ret>=0?'g':'r'}">${ret>=0?'+':'-'}${ff(ret)}</div><div class="s ${ret>=0?'g':'r'}">${fp(rp)}</div></div>
-    <div class="kpi"><label>Realized gain</label><div class="v g">+${ff(REAL)}</div><div class="s">BNO · 3 trades</div></div>
-    <div class="kpi"><label>Cash balance</label><div class="v b">${ff(CASH)}</div></div>
-    <div class="kpi"><label>Commission paid</label><div class="v r">−${ff(COMM)}</div><div class="s">All 20 trades</div></div>`;
+    <div class="kpi"><label>Portfolio value</label><div class="v g">${_vff(tv)}</div><div class="s">Jun 2, 2026 live</div></div>
+    <div class="kpi"><label>Total invested</label><div class="v">${_vff(tc)}</div><div class="s">12 open positions</div></div>
+    <div class="kpi"><label>Unrealized P&L</label><div class="v ${ret>=0?'g':'r'}">${ret>=0?'+':'-'}${_vff(ret)}</div><div class="s ${ret>=0?'g':'r'}">${_vfp(rp)}</div></div>
+    <div class="kpi"><label>Realized gain</label><div class="v g">+${_vff(_VREAL)}</div><div class="s">BNO · 3 trades</div></div>
+    <div class="kpi"><label>Cash balance</label><div class="v b">${_vff(_VCASH)}</div></div>
+    <div class="kpi"><label>Commission paid</label><div class="v r">−${_vff(_VCOMM)}</div><div class="s">All 20 trades</div></div>`;
 }
-function rT(){
+function vRT(){
   const lb={CSR:'dp',SPUR:'by',SSAL:'sl'},lt={CSR:'Deposit',SPUR:'Buy',SSAL:'Sell'};
-  _v$('tb').innerHTML=TX.map(t=>`<tr>
+  _v$('tb').innerHTML=_VTX.map(t=>`<tr>
     <td>${t.d}</td><td><span class="bd ${lb[t.tp]||''}">${lt[t.tp]||t.tp}</span></td>
     <td style="color:#6b7280">${t.ds}</td>
-    <td class="${t.tp==='SSAL'||t.tp==='CSR'?'g':'r'}" style="font-weight:600">${t.tp==='SSAL'||t.tp==='CSR'?'+':'-'}${ff(t.a)}</td>
-    <td style="color:#6b7280">${ff(t.bl)}</td>
+    <td class="${t.tp==='SSAL'||t.tp==='CSR'?'g':'r'}" style="font-weight:600">${t.tp==='SSAL'||t.tp==='CSR'?'+':'-'}${_vff(t.a)}</td>
+    <td style="color:#6b7280">${_vff(t.bl)}</td>
     <td style="color:#9ca3af;font-size:10px">Settled</td>
   </tr>`).join('');
 }
-function rNR(){
+function vRNR(){
   const br=parseInt(_v$('tbr').value),cess=_v$('cess').checked;
   const rate=parseFloat(_v$('inr').value)||84,af=parseFloat(_v$('aum').value)||0;
   const eff=br*(cess?1.04:1)/100;
-  const tv=H.reduce((s,h)=>s+h.val,0),tc=H.reduce((s,h)=>s+h.inv,0),unr=tv-tc;
-  const rTax=REAL*eff,uTax=Math.max(0,unr)*eff,nn=tv+CASH-uTax-rTax-af,roc=(nn-DEPS)/DEPS*100;
+  const tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),unr=tv-tc;
+  const rTax=_VREAL*eff,uTax=Math.max(0,unr)*eff,nn=tv+_VCASH-uTax-rTax-af,roc=(nn-_VDEPS)/_VDEPS*100;
   const wr=(ic,lbl,sub,amt,cls,bg)=>`<div class="wr">
     <div class="wi" style="background:${bg}">${ic}</div>
     <div class="wl"><strong>${lbl}</strong>${sub}</div>
     <div class="wa ${cls}">${amt}</div></div>`;
   _v$('wfin').innerHTML=
-    wr('💰','Total LRS deposits (6 remittances)','FY 2023-24 · FY 2025-26 · FY 2026-27 (4 transfers)',ff(DEPS),'g','#dcfce7')+
-    wr('📝','Commission charges — all 20 trades',`Avg $0.74/trade · ${fi(COMM,rate)}`,'-'+ff(COMM),'r','#fee2e2')+
-    wr('✅','Realized gain — BNO (3 completed trades)',`All STCG (held < 24 months) · ${fi(REAL,rate)}`,'+'+ff(REAL),'g','#dcfce7')+
-    wr('🏦',`STCG tax on BNO gain @ ${(eff*100).toFixed(1)}%`,`Reportable in Schedule FA · ${fi(rTax,rate)}`,'-'+ff(rTax),'r','#fef3c7');
+    wr('💰','Total LRS deposits (6 remittances)','FY 2023-24 · FY 2025-26 · FY 2026-27 (4 transfers)',_vff(_VDEPS),'g','#dcfce7')+
+    wr('📝','Commission charges — all 20 trades',`Avg $0.74/trade · ${_vfi(_VCOMM,rate)}`,'-'+_vff(_VCOMM),'r','#fee2e2')+
+    wr('✅','Realized gain — BNO (3 completed trades)',`All STCG (held < 24 months) · ${_vfi(_VREAL,rate)}`,'+'+_vff(_VREAL),'g','#dcfce7')+
+    wr('🏦',`STCG tax on BNO gain @ ${(eff*100).toFixed(1)}%`,`Reportable in Schedule FA · ${_vfi(rTax,rate)}`,'-'+_vff(rTax),'r','#fef3c7');
   _v$('wfg').innerHTML=
-    wr('📈','Unrealized gain — 12 open positions (live prices)',`${fi(unr,rate)} · All STCG if sold today`,'+'+ff(unr),'g','#dcfce7')+
-    wr('🏦',`Est. STCG tax if all sold today @ ${(eff*100).toFixed(1)}%`,`Effective rate · ${fi(uTax,rate)}`,'-'+ff(uTax),'r','#fef3c7')+
-    wr('💵','Cash remaining in Vested account','Uninvested balance',ff(CASH),'b','#dbeafe');
+    wr('📈','Unrealized gain — 12 open positions (live prices)',`${_vfi(unr,rate)} · All STCG if sold today`,'+'+_vff(unr),'g','#dcfce7')+
+    wr('🏦',`Est. STCG tax if all sold today @ ${(eff*100).toFixed(1)}%`,`Effective rate · ${_vfi(uTax,rate)}`,'-'+_vff(uTax),'r','#fef3c7')+
+    wr('💵','Cash remaining in Vested account','Uninvested balance',_vff(_VCASH),'b','#dbeafe');
   _v$('nnb').innerHTML=`
     <div>
       <div style="font-size:11px;color:#6b7280">Net-net if all 12 positions sold today — after all taxes &amp; fees</div>
-      <div class="big">${ff(nn)} &nbsp;·&nbsp; ${fi(nn,rate)}</div>
-      <div style="font-size:11px;color:#6b7280;margin-top:2px">After ${(eff*100).toFixed(1)}% STCG + ${ff(COMM)} commission + ${ff(af)} platform fee · Deposited ${ff(DEPS)}</div>
+      <div class="big">${_vff(nn)} &nbsp;·&nbsp; ${_vfi(nn,rate)}</div>
+      <div style="font-size:11px;color:#6b7280;margin-top:2px">After ${(eff*100).toFixed(1)}% STCG + ${_vff(_VCOMM)} commission + ${_vff(af)} platform fee · Deposited ${_vff(_VDEPS)}</div>
     </div>
     <div style="margin-left:auto;text-align:right;flex-shrink:0">
       <div style="font-size:11px;color:#6b7280">Return on capital</div>
@@ -3080,37 +3307,37 @@ function rNR(){
       <div style="font-size:10px;color:#9ca3af">after all Indian taxes</div>
     </div>`;
   _v$('scg').innerHTML=[{l:'20% + 4% cess',e:.208},{l:'30% + 4% cess',e:.312},{l:'Gross (pre-tax)',e:0}].map(sc=>{
-    const v=tv+CASH-Math.max(0,unr)*sc.e-REAL*sc.e-af,r=(v-DEPS)/DEPS*100;
-    return `<div class="sc"><div class="sl">${sc.l}</div><div class="sv ${v>=DEPS?'g':'r'}">${ff(v)}</div>
-      <div style="font-size:10px;color:#6b7280;margin-top:3px">${fp(r)} ROC</div>
-      <div style="font-size:10px;color:#9ca3af">${fi(v,rate)}</div></div>`;
+    const v=tv+_VCASH-Math.max(0,unr)*sc.e-_VREAL*sc.e-af,r=(v-_VDEPS)/_VDEPS*100;
+    return `<div class="sc"><div class="sl">${sc.l}</div><div class="sv ${v>=_VDEPS?'g':'r'}">${_vff(v)}</div>
+      <div style="font-size:10px;color:#6b7280;margin-top:3px">${_vfp(r)} ROC</div>
+      <div style="font-size:10px;color:#9ca3af">${_vfi(v,rate)}</div></div>`;
   }).join('');
 }
-function rCh(){
-  if(PC)PC.destroy();if(SC)SC.destroy();if(PLC)PLC.destroy();
-  const tv=H.reduce((s,h)=>s+h.val,0);
-  const so=[...H].sort((a,b)=>b.val-a.val);
-  PC=new Chart(_v$('piec'),{type:'doughnut',data:{labels:so.map(h=>h.t),datasets:[{data:so.map(h=>+(h.val/tv*100).toFixed(1)),backgroundColor:CLR,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
-  _v$('pl').innerHTML=so.map((h,i)=>`<span><span class="ld" style="background:${CLR[i]}"></span>${h.t} ${(h.val/tv*100).toFixed(1)}%</span>`).join('');
-  const sm={};H.forEach(h=>{sm[h.sec]=(sm[h.sec]||0)+h.val});
+function vRCh(){
+  if(_vPC)_vPC.destroy();if(_vSC)_vSC.destroy();if(_vPLC)_vPLC.destroy();
+  const tv=_VH.reduce((s,h)=>s+h.val,0);
+  const so=[..._VH].sort((a,b)=>b.val-a.val);
+  _vPC=new Chart(_v$('piec'),{type:'doughnut',data:{labels:so.map(h=>h.t),datasets:[{data:so.map(h=>+(h.val/tv*100).toFixed(1)),backgroundColor:CLR,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
+  _v$('pl').innerHTML=so.map((h,i)=>`<span><span class="ld" style="background:${_VCLR[i]}"></span>${h.t} ${(h.val/tv*100).toFixed(1)}%</span>`).join('');
+  const sm={};_VH.forEach(function(h){sm[h.sec]=(sm[h.sec]||0)+h.val;});
   const sk=Object.keys(sm).sort((a,b)=>sm[b]-sm[a]);
-  SC=new Chart(_v$('secc'),{type:'bar',data:{labels:sk,datasets:[{data:sk.map(s=>+(sm[s]/tv*100).toFixed(1)),backgroundColor:['#2563eb','#16a34a','#ea580c','#9333ea'],borderRadius:6,borderSkipped:false}]},
+  _vSC=new Chart(_v$('secc'),{type:'bar',data:{labels:sk,datasets:[{data:sk.map(s=>+(sm[s]/tv*100).toFixed(1)),backgroundColor:['#2563eb','#16a34a','#ea580c','#9333ea'],borderRadius:6,borderSkipped:false}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:11}},grid:{color:'#f3f4f6'}},y:{ticks:{callback:v=>v+'%',font:{size:11}},grid:{color:'#f3f4f6'}}}}});
-  const sp=[...H].sort((a,b)=>b.ret-a.ret);
-  _v$('pw').style.height=Math.max(260,H.length*40+60)+'px';
-  PLC=new Chart(_v$('pnlc'),{type:'bar',data:{labels:sp.map(h=>h.t),datasets:[{data:sp.map(h=>h.ret),backgroundColor:sp.map(h=>h.ret>=0?'#16a34a':'#dc2626'),borderRadius:4,borderSkipped:false}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ff(ctx.raw)} (${fp(sp[ctx.dataIndex].rp)})`}}},
+  const sp=[..._VH].sort((a,b)=>b.ret-a.ret);
+  _v$('pw').style.height=Math.max(260,_VH.length*40+60)+'px';
+  _vPLC=new Chart(_v$('pnlc'),{type:'bar',data:{labels:sp.map(h=>h.t),datasets:[{data:sp.map(h=>h.ret),backgroundColor:sp.map(h=>h.ret>=0?'#16a34a':'#dc2626'),borderRadius:4,borderSkipped:false}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${_vff(ctx.raw)} (${_vfp(sp[ctx.dataIndex].rp)})`}}},
       scales:{x:{ticks:{callback:v=>'$'+v,font:{size:11}},grid:{color:'#f3f4f6'}},y:{ticks:{font:{size:11,weight:'bold'}},grid:{display:false}}}}});
 }
-async function rAI(type){
+async function vRAI(type){
   ['ba','bb','bc','bd'].forEach(function(b){var el=_v$(b);if(el)el.disabled=true;});
   const o=_v$('ao');o.style.color='#6b7280';
   o.textContent={analyze:'🔍 Analyzing your portfolio…',rebalance:'⚖️ Building rebalancing plan…',risk:'🛡️ Running risk assessment…',trends:'📈 Fetching market trends…'}[type];
-  const tv=H.reduce((s,h)=>s+h.val,0),tc=H.reduce((s,h)=>s+h.inv,0);
+  const tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0);
   const sum=`Vested portfolio (live Jun 2 2026) — Ramnath Udai Shirodkar, Pune, India. VSUT000394.
-12 holdings · Value:${ff(tv)} · Invested:${ff(tc)} · Unrealized:+${ff(tv-tc)}(+${((tv-tc)/tc*100).toFixed(2)}%)
-Deposits:${ff(DEPS)} Cash:${ff(CASH)} Commission:-${ff(COMM)} Realized(BNO):+${ff(REAL)} STCG
-${H.map(h=>`${h.t}@$${h.c}|${h.ret>=0?'+':''}${ff(h.ret)}(${fp(h.rp)})|today:${h.dc>=0?'+':''}$${h.dc.toFixed(2)}`).join(' ')}
+12 holdings · Value:${_vff(tv)} · Invested:${_vff(tc)} · Unrealized:+${_vff(tv-tc)}(+${((tv-tc)/tc*100).toFixed(2)}%)
+Deposits:${_vff(_VDEPS)} Cash:${_vff(_VCASH)} Commission:-${_vff(_VCOMM)} Realized(BNO):+${_vff(_VREAL)} STCG
+${_VH.map(h=>`${h.t}@$${h.c}|${h.ret>=0?'+':''}${_vff(h.ret)}(${_vfp(h.rp)})|today:${h.dc>=0?'+':''}$${h.dc.toFixed(2)}`).join(' ')}
 Sectors: Tech ~77% | Healthcare ~11% | Consumer Disc ~6% | Energy ~4%
 All STCG (<24mo). Only NVO in loss (-3.51%).`;
   const P={
@@ -3134,7 +3361,7 @@ All STCG (<24mo). Only NVO in loss (-3.51%).`;
   }
   ['ba','bb','bc','bd'].forEach(function(b){var el=_v$(b);if(el)el.disabled=false;});
 }
-rH();rT();rNR();
+// init handled by initVestedModule()
 </script>
 
 </div>
