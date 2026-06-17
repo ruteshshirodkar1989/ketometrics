@@ -558,7 +558,7 @@ button,input,select,a{touch-action:manipulation}
 .ex-amounts{text-align:right;flex-shrink:0;min-width:80px}
 .ex-monthly{font-size:13px;font-weight:600;color:var(--accent)}
 .ex-annual{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace}
-.ex-actions{display:flex;gap:4px;flex-shrink:0}
+.ex-actions{flex-shrink:0;display:flex;gap:4px;flex-shrink:0}
 .ex-preview{font-size:12px;color:var(--accent);font-family:'DM Mono',monospace;
   background:var(--accent-light);border-radius:var(--radius-sm);
   padding:7px 10px;margin-bottom:8px;min-height:20px}
@@ -645,6 +645,65 @@ tr:hover td{background:#f9fafb}
 #sec-invest .vnb.active{background:#1a6b4a;color:#fff}
 #sec-invest .vpanel{border-radius:var(--radius);overflow:hidden;margin-bottom:12px;border:1px solid var(--border)}
 #sec-invest .vph{padding:9px 14px;background:var(--surface);border-bottom:1px solid var(--border);font-weight:600;font-size:12.5px;display:flex;align-items:center;justify-content:space-between}
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE — INVEST & BUDGET MODULES
+═══════════════════════════════════════════════════════ */
+@media(max-width:640px){
+  /* ── Invest sub-nav — horizontal scroll, compact ── */
+  #sec-invest .vinav{padding:3px;gap:1px;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap}
+  #sec-invest .vnb{padding:7px 9px;font-size:11px;flex-shrink:0;white-space:nowrap}
+
+  /* ── KPI cards — 2 per row ── */
+  #sec-invest .kpis{grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px}
+  #sec-invest .kpi{padding:9px 10px}
+  #sec-invest .kpi label{font-size:9px}
+  #sec-invest .kpi .v{font-size:15px!important}
+
+  /* ── Panel headers ── */
+  #sec-invest .vph{padding:8px 11px;font-size:11.5px;flex-wrap:wrap;gap:5px}
+  #sec-invest .vph .gt{font-size:9.5px}
+
+  /* ── Tables — smaller font, tighter padding, horizontal scroll ── */
+  #sec-invest .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #sec-invest table{min-width:560px;font-size:11px}
+  #sec-invest th{padding:6px 8px;font-size:9px;white-space:nowrap}
+  #sec-invest td{padding:6px 8px;white-space:nowrap}
+
+  /* ── Refresh / Import buttons wrap on small screens ── */
+  #sec-invest .vph>div{flex-wrap:wrap;gap:5px}
+  #sec-invest .vph button{font-size:10px!important;padding:4px 8px!important}
+  #sec-invest #v-last-update{font-size:9.5px}
+
+  /* ── AI Analysis tab ── */
+  #sec-invest .aib{font-size:11.5px;padding:9px 12px;margin:0 5px 8px 0;display:inline-block}
+  #sec-invest #pg-va>.vpanel{padding:13px}
+
+  /* ── Net Returns — tax scenario grid ── */
+  #sec-invest .scg{grid-template-columns:1fr!important;gap:8px}
+  #sec-invest .nnb{font-size:13px;padding:10px}
+
+  /* ── Charts ── */
+  #sec-invest canvas{max-width:100%!important}
+  #sec-invest .vpanel{padding:11px}
+
+  /* ── Budget module ── */
+  #sec-budget .ex-item{flex-wrap:wrap;padding:9px 11px;gap:6px}
+  #sec-budget .ex-info{width:100%;order:2}
+  #sec-budget .ex-amounts{order:3;text-align:left;margin-top:2px}
+  #sec-budget .ex-actions{flex-shrink:0;order:1;width:100%;justify-content:flex-start}
+  #sec-budget .budget-highlight{padding:13px 15px}
+  #sec-budget .bh-amount{font-size:24px}
+  #sec-budget #ex-kpi-cards{grid-template-columns:repeat(2,1fr)}
+  #sec-budget .chart-row{grid-template-columns:1fr!important}
+  #sec-budget .ex-cat-row{font-size:11px}
+}
+@media(max-width:380px){
+  #sec-invest .kpis{grid-template-columns:1fr 1fr}
+  #sec-invest table{min-width:520px}
+  #sec-budget #ex-kpi-cards{grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body>
@@ -761,7 +820,7 @@ tr:hover td{background:#f9fafb}
   </div>
   <div class="sh">All entries</div>
   <div style="font-size:12px;color:var(--text3);margin-bottom:8px" id="dl-count"></div>
-  <div class="tbl-wrap"><table><thead><tr><th>Date</th><th>Weight</th><th>Ketones</th><th>GKI</th><th>BF%</th><th>Muscle%</th><th>Exercise</th><th>Notes</th><th></th></tr></thead><tbody id="d-tbody"></tbody></table></div>
+  <div class="tbl-wrap"><table><thead><tr><th></th><th>Date</th><th>Weight</th><th>Ketones</th><th>GKI</th><th>BF%</th><th>Muscle%</th><th>Exercise</th><th>Notes</th></tr></thead><tbody id="d-tbody"></tbody></table></div>
 </div>
 
 <!-- FOOD LOG -->
@@ -843,11 +902,9 @@ tr:hover td{background:#f9fafb}
     <div class="btn-row"><button class="primary" id="m-submit-btn" onclick="addMaster()">Add to master</button><button class="ghost" id="m-cancel-btn" style="display:none" onclick="cancelEditMaster()">Cancel edit</button><span id="m-msg"></span></div>
   </div>
   <div style="margin-bottom:10px"><input type="text" id="m-search" placeholder="Search foods..." oninput="renderMaster()" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--surface);color:var(--text);outline:none"></div>
-  <div class="tbl-wrap"><table><thead><tr><th>Food name</th><th>Cal/100g</th><th>Protein</th><th>Fat</th><th>Carbs</th><th>Notes</th><th></th></tr></thead><tbody id="m-tbody"></tbody></table></div>
+  <div class="tbl-wrap"><table><thead><tr><th></th><th>Food name</th><th>Cal/100g</th><th>Protein</th><th>Fat</th><th>Carbs</th><th>Notes</th><th></th></tr></thead><tbody id="m-tbody"></tbody></table></div>
 </div>
 
-</main>
-</div>
 <script type="application/json" id="_seed">{"daily":[{"date":"2026-02-01","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-02","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-03","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-04","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-05","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-06","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-07","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-08","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-09","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-10","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-11","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-12","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-13","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-14","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-15","weight":83.2,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-16","weight":83.55,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-17","weight":84.15,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-18","weight":84.25,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-19","weight":84.55,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-20","weight":84.7,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-21","weight":84.15,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-22","weight":83.8,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-23","weight":82.7,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-24","weight":82.55,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-25","weight":82.85,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-26","weight":82.2,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-27","weight":82.4,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-28","weight":82.2,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-01","weight":81.8,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":22.9,"skeletalMuscle":34.2,"notes":""},{"date":"2026-03-02","weight":81.95,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-03","weight":81.85,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-04","weight":81.85,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-05","weight":82.45,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-06","weight":81.65,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":23.2,"skeletalMuscle":33.9,"notes":""},{"date":"2026-03-07","weight":81.7,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-08","weight":81.9,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-09","weight":82.5,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-10","weight":82.4,"exercise":"Walking","ketones":0.6,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-11","weight":82.25,"exercise":"Walking","ketones":0.2,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-12","weight":82.8,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":23,"skeletalMuscle":34.6,"notes":""},{"date":"2026-03-13","weight":82.2,"exercise":"Walking","ketones":0.2,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-14","weight":82.2,"exercise":"Walking","ketones":1.2,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-15","weight":81.7,"exercise":"Walking","ketones":0.8,"glucose":"","gki":"","bodyFat":21.5,"skeletalMuscle":34.9,"notes":""},{"date":"2026-03-16","weight":80.75,"exercise":"Walking","ketones":0.2,"glucose":"","gki":"","bodyFat":22.8,"skeletalMuscle":33.7,"notes":""},{"date":"2026-03-17","weight":81.5,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-18","weight":81.5,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-19","weight":81.3,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-20","weight":81.1,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-21","weight":80.65,"exercise":"Walking","ketones":1.2,"glucose":"","gki":"","bodyFat":23.1,"skeletalMuscle":33.6,"notes":""},{"date":"2026-03-22","weight":80.5,"exercise":"Walking","ketones":1.1,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-23","weight":80,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":19.2,"skeletalMuscle":35.7,"notes":""},{"date":"2026-03-24","weight":80,"exercise":"Walking","ketones":1.2,"glucose":"","gki":"","bodyFat":20.7,"skeletalMuscle":34.5,"notes":""},{"date":"2026-03-25","weight":80.2,"exercise":"Walking","ketones":1.2,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-26","weight":80.45,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-27","weight":80.45,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-28","weight":80.45,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-29","weight":80.1,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-30","weight":79.75,"exercise":"","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-31","weight":80.1,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-01","weight":80.05,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-02","weight":80.2,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-03","weight":80.35,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-04","weight":80.55,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-05","weight":80,"exercise":"Walking","ketones":0.2,"glucose":"","gki":"","bodyFat":22.3,"skeletalMuscle":33.7,"notes":""},{"date":"2026-04-06","weight":79.45,"exercise":"Walking","ketones":0.6,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-07","weight":79.45,"exercise":"Walking","ketones":1.1,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-08","weight":79.7,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-09","weight":79.1,"exercise":"Walking","ketones":0.6,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-10","weight":78.85,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":21.1,"skeletalMuscle":33.8,"notes":""},{"date":"2026-04-11","weight":78.7,"exercise":"Walking","ketones":0.8,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-12","weight":78.65,"exercise":"Walking","ketones":0.9,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-13","weight":78.1,"exercise":"Walking","ketones":0.1,"glucose":"","gki":"","bodyFat":20.4,"skeletalMuscle":33.8,"notes":""},{"date":"2026-04-14","weight":78.15,"exercise":"Walking","ketones":0.8,"glucose":"","gki":"","bodyFat":20.7,"skeletalMuscle":33.6,"notes":""},{"date":"2026-04-15","weight":78.5,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":20.5,"skeletalMuscle":33.7,"notes":""},{"date":"2026-04-16","weight":78.35,"exercise":"Walking","ketones":0.4,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-17","weight":78,"exercise":"Walking","ketones":0.9,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-18","weight":76.75,"exercise":"Walking","ketones":0.4,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-19","weight":77.9,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":18.1,"skeletalMuscle":34.9,"notes":""},{"date":"2026-04-20","weight":78.05,"exercise":"Walking","ketones":0.3,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-25","weight":77.7,"exercise":"Walking","ketones":"0.6","glucose":"81","gki":"7.49","bodyFat":"19.6","skeletalMuscle":"34","notes":""},{"date":"2026-04-28","weight":77.95,"exercise":"","ketones":"0.9","glucose":"85","gki":"5.24","bodyFat":"20.2","skeletalMuscle":"33.8","notes":""},{"date":"2026-04-29","weight":78,"exercise":"","ketones":"0.6","glucose":"83","gki":"7.68","bodyFat":"20.8","skeletalMuscle":"33.5","notes":""},{"date":"2026-04-30","weight":78,"exercise":"Walking","ketones":"0.1","glucose":"93","gki":"51.61","bodyFat":"17.9","skeletalMuscle":"35","notes":""},{"date":"2026-05-01","weight":78,"exercise":"Walking","ketones":"0.2","glucose":"95","gki":"26.36","bodyFat":"19.5","skeletalMuscle":"34.2","notes":""},{"date":"2026-05-02","weight":78,"exercise":"Walking","ketones":"0","glucose":"105","gki":"","bodyFat":"18.4","skeletalMuscle":"34.8","notes":""},{"date":"2026-05-03","weight":78,"exercise":"","ketones":"0.1","glucose":"83","gki":"46.06","bodyFat":"20.2","skeletalMuscle":"33.8","notes":""},{"date":"2026-05-04","weight":80.7,"exercise":"","ketones":"0","glucose":"104","gki":"","bodyFat":"21.7","skeletalMuscle":"33","notes":""},{"date":"2026-05-05","weight":80.6,"exercise":"","ketones":"0.2","glucose":"102","gki":"28.3","bodyFat":"21.4","skeletalMuscle":"34.4","notes":""},{"date":"2026-05-06","weight":79.5,"exercise":"","ketones":"0","glucose":"88","gki":"","bodyFat":"20.6","skeletalMuscle":"34.3","notes":""},{"date":"2026-05-07","weight":79.5,"exercise":"No walking","ketones":"0.3","glucose":"82","gki":"15.17","bodyFat":"20.9","skeletalMuscle":"34.2","notes":""},{"date":"2026-05-08","weight":78.7,"exercise":"","ketones":"0.1","glucose":"85","gki":"47.17","bodyFat":"19.4","skeletalMuscle":"34.6","notes":""},{"date":"2026-05-09","weight":78.7,"exercise":"","ketones":"0.5","glucose":"84","gki":"9.32","bodyFat":"21.3","skeletalMuscle":"33.6","notes":""},{"date":"2026-05-10","weight":78.7,"exercise":"","ketones":"0.2","glucose":"87","gki":"24.14","bodyFat":"19.5","skeletalMuscle":"34.5","notes":""},{"date":"2026-05-11","weight":77.9,"exercise":"","ketones":"0.3","glucose":"85","gki":"15.72","bodyFat":"19.7","skeletalMuscle":"34.1","notes":""},{"date":"2026-05-12","weight":77.9,"exercise":"No walking","ketones":"0.4","glucose":"82","gki":"11.38","bodyFat":"19.7","skeletalMuscle":"34.1","notes":""},{"date":"2026-05-13","weight":77.6,"exercise":"No","ketones":"0.3","glucose":"83","gki":"15.35","bodyFat":"18.8","skeletalMuscle":"34.4","notes":""},{"date":"2026-05-14","weight":77.2,"exercise":"No","ketones":"0.5","glucose":"76","gki":"8.44","bodyFat":"18.8","skeletalMuscle":"34.2","notes":""},{"date":"2026-05-15","weight":77.1,"exercise":"No","ketones":"0.5","glucose":"83","gki":"9.21","bodyFat":"17.2","skeletalMuscle":"34.9","notes":""},{"date":"2026-05-16","weight":77,"exercise":"No","ketones":"0.6","glucose":"76","gki":"7.03","bodyFat":"19.5","skeletalMuscle":"33.7","notes":""},{"date":"2026-05-17","weight":77,"exercise":"No","ketones":"0","glucose":"96","gki":"","bodyFat":"19.3","skeletalMuscle":"33.8","notes":""},{"date":"2026-05-18","weight":77.1,"exercise":"No","ketones":"0.1","glucose":"83","gki":"46.06","bodyFat":"18.2","skeletalMuscle":"34.4","notes":""},{"date":"2026-05-19","weight":77,"exercise":"No","ketones":"0.4","glucose":"85","gki":"11.79","bodyFat":"19.5","skeletalMuscle":"34.7","notes":""},{"date":"2026-05-20","weight":76.8,"exercise":"No","ketones":"0.4","glucose":"82","gki":"11.38","bodyFat":"18.30","skeletalMuscle":"34.2","notes":""},{"date":"2026-05-21","weight":76.8,"exercise":"No","ketones":"1.1","glucose":"79","gki":"3.99","bodyFat":"18.8","skeletalMuscle":"34","notes":""},{"date":"2026-05-22","weight":77,"exercise":"No","ketones":"","glucose":"","gki":"","bodyFat":"18.2","skeletalMuscle":"34.4","notes":""},{"date":"2026-05-25","weight":79.05,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"21.2","skeletalMuscle":"34","notes":""}],"fm":[{"id":1,"name":"Milk Gokul","cal":92,"pro":3.6,"fat":6.5,"car":4.8,"notes":""},{"id":2,"name":"protein","cal":135,"pro":25,"fat":0,"car":2,"notes":""},{"id":3,"name":"Chicken Haryali","cal":337,"pro":47.8,"fat":11.4,"car":7.3,"notes":"Check your brand"},{"id":4,"name":"Egg","cal":320,"pro":28.1,"fat":21.3,"car":1.6,"notes":""},{"id":5,"name":"Onion","cal":30,"pro":0.3,"fat":0,"car":2.8,"notes":""},{"id":6,"name":"Cheese slice Amul Normal","cal":311,"pro":20,"fat":25,"car":1.6,"notes":"Approximate"},{"id":7,"name":"Mayo fabsta","cal":474.45,"pro":0.18,"fat":47.25,"car":12.12,"notes":""},{"id":8,"name":"Gouda Cheese","cal":348,"pro":24.5,"fat":27,"car":1.7,"notes":""},{"id":9,"name":"Yummiez Seekh kabab","cal":216,"pro":17.57,"fat":13.9,"car":4.63,"notes":""},{"id":10,"name":"Punjab Sindh Ghee","cal":989,"pro":0,"fat":99,"car":0,"notes":""},{"id":11,"name":"A+ Cheese Slices","cal":316,"pro":18,"fat":25,"car":4.8,"notes":""},{"id":12,"name":"Chicken Gravy easy","cal":232,"pro":46.1,"fat":5,"car":2.8,"notes":"Only chicken"},{"id":13,"name":"Toum Garlic Sauce","cal":688,"pro":1.8,"fat":73.2,"car":9.5,"notes":""},{"id":14,"name":"Amul Masti Dahi","cal":65,"pro":4,"fat":3.1,"car":4.6,"notes":""},{"id":15,"name":"Noto mini","cal":30,"pro":0.9,"fat":2,"car":1,"notes":""},{"id":16,"name":"Noto Mini New","cal":41.1,"pro":0.6,"fat":2.7,"car":4.8,"notes":""},{"id":1777378099822,"name":"Yummies chicken kebab","cal":211,"pro":17.57,"fat":13.6,"car":4.63,"notes":""},{"id":1777525913582,"name":"Almonds","cal":579,"pro":21.2,"fat":51.6,"car":19.7,"notes":""},{"id":1777525971873,"name":"Cashew","cal":605,"pro":24,"fat":49,"car":30.2,"notes":""},{"id":1777526033130,"name":"Pistacio","cal":560,"pro":20.6,"fat":44.4,"car":28,"notes":""},{"id":1777545981355,"name":"Peanut","cal":567,"pro":25.8,"fat":49.2,"car":16.1,"notes":""},{"id":1778127797406,"name":"Nutrabay Concentrate Cold Coffee","cal":136,"pro":25.52,"fat":2.37,"car":3.23,"notes":""},{"id":1778127915502,"name":"Amul Cheese Cubes","cal":311,"pro":20,"fat":25,"car":1.5,"notes":""},{"id":1778142029600,"name":"Prawns","cal":106,"pro":20,"fat":0.3,"car":1,"notes":""},{"id":1778486236626,"name":"Chicken leg","cal":595,"pro":50,"fat":15,"car":0,"notes":""},{"id":1778486354289,"name":"Chicken Tandoori Masala","cal":48.5,"pro":0.8,"fat":3.1,"car":3.4,"notes":"100 grams is for 1 leg piece masala"},{"id":1778659756936,"name":"King Fish","cal":105,"pro":20.28,"fat":2,"car":0,"notes":""}],"fl":[{"date":"2026-03-20","food":"Milk Gokul","grams":200,"cal":184,"pro":7.2,"fat":13,"car":9.6},{"date":"2026-03-20","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-20","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-20","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-03-20","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-03-21","food":"Milk Gokul","grams":200,"cal":184,"pro":7.2,"fat":13,"car":9.6},{"date":"2026-03-21","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-21","food":"Yummiez Seekh kabab","grams":200,"cal":432,"pro":35.1,"fat":27.8,"car":9.3},{"date":"2026-03-21","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-03-22","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-22","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-22","food":"Yummiez Seekh kabab","grams":300,"cal":648,"pro":52.7,"fat":41.7,"car":13.9},{"date":"2026-03-23","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-23","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-23","food":"Yummiez Seekh kabab","grams":300,"cal":648,"pro":52.7,"fat":41.7,"car":13.9},{"date":"2026-03-23","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-03-23","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-03-24","food":"Milk Gokul","grams":200,"cal":184,"pro":7.2,"fat":13,"car":9.6},{"date":"2026-03-24","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-24","food":"Yummiez Seekh kabab","grams":300,"cal":648,"pro":52.7,"fat":41.7,"car":13.9},{"date":"2026-03-24","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-03-24","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-03-25","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-25","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-25","food":"Punjab Sindh Ghee","grams":25,"cal":247.3,"pro":0,"fat":24.8,"car":0},{"date":"2026-03-25","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-25","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-03-26","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-26","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-26","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-26","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-03-26","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-03-26","food":"A+ Cheese Slices","grams":100,"cal":316,"pro":18,"fat":25,"car":4.8},{"date":"2026-03-30","food":"A+ Cheese Slices","grams":100,"cal":316,"pro":18,"fat":25,"car":4.8},{"date":"2026-03-30","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-30","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-30","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-03-30","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-31","food":"A+ Cheese Slices","grams":100,"cal":316,"pro":18,"fat":25,"car":4.8},{"date":"2026-03-31","food":"Milk Gokul","grams":200,"cal":184,"pro":7.2,"fat":13,"car":9.6},{"date":"2026-03-31","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-31","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-31","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-01","food":"A+ Cheese Slices","grams":160,"cal":505.6,"pro":28.8,"fat":40,"car":7.7},{"date":"2026-04-01","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-04-01","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-01","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-01","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-01","food":"Cheese slice Amul Normal","grams":40,"cal":124.4,"pro":8,"fat":10,"car":0.6},{"date":"2026-04-02","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-04-02","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-02","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-02","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-02","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-04-03","food":"Milk Gokul","grams":250,"cal":230,"pro":9,"fat":16.3,"car":12},{"date":"2026-04-03","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-03","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-03","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-04-04","food":"Milk Gokul","grams":250,"cal":230,"pro":9,"fat":16.3,"car":12},{"date":"2026-04-04","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-04","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-04","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-04-04","food":"Egg","grams":50,"cal":160,"pro":14.1,"fat":10.7,"car":0.8},{"date":"2026-04-05","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-05","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-05","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-05","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-05","food":"Punjab Sindh Ghee","grams":100,"cal":989,"pro":0,"fat":99,"car":0},{"date":"2026-04-06","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-06","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-06","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-06","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-06","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-06","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-06","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-07","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-07","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-07","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-07","food":"Punjab Sindh Ghee","grams":25,"cal":247.3,"pro":0,"fat":24.8,"car":0},{"date":"2026-04-07","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-07","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-08","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-08","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-08","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-08","food":"Punjab Sindh Ghee","grams":25,"cal":247.3,"pro":0,"fat":24.8,"car":0},{"date":"2026-04-08","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-08","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-08","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-09","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-09","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-09","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-09","food":"Chicken Gravy easy","grams":100,"cal":232,"pro":46.1,"fat":5,"car":2.8},{"date":"2026-04-09","food":"Toum Garlic Sauce","grams":50,"cal":344,"pro":0.9,"fat":36.6,"car":4.8},{"date":"2026-04-09","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-10","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-10","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-10","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-10","food":"Chicken Gravy easy","grams":100,"cal":232,"pro":46.1,"fat":5,"car":2.8},{"date":"2026-04-10","food":"Toum Garlic Sauce","grams":50,"cal":344,"pro":0.9,"fat":36.6,"car":4.8},{"date":"2026-04-10","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-10","food":"Amul Masti Dahi","grams":100,"cal":65,"pro":4,"fat":3.1,"car":4.6},{"date":"2026-04-11","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-11","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-11","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-11","food":"Chicken Gravy easy","grams":100,"cal":232,"pro":46.1,"fat":5,"car":2.8},{"date":"2026-04-11","food":"Toum Garlic Sauce","grams":50,"cal":344,"pro":0.9,"fat":36.6,"car":4.8},{"date":"2026-04-11","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-11","food":"Amul Masti Dahi","grams":100,"cal":65,"pro":4,"fat":3.1,"car":4.6},{"date":"2026-04-11","food":"Noto mini","grams":900,"cal":270,"pro":8.1,"fat":18,"car":9},{"date":"2026-04-12","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-12","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-12","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-12","food":"Chicken Gravy easy","grams":100,"cal":232,"pro":46.1,"fat":5,"car":2.8},{"date":"2026-04-12","food":"Toum Garlic Sauce","grams":50,"cal":344,"pro":0.9,"fat":36.6,"car":4.8},{"date":"2026-04-12","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-12","food":"Amul Masti Dahi","grams":100,"cal":65,"pro":4,"fat":3.1,"car":4.6},{"date":"2026-04-12","food":"Noto mini","grams":1800,"cal":540,"pro":16.2,"fat":36,"car":18},{"date":"2026-04-13","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-13","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-13","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-13","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-13","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-13","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-14","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-14","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-14","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-14","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-14","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-15","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-15","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-15","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-15","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-15","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-15","food":"Noto mini","grams":900,"cal":270,"pro":8.1,"fat":18,"car":9},{"date":"2026-04-15","food":"Egg","grams":50,"cal":160,"pro":14.1,"fat":10.7,"car":0.8},{"date":"2026-04-16","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-16","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-16","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-16","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-17","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-17","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-17","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-17","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-18","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-18","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-18","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-18","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-19","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-19","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-19","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-20","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-20","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-20","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-20","food":"Noto Mini New","grams":200,"cal":82.2,"pro":1.2,"fat":5.4,"car":9.6},{"date":"2026-04-25","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-25","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-25","food":"Punjab Sindh Ghee","grams":60,"cal":593.4,"pro":0,"fat":59.4,"car":0},{"date":"2026-04-28","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-28","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-28","food":"Yummiez Seekh kabab","grams":400,"cal":864,"pro":70.3,"fat":55.6,"car":18.5},{"date":"2026-04-28","food":"Noto Mini New","grams":200,"cal":82.2,"pro":1.2,"fat":5.4,"car":9.6},{"date":"2026-04-29","food":"Almonds","grams":25,"cal":144.8,"pro":5.3,"fat":12.9,"car":4.9},{"date":"2026-04-29","food":"Pistacio","grams":10,"cal":56,"pro":2.1,"fat":4.4,"car":2.8},{"date":"2026-04-30","food":"Almonds","grams":20,"cal":115.8,"pro":4.2,"fat":10.3,"car":3.9},{"date":"2026-04-30","food":"Pistacio","grams":10,"cal":56,"pro":2.1,"fat":4.4,"car":2.8},{"date":"2026-04-30","food":"Peanut","grams":150,"cal":850.5,"pro":38.7,"fat":73.8,"car":24.1},{"date":"2026-05-07","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-07","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-07","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-07","food":"Punjab Sindh Ghee","grams":30,"cal":296.7,"pro":0,"fat":29.7,"car":0},{"date":"2026-05-07","food":"Prawns","grams":30,"cal":31.8,"pro":6,"fat":0.1,"car":0.3},{"date":"2026-05-07","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-07","food":"Amul Cheese Cubes","grams":25,"cal":77.8,"pro":5,"fat":6.3,"car":0.4},{"date":"2026-05-07","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-08","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-08","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-08","food":"Amul Cheese Cubes","grams":75,"cal":233.3,"pro":15,"fat":18.8,"car":1.1},{"date":"2026-05-08","food":"Punjab Sindh Ghee","grams":100,"cal":989,"pro":0,"fat":99,"car":0},{"date":"2026-05-08","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-09","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-09","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-09","food":"Punjab Sindh Ghee","grams":100,"cal":989,"pro":0,"fat":99,"car":0},{"date":"2026-05-09","food":"Prawns","grams":50,"cal":53,"pro":10,"fat":0.1,"car":0.5},{"date":"2026-05-09","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-09","food":"Peanut","grams":30,"cal":170.1,"pro":7.7,"fat":14.8,"car":4.8},{"date":"2026-05-10","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-10","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-10","food":"Punjab Sindh Ghee","grams":100,"cal":989,"pro":0,"fat":99,"car":0},{"date":"2026-05-10","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-10","food":"Amul Cheese Cubes","grams":100,"cal":311,"pro":20,"fat":25,"car":1.5},{"date":"2026-05-11","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-11","food":"Punjab Sindh Ghee","grams":60,"cal":593.4,"pro":0,"fat":59.4,"car":0},{"date":"2026-05-11","food":"Milk Gokul","grams":126,"cal":115.9,"pro":4.5,"fat":8.2,"car":6},{"date":"2026-05-11","food":"Chicken leg","grams":100,"cal":595,"pro":50,"fat":15,"car":0},{"date":"2026-05-11","food":"Chicken Tandoori Masala","grams":200,"cal":97,"pro":1.6,"fat":6.2,"car":6.8},{"date":"2026-05-11","food":"Amul Cheese Cubes","grams":75,"cal":233.3,"pro":15,"fat":18.8,"car":1.1},{"date":"2026-05-12","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-12","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-12","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-12","food":"Chicken Tandoori Masala","grams":100,"cal":48.5,"pro":0.8,"fat":3.1,"car":3.4},{"date":"2026-05-12","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-05-12","food":"Chicken leg","grams":50,"cal":297.5,"pro":25,"fat":7.5,"car":0},{"date":"2026-05-12","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-12","food":"Almonds","grams":20,"cal":115.8,"pro":4.2,"fat":10.3,"car":3.9},{"date":"2026-05-12","food":"Amul Cheese Cubes","grams":75,"cal":233.3,"pro":15,"fat":18.8,"car":1.1},{"date":"2026-05-13","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-13","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-13","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-13","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-05-13","food":"King Fish","grams":250,"cal":262.5,"pro":50.7,"fat":5,"car":0},{"date":"2026-05-14","food":"King Fish","grams":250,"cal":262.5,"pro":50.7,"fat":5,"car":0},{"date":"2026-05-14","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-14","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-05-14","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-14","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-14","food":"Amul Cheese Cubes","grams":75,"cal":233.3,"pro":15,"fat":18.8,"car":1.1},{"date":"2026-05-15","food":"King Fish","grams":200,"cal":210,"pro":40.6,"fat":4,"car":0},{"date":"2026-05-15","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-15","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-05-15","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-15","food":"Amul Cheese Cubes","grams":100,"cal":311,"pro":20,"fat":25,"car":1.5},{"date":"2026-05-16","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-05-16","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-16","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-16","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-17","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-17","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-17","food":"Amul Cheese Cubes","grams":100,"cal":311,"pro":20,"fat":25,"car":1.5},{"date":"2026-05-17","food":"King Fish","grams":150,"cal":157.5,"pro":30.4,"fat":3,"car":0},{"date":"2026-05-20","food":"King Fish","grams":150,"cal":157.5,"pro":30.4,"fat":3,"car":0},{"date":"2026-05-20","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-20","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-20","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-20","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-05-22","food":"King Fish","grams":300,"cal":315,"pro":60.8,"fat":6,"car":0},{"date":"2026-05-24","food":"King Fish","grams":300,"cal":315,"pro":60.8,"fat":6,"car":0},{"date":"2026-05-25","food":"King Fish","grams":300,"cal":315,"pro":60.8,"fat":6,"car":0}]}</script>
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
@@ -944,7 +1001,7 @@ function sw(tab){
   if(tab==='analytics')renderAnalytics();
   if(tab==='daily'){setToday('d-date');renderDailyTable();}
   if(tab==='food'){renderFoodLog();populateFoodSel();}
-  if(tab==='recipes'){populateRecipeFoodSel();renderRecipeIngredients();renderRecipeList();}if(tab==='master')renderMaster();if(tab==='budget')renderExpenses();if(tab==='invest')initVestedModule();
+  if(tab==='food')checkAutoFillYesterday();if(tab==='recipes'){populateRecipeFoodSel();renderRecipeIngredients();renderRecipeList();}if(tab==='master')renderMaster();if(tab==='budget')renderExpenses();if(tab==='invest')initVestedModule();
   // Sync bottom nav
   document.querySelectorAll('#bottom-nav button').forEach(function(b){
     b.classList.toggle('active',b.dataset.tab===tab);
@@ -1142,7 +1199,7 @@ function renderDailyTable(){
   var rows=DL.slice().reverse();
   document.getElementById('d-tbody').innerHTML=rows.length?rows.map(function(r){
     var k=r.ketones!==''?r.ketones:'--',g=r.gki!==''?r.gki+' '+gkiBadge(r.gki):'--',bf=r.bodyFat!==''?r.bodyFat+'%':'--',sm=r.skeletalMuscle!==''?r.skeletalMuscle+'%':'--';
-    return'<tr><td>'+fmtS(r.date)+'</td><td>'+r.weight+'</td><td>'+k+'</td><td>'+g+'</td><td>'+bf+'</td><td>'+sm+'</td><td style="font-family:\'DM Sans\',sans-serif">'+(r.exercise||'--')+'</td><td style="font-family:\'DM Sans\',sans-serif;max-width:110px;overflow:hidden;text-overflow:ellipsis">'+(r.notes||'')+'</td><td><button class="ghost" style="padding:2px 8px;font-size:11px;margin-right:3px" onclick="editDaily(\''+r.date+'\')">Edit</button><button class="del-btn" onclick="delDaily(\''+r.date+'\')">&#215;</button></td></tr>';
+    return'<tr><td style="white-space:nowrap"><button class="ghost" style="padding:2px 8px;font-size:11px;margin-right:3px" onclick="editDaily(\''+r.date+'\')">Edit</button><button class="del-btn" onclick="delDaily(\''+r.date+'\')">&#215;</button></td><td>'+fmtS(r.date)+'</td><td>'+r.weight+'</td><td>'+k+'</td><td>'+g+'</td><td>'+bf+'</td><td>'+sm+'</td><td style="font-family:\'DM Sans\',sans-serif">'+(r.exercise||'--')+'</td><td style="font-family:\'DM Sans\',sans-serif;max-width:110px;overflow:hidden;text-overflow:ellipsis">'+(r.notes||'')+'</td></tr>';
   }).join(''):'<tr><td colspan="9" style="text-align:center;color:var(--text3);padding:20px">No entries yet</td></tr>';
 }
 function editDaily(date){
@@ -1257,7 +1314,7 @@ function renderFoodLog(){
       var opts=FM.map(function(fm){return'<option value="'+fm.name+'"'+(fm.name===f.food?' selected':'')+'>'+fm.name+'</option>';}).join('');
       return'<div class="food-item" style="flex-wrap:wrap;gap:8px"><select id="fl-ef" style="font-family:\'DM Sans\',sans-serif;font-size:13px;padding:5px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);flex:1;min-width:130px">'+opts+'</select><input id="fl-eg" type="number" value="'+f.grams+'" step="5" style="width:75px;font-family:\'DM Sans\',sans-serif;font-size:13px;padding:5px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg)"><button class="primary" style="padding:5px 12px;font-size:12px" onclick="saveFoodLog(\''+date+'\','+i+')">Save</button><button class="ghost" style="padding:5px 10px;font-size:12px" onclick="cancelFoodEdit()">Cancel</button></div>';
     }
-    return'<div class="food-item"><div class="food-name">'+f.food+'</div><div class="food-macro">'+f.grams+'g &middot; P'+f.pro.toFixed(1)+' F'+f.fat.toFixed(1)+' C'+f.car.toFixed(1)+'</div><div class="food-cal">'+Math.round(f.cal)+' kcal</div><div style="display:flex;gap:4px"><button class="ghost" style="padding:2px 8px;font-size:11px" onclick="editFoodLog(\''+date+'\','+i+')">Edit</button><button class="del-btn" onclick="delFood(\''+date+'\','+i+')">&#215;</button></div></div>';
+    return'<div class="food-item"><div style="display:flex;gap:4px;flex-shrink:0"><button class="ghost" style="padding:2px 8px;font-size:11px" onclick="editFoodLog(\''+date+'\','+i+')">Edit</button><button class="del-btn" onclick="delFood(\''+date+'\','+i+')">&#215;</button></div><div class="food-name">'+f.food+'</div><div class="food-macro">'+f.grams+'g &middot; P'+f.pro.toFixed(1)+' F'+f.fat.toFixed(1)+' C'+f.car.toFixed(1)+'</div><div class="food-cal">'+Math.round(f.cal)+' kcal</div></div>';
   }).join('')+'</div>';
 }
 function addFood(){
@@ -1350,9 +1407,47 @@ function delMaster(id){
 function renderMaster(){
   var q=(document.getElementById('m-search').value||'').toLowerCase();
   var rows=FM.filter(function(f){return!q||f.name.toLowerCase().indexOf(q)>=0;});
-  document.getElementById('m-tbody').innerHTML=rows.length?rows.map(function(f){return'<tr><td style="font-family:\'DM Sans\',sans-serif;font-weight:500">'+f.name+'</td><td>'+f.cal+'</td><td>'+f.pro+'</td><td>'+f.fat+'</td><td>'+f.car+'</td><td style="font-family:\'DM Sans\',sans-serif;color:var(--text3)">'+(f.notes||'')+'</td><td><button class="ghost" style="padding:2px 8px;font-size:11px;margin-right:3px" onclick="editMaster('+f.id+')">Edit</button><button class="del-btn" onclick="delMaster('+f.id+')">&#215;</button></td></tr>';}).join(''):'<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:20px">No foods found</td></tr>';
+  document.getElementById('m-tbody').innerHTML=rows.length?rows.map(function(f){return'<tr><td style="white-space:nowrap"><button class="ghost" style="padding:2px 8px;font-size:11px;margin-right:3px" onclick="editMaster('+f.id+')">Edit</button><button class="del-btn" onclick="delMaster('+f.id+')">&#215;</button></td><td style="font-family:\'DM Sans\',sans-serif;font-weight:500">'+f.name+'</td><td>'+f.cal+'</td><td>'+f.pro+'</td><td>'+f.fat+'</td><td>'+f.car+'</td><td style="font-family:\'DM Sans\',sans-serif;color:var(--text3)">'+(f.notes||'')+'</td></tr>';}).join(''):'<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:20px">No foods found</td></tr>';
 }
 
+
+// =====================================================================
+// AUTO-FILL TODAY'S MEALS FROM YESTERDAY
+// =====================================================================
+var _autoFillChecked=false;
+async function checkAutoFillYesterday(){
+  var todayStr=today();
+  var dateShown=document.getElementById('f-date').value||todayStr;
+  if(dateShown!==todayStr)return; // only auto-fill when viewing the actual current date
+  if(_autoFillChecked)return;
+  _autoFillChecked=true;
+
+  var todaysItems=FL.filter(function(f){return f.date===todayStr;});
+  if(todaysItems.length)return; // already has entries - never overwrite
+
+  var yDate=new Date(todayStr+'T00:00:00');
+  yDate.setDate(yDate.getDate()-1);
+  var yStr=yDate.toISOString().split('T')[0];
+  var yItems=FL.filter(function(f){return f.date===yStr;});
+  if(!yItems.length)return; // nothing to copy
+
+  setSyncStatus('busy','Auto-filling from yesterday...');
+  try{
+    for(var i=0;i<yItems.length;i++){
+      var src=yItems[i];
+      var newItem={date:todayStr,food:src.food,grams:src.grams,cal:src.cal,pro:src.pro,fat:src.fat,car:src.car};
+      var saved=await sbPost('food_log',newItem);
+      var savedRow=Array.isArray(saved)?saved[0]:saved;
+      FL.push(flFromDB(savedRow));
+    }
+    renderFoodLog();
+    showMsg('f-msg','Auto-filled '+yItems.length+' item'+(yItems.length!==1?'s':'')+' from yesterday \u2014 edit or remove as needed');
+    setSyncStatus('ok','');
+  }catch(e){
+    setSyncStatus('error','Auto-fill failed');
+    console.error('Auto-fill error:',e);
+  }
+}
 
 // =====================================================================
 // RECIPES
@@ -1541,11 +1636,11 @@ function renderRecipeList(){
       '<div style="display:flex;gap:6px;margin-bottom:8px">'+
       '<button class="ghost" style="padding:3px 10px;font-size:11px" onclick="copyRecipe('+r.id+')">&#10064; Copy</button>'+
       '<button class="ghost" style="padding:3px 10px;font-size:11px" onclick="editRecipe('+r.id+')">&#9998; Edit</button>'+
+      '<button class="del-btn" onclick="delRecipe('+r.id+')">&#215;</button>'+
       '</div>'+
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start">'+
       '<div><div class="recipe-card-title">'+r.name+'</div>'+
       '<div class="recipe-card-meta">'+ings.length+' ingredient'+(ings.length!==1?'s':'')+' &middot; '+w+'g total &middot; '+srv+'g/serving</div></div>'+
-      '<button class="del-btn" onclick="delRecipe('+r.id+')">&#215;</button></div></div>'+
+      '</div>'+
       '<div class="cards" style="margin-bottom:10px">'+
       '<div class="card green"><div class="card-lbl">Cal/serving</div><div class="card-val">'+Math.round(r.cal*ratio)+'</div><div class="card-sub">'+srv+'g</div></div>'+
       '<div class="card"><div class="card-lbl">Protein</div><div class="card-val">'+(r.pro*ratio).toFixed(1)+'</div><div class="card-sub">g</div></div>'+
@@ -2318,20 +2413,27 @@ function renderExpenseList(){
   var sorted=EX.slice().sort(function(a,b){return exMonthlyCost(b)-exMonthlyCost(a);});
   el.innerHTML=sorted.map(function(e){
     var mc=exMonthlyCost(e);
-    var detail=e.entry_type==='quantity'?
-      (exFmt(e.cost_per_unit)+' \u00D7 '+e.quantity+' '+e.unit_label+(e.frequency==='annual'?' /year':'/month')):
-      (exFmt(e.amount)+(e.frequency==='annual'?' /year':'/month'));
-    return '<div class="ex-item"><div class="ex-info"><div class="ex-name">'+e.name+
+    var detail;
+    if(e.entry_type==='daily_use'){
+      var dpp=e.pkg_qty&&e.daily_use?e.pkg_qty/e.daily_use:0;
+      detail=e.pkg_qty+e.unit_label+' @ '+exFmt(e.pkg_price)+' \u2192 lasts '+(dpp?dpp.toFixed(1):'?')+' days';
+    }else if(e.entry_type==='quantity'){
+      detail=exFmt(e.cost_per_unit)+' \u00D7 '+e.quantity+' '+e.unit_label+(e.frequency==='annual'?' /year':'/month');
+    }else{
+      detail=exFmt(e.amount)+(e.frequency==='annual'?' /year':'/month');
+    }
+    return '<div class="ex-item"><div class="ex-actions">'+
+      '<button class="ghost" style="padding:3px 8px;font-size:11px" onclick="editExpense('+e.id+')">Edit</button>'+
+      '<button class="del-btn" onclick="delExpense('+e.id+')">&#215;</button>'+
+      '</div><div class="ex-info"><div class="ex-name">'+e.name+
       '<span class="cat-badge">'+e.category+'</span></div>'+
       '<div class="ex-detail">'+detail+'</div></div>'+
       '<div class="ex-amounts"><div class="ex-monthly">'+exFmt(mc)+'/mo</div>'+
       '<div class="ex-annual">'+exFmt(mc*12)+'/yr</div></div>'+
-      '<div class="ex-actions">'+
-      '<button class="ghost" style="padding:3px 8px;font-size:11px" onclick="editExpense('+e.id+')">Edit</button>'+
-      '<button class="del-btn" onclick="delExpense('+e.id+')">&#215;</button>'+
-      '</div></div>';
+      '</div>';
   }).join('');
 }
+
 
 // =====================================================================
 // INVEST / VESTED PORTFOLIO MODULE
@@ -2924,6 +3026,7 @@ async function _runApp(){
   // Each step independent — one failure won't block the rest
   try{await initData();}catch(e){console.error('initData failed:',e);}
   try{setToday('d-date');}catch(e){}
+  try{checkAutoFillYesterday();}catch(e){}
   try{var _fd=document.getElementById('f-date');if(_fd)_fd.value=today();}catch(e){}
   try{var _fl=document.getElementById('f-label');if(_fl)_fl.textContent=fmtL(today());}catch(e){}
   try{renderDash();}catch(e){console.error('renderDash failed:',e);}
@@ -3080,21 +3183,21 @@ async function _runApp(){
 <button onclick="document.getElementById('v-upload-input').click()" style="background:#4f46e5;color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600">📤 Import Excel</button>
 <input type="file" id="v-upload-input" accept=".xlsx,.xls" style="display:none" onchange="parseVestedFile(event)">
 </div></div>
-    <table><thead><tr>
+    <div class="tbl-wrap"><table><thead><tr>
       <th style="width:10%">Ticker</th><th style="width:16%">Name</th><th style="width:8%">Sector</th>
       <th style="width:8%">Shares</th><th style="width:9%">Avg cost</th><th style="width:10%">Price</th>
       <th style="width:9%">Value</th><th style="width:9%">Return $</th><th style="width:9%">Return %</th><th style="width:12%">Today $/(%)</th>
-    </tr></thead><tbody id="hb"></tbody></table>
+    </tr></thead><tbody id="hb"></tbody></table></div>
   </div>
   <div class="vpanel">
     <div class="vph">Closed Positions — BNO (US Brent Oil Fund)</div>
-    <table><thead><tr><th>Buy</th><th>Sell</th><th>Shares</th><th>Cost</th><th>Proceeds</th><th>Gain</th><th>Type</th><th>Held</th></tr></thead>
+    <div class="tbl-wrap"><table><thead><tr><th>Buy</th><th>Sell</th><th>Shares</th><th>Cost</th><th>Proceeds</th><th>Gain</th><th>Type</th><th>Held</th></tr></thead>
     <tbody>
       <tr><td>2023-07-26</td><td>2023-11-07</td><td>5.3</td><td>$148.61</td><td>$155.31</td><td class="g">+$6.70</td><td><span class="bd sc">STCG</span></td><td>104 days</td></tr>
       <tr><td>2023-11-14</td><td>2024-06-21</td><td>5</td><td>$148.89</td><td>$160.28</td><td class="g">+$11.39</td><td><span class="bd sc">STCG</span></td><td>220 days</td></tr>
       <tr><td>2025-04-01</td><td>2026-03-18</td><td>5</td><td>$155.67</td><td>$256.39</td><td class="g">+$100.72</td><td><span class="bd sc">STCG</span></td><td>351 days</td></tr>
       <tr style="background:#f9fafb"><td colspan="5" style="font-size:9.5px;text-transform:uppercase;color:#9ca3af;font-weight:700;letter-spacing:.4px">Total realized gain</td><td class="g" style="font-weight:800">+$118.81</td><td colspan="2" style="font-size:10px;color:#9ca3af">All STCG — held &lt; 24 months</td></tr>
-    </tbody></table>
+    </tbody></table></div>
   </div>
 </div>
 
@@ -3107,18 +3210,18 @@ async function _runApp(){
   </div>
   <div class="vpanel">
     <div class="vph">All Transactions (26)</div>
-    <table><thead><tr><th style="width:13%">Date</th><th style="width:8%">Type</th><th style="width:42%">Description</th><th style="width:13%">Amount</th><th style="width:13%">Balance</th><th style="width:11%">Status</th></tr></thead>
-    <tbody id="tb"></tbody></table>
+    <div class="tbl-wrap"><table><thead><tr><th style="width:13%">Date</th><th style="width:8%">Type</th><th style="width:42%">Description</th><th style="width:13%">Amount</th><th style="width:13%">Balance</th><th style="width:11%">Status</th></tr></thead>
+    <tbody id="tb"></tbody></table></div>
   </div>
   <div class="vpanel">
     <div class="vph">LRS Deposits &amp; TCS Status</div>
-    <table><thead><tr><th>Date</th><th>USD</th><th>Est. INR (₹84)</th><th>FY</th><th>TCS Status</th></tr></thead>
+    <div class="tbl-wrap"><table><thead><tr><th>Date</th><th>USD</th><th>Est. INR (₹84)</th><th>FY</th><th>TCS Status</th></tr></thead>
     <tbody>
       <tr><td>2023-07-26</td><td>$150.00</td><td>₹12,600</td><td>FY 2023-24</td><td class="g">None — below ₹7L</td></tr>
       <tr><td>2026-03-30</td><td>$1,008.00</td><td>₹84,672</td><td>FY 2025-26</td><td class="g">None — below ₹7L</td></tr>
       <tr><td>2026-04-15 to 06-01</td><td>$3,963.46</td><td>₹3,32,930</td><td>FY 2026-27</td><td class="g">None — ₹3.33L cumulative, below ₹7L</td></tr>
       <tr style="background:#f9fafb"><td style="font-weight:700">Total</td><td style="font-weight:700">$5,121.46</td><td style="font-weight:700">₹4,30,203</td><td></td><td class="g" style="font-weight:700">₹0 TCS — all FYs below ₹7L</td></tr>
-    </tbody></table>
+    </tbody></table></div>
   </div>
 </div>
 
@@ -3144,8 +3247,7 @@ async function _runApp(){
       <tr><td>LRS / TCS</td><td>20% TCS above ₹7L/FY under LRS. FY 2026-27 total ₹3.33L — below threshold, ₹0 TCS deducted.</td></tr>
       <tr><td>DTAA India-US</td><td>US dividend withholding (25%) claimable as foreign tax credit via Form 67 + ITR filing.</td></tr>
     </tbody>
-  </table></div>
-</div>
+  </table></div></div>
 
 <div id="pg-vc" class="vpg">
   <div class="tc">
@@ -3160,14 +3262,15 @@ async function _runApp(){
     <div style="font-size:15px;font-weight:700;margin-bottom:3px">🤖 AI Portfolio Advisor</div>
     <div style="font-size:11.5px;color:#6b7280;margin-bottom:13px">Uses your live Vested data — 12 holdings · $6,262 value · +20.43% returns · Jun 2, 2026</div>
     <div>
-      <button class="aib" id="ba" onclick="rAI('analyze')">🧠 Full analysis ↗</button>
-      <button class="aib g2" id="bb" onclick="rAI('rebalance')">⚖️ Rebalancing ↗</button>
-      <button class="aib a2" id="bc" onclick="rAI('risk')">🛡️ Risk check ↗</button>
-      <button class="aib g3" id="bd" onclick="rAI('trends')">📈 Market trends ↗</button>
+      <button class="aib" id="ba" onclick="vRAI('analyze')">🧠 Full analysis ↗</button>
+      <button class="aib g2" id="bb" onclick="vRAI('rebalance')">⚖️ Rebalancing ↗</button>
+      <button class="aib a2" id="bc" onclick="vRAI('risk')">🛡️ Risk check ↗</button>
+      <button class="aib g3" id="bd" onclick="vRAI('trends')">📈 Market trends ↗</button>
     </div>
     <div style="height:1px;background:#e2e4e8;margin:12px 0"></div>
     <div class="aiout" id="ao">Pick an analysis type above — uses your live Vested portfolio data.</div>
   </div>
+</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -3364,8 +3467,6 @@ All STCG (<24mo). Only NVO in loss (-3.51%).`;
 // init handled by initVestedModule()
 </script>
 
-</div>
-
 <!-- BUDGET / EXPENSE PLANNER -->
 <div class="sec" id="sec-budget">
   <!-- Add/Edit form -->
@@ -3473,6 +3574,9 @@ All STCG (<24mo). Only NVO in loss (-3.51%).`;
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
     <div id="ex-list"><div style="padding:20px;text-align:center;color:var(--text3);font-size:13px">No expenses yet. Add one above.</div></div>
   </div>
+</div>
+
+</main>
 </div>
 
 <!-- ═══ LOGIN SCREEN ═══════════════════════════════════════════════ -->
