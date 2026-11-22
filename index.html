@@ -777,6 +777,100 @@ html.km-quick #login-screen{display:none}   /* remembered session: keep the logi
   .auc-flags{gap:6px}
 }
 
+/* ── Food log: copy items from another day ── */
+.copy-day{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px}
+.copy-toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);cursor:pointer;user-select:none;width:max-content;max-width:100%}
+.copy-toggle input{width:18px;height:18px;accent-color:var(--accent);margin:0;flex-shrink:0}
+.copy-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.copy-row input[type=date]{font-family:'DM Sans',sans-serif;font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);max-width:100%}
+.copy-row input:disabled,.copy-row button:disabled{opacity:.45;cursor:not-allowed}
+.copy-info{font-size:12px;color:var(--text3)}
+#f-copy-msg:empty{display:none}
+
+/* ── Exercise module ── */
+.gym-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.gym-tab{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:7px 16px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer}
+.gym-tab:hover{background:var(--surface2)}
+.gym-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.gym-empty{padding:18px;text-align:center;color:var(--text3);font-size:13px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;line-height:1.6}
+.gym-empty button{margin-left:6px}
+.gym-hint{font-size:12px;color:var(--text3);margin:2px 0 8px;line-height:1.45}
+.gym-sm{padding:5px 12px!important;font-size:12px!important;min-height:0!important}
+.gym-xs{padding:2px 8px!important;font-size:12px!important;min-height:0!important;line-height:1.3}
+.gym-pick-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.gym-pick-row select{flex:1;min-width:0;font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);max-width:100%}
+.gym-pick-row button{flex-shrink:0}
+.gym-list{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px}
+.gym-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid rgba(0,0,0,.05);font-size:13px}
+.gym-row:last-child{border-bottom:none}
+.gym-row-tall{align-items:flex-start}
+.gym-row-main{flex:1;min-width:0}
+.gym-row-name{font-weight:500;overflow-wrap:anywhere}
+.gym-row-sub{font-size:11.5px;color:var(--text3);margin-top:2px;overflow-wrap:anywhere}
+.gym-row-sub small{color:var(--text3)}
+.gym-row-act{display:flex;gap:6px;align-items:center;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.gym-rt-combo{font-size:12px;color:var(--text2);margin-top:3px;overflow-wrap:anywhere}
+.gym-rt-combo b{font-weight:500;color:var(--text)}
+.gym-pill{font-size:11px;color:var(--accent);background:var(--accent-light);padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.gym-draft{list-style:none;margin:0;padding:0;border:1px solid var(--border);border-radius:var(--radius-sm);counter-reset:gd}
+.gym-draft li{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid rgba(0,0,0,.05);font-size:13px;counter-increment:gd}
+.gym-draft li:last-child{border-bottom:none}
+.gym-draft li::before{content:counter(gd);font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);min-width:16px}
+.gym-draft-txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.gym-draft-txt small{font-size:11px;color:var(--text3);overflow-wrap:anywhere}
+.gym-draft-act{display:flex;gap:4px;align-items:center;flex-shrink:0}
+.gym-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:10px}
+.gym-card-head{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.gym-card-tt{min-width:0}
+.gym-card-title{font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.gym-card-sub{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.gym-sets{width:100%;border-collapse:collapse;font-size:13px;margin:4px 0 10px}
+.gym-sets th{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);font-weight:500;text-align:left;padding:4px 6px;border-bottom:1px solid var(--border)}
+.gym-sets td{padding:6px;border-bottom:1px solid rgba(0,0,0,.05);font-family:'DM Mono',monospace}
+.gym-sets td:last-child,.gym-sets th:last-child{text-align:right;width:30px}
+.gym-add-set{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.gym-num{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text3)}
+.gym-num input{width:74px;font-family:'DM Mono',monospace;font-size:14px;padding:7px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);text-align:center}
+.gym-num input:focus{border-color:var(--accent);background:var(--surface);outline:none}
+.gym-x{color:var(--text3);font-size:13px}
+.gym-date-lbl{font-size:13px;color:var(--text2)}
+.gym-cards .card-val small{font-size:12px;font-weight:400;letter-spacing:0}
+.gym-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gym-two .chart-wrap{margin-bottom:12px}
+.gym-trend-h{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text3);margin:12px 0 6px}
+.gym-trend-h:first-child{margin-top:4px}
+.gym-trend{display:flex;align-items:center;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.04);flex-wrap:wrap}
+.gym-trend-l{flex:1;min-width:120px;color:var(--text2)}
+.gym-trend-v{font-family:'DM Mono',monospace}
+.gym-trend-d{font-family:'DM Mono',monospace;font-size:12px;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.gym-trend.up .gym-trend-d{background:var(--accent-light);color:var(--accent)}
+.gym-trend.down .gym-trend-d{background:var(--red-light);color:var(--red)}
+.gym-trend.flat .gym-trend-d{background:var(--surface2);color:var(--text3)}
+.gym-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#1a1a1a;color:#fff;font-size:13px;padding:10px 16px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9000;max-width:calc(100vw - 32px);text-align:center}
+.gym-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.gym-toast.err{background:var(--red)}
+@media(max-width:640px){
+  .gym-tab{padding:6px 12px;font-size:12.5px}
+  .gym-two{grid-template-columns:1fr;gap:0}
+  .gym-row{padding:9px 10px;flex-wrap:wrap}
+  .gym-row-act{width:auto}
+  .gym-num input{width:72px!important;font-size:16px}
+  .gym-add-set .primary{flex:1;min-width:110px}
+  /* the app's phone rules make every input full width and every table 480px+ wide; not here */
+  .copy-toggle input[type=checkbox]{width:20px!important;min-width:20px;height:20px;flex:none}
+  .gym-sets{min-width:0!important;table-layout:fixed}
+  .gym-sets th,.gym-sets td{padding:6px 4px;font-size:12px}
+  .gym-sets th:first-child,.gym-sets td:first-child{width:36px}
+  .gym-sets td:last-child,.gym-sets th:last-child{width:36px}
+  .gym-card{padding:12px}
+  .gym-toast{bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+  /* phone bar: more tabs than fit -> slimmer buttons; still scrolls if needed */
+  #bottom-nav{overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+  #bottom-nav::-webkit-scrollbar{display:none}
+  #bottom-nav button{min-width:36px}
+  #bottom-nav.bn-many button{padding:4px 1px;font-size:8px}
+  #bottom-nav.bn-many .bn-icon{padding:3px 5px}
+}
 </style>
 </head>
 <body>
@@ -788,6 +882,7 @@ html.km-quick #login-screen{display:none}   /* remembered session: keep the logi
     <button class="active" data-tab="dash" onclick="sw('dash')">Dashboard</button>
     <button data-tab="analytics" onclick="sw('analytics')">Analytics</button>
     <button data-tab="daily" onclick="sw('daily')">Daily Log</button>
+    <button data-tab="exercise" onclick="sw('exercise')">Exercise</button>
     <button data-tab="food" onclick="sw('food')">Food Log</button>
     <button data-tab="recipes" onclick="sw('recipes')">Recipes</button>
     <button data-tab="master" onclick="sw('master')">Food Master</button>
@@ -906,6 +1001,15 @@ html.km-quick #login-screen{display:none}   /* remembered session: keep the logi
     <button onclick="fShift(1)">&#8250;</button>
     <span style="font-size:13px;color:var(--text2)" id="f-label"></span>
   </div>
+  <div class="copy-day" id="f-copy-panel">
+    <label class="copy-toggle"><input type="checkbox" id="f-copy-on" onchange="fCopyToggle()"> Copy items from another day</label>
+    <div class="copy-row">
+      <input type="date" id="f-copy-date" disabled onchange="fCopyRefresh()" aria-label="Day to copy from">
+      <button type="button" class="ghost" id="f-copy-btn" disabled onclick="fCopyFromDate()">Copy</button>
+      <span class="copy-info" id="f-copy-info"></span>
+    </div>
+    <span id="f-copy-msg"></span>
+  </div>
   <div class="cards" id="f-macros"></div>
   <div class="panel">
     <div class="panel-title">Add food or recipe</div>
@@ -929,6 +1033,25 @@ html.km-quick #login-screen{display:none}   /* remembered session: keep the logi
   <div class="sh">Items logged</div>
   <div id="f-list"></div>
 </div>
+
+
+<!-- EXERCISE (part of Health Tracking) -->
+<div class="sec" id="sec-exercise">
+  <div class="gym-tabs" id="gym-tabs" role="tablist" aria-label="Exercise sections">
+    <button type="button" class="gym-tab active" data-gact="view" data-gview="log">Workout</button>
+    <button type="button" class="gym-tab" data-gact="view" data-gview="ex">Exercises</button>
+    <button type="button" class="gym-tab" data-gact="view" data-gview="combos">Combos</button>
+    <button type="button" class="gym-tab" data-gact="view" data-gview="routines">Routines</button>
+    <button type="button" class="gym-tab" data-gact="view" data-gview="stats">Analytics</button>
+  </div>
+  <div id="gym-load-msg"></div>
+  <div id="gym-pane-log"></div>
+  <div id="gym-pane-ex" style="display:none"></div>
+  <div id="gym-pane-combos" style="display:none"></div>
+  <div id="gym-pane-routines" style="display:none"></div>
+  <div id="gym-pane-stats" style="display:none"></div>
+</div>
+
 
 
 <!-- RECIPES -->
@@ -1013,12 +1136,36 @@ function sbH(x){
   if(tok)hd['Authorization']='Bearer '+tok;
   return Object.assign(hd,x||{});
 }
-function sbGet(ep){return fetch(SB_URL+ep,{headers:sbH()}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});}
-function sbPost(table,data,prefer){return fetch(SB_URL+table,{method:'POST',headers:sbH({'Prefer':prefer||'return=representation'}),body:JSON.stringify(data)}).then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error(t);});var ct=r.headers.get('content-type')||'';return ct.indexOf('json')>=0?r.json():r.text().then(function(t){return t||null;});});}
+// Every data call gets one automatic retry with a fresh sign-in token if the old one expired
+// (the app can stay open for hours, e.g. through a whole workout)
+function _sbFetch(url,init,extra){
+  var go=function(){return fetch(url,Object.assign({},init||{},{headers:sbH(extra)}));};
+  return go().then(function(r){
+    if(r.status!==401||!SESSION||!SESSION.refresh_token)return r;
+    return _refreshSession().then(function(ok){return ok?go():r;});
+  });
+}
+function sbGet(ep){return _sbFetch(SB_URL+ep).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});}
+// Reads EVERY row, page by page: Supabase returns at most 1000 rows per request
+async function sbGetAll(ep){
+  var out=[],total=null,sep=ep.indexOf('?')>=0?'&':'?';
+  for(var page=0;page<1000;page++){
+    var r=await _sbFetch(SB_URL+ep+sep+'limit=1000&offset='+out.length,null,page===0?{'Prefer':'count=exact'}:null);
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    if(page===0){var m=/\/(\d+)\s*$/.exec(r.headers.get('content-range')||'');if(m)total=parseInt(m[1],10);}
+    var rows=await r.json();
+    if(!Array.isArray(rows))return rows;
+    if(!rows.length)break;
+    out=out.concat(rows);
+    if(total!==null&&out.length>=total)break;
+  }
+  return out;
+}
+function sbPost(table,data,prefer){return _sbFetch(SB_URL+table,{method:'POST',body:JSON.stringify(data)},{'Prefer':prefer||'return=representation'}).then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error(t);});var ct=r.headers.get('content-type')||'';return ct.indexOf('json')>=0?r.json():r.text().then(function(t){return t||null;});});}
 function insertChunks(table,rows,size){var chunks=[],i=0;while(i<rows.length){chunks.push(rows.slice(i,i+size));i+=size;}return chunks.reduce(function(p,chunk){return p.then(function(){return sbPost(table,chunk,'return=minimal');});},Promise.resolve());}
 function sbUpsert(table,data){return sbPost(table,data,'resolution=merge-duplicates,return=representation');}
-function sbPatch(table,filter,data){return fetch(SB_URL+table+'?'+filter,{method:'PATCH',headers:sbH({'Prefer':'return=representation'}),body:JSON.stringify(data)}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});}
-function sbDel(table,filter){return fetch(SB_URL+table+'?'+filter,{method:'DELETE',headers:sbH()}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);});}
+function sbPatch(table,filter,data){return _sbFetch(SB_URL+table+'?'+filter,{method:'PATCH',body:JSON.stringify(data)},{'Prefer':'return=representation'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});}
+function sbDel(table,filter){return _sbFetch(SB_URL+table+'?'+filter,{method:'DELETE'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);});}
 function sbTimeout(ms){return new Promise(function(_,rej){setTimeout(function(){rej(new Error('Request timed out - run this file in your own browser, not inside Claude'));},ms);});}
 function sbRace(p){return Promise.race([p,sbTimeout(8000)]);}
 
@@ -1038,15 +1185,15 @@ function setSyncStatus(type,msg){var el=document.getElementById('sync-status'),d
 async function initData(){
   setSyncStatus('busy','Connecting...');
   try{
-    var res=await Promise.all([sbRace(sbGet('daily_log?order=date.asc')),sbRace(sbGet('food_master?order=name.asc')),sbRace(sbGet('food_log?order=date.asc,id.asc'))]);
+    var res=await Promise.all([sbRace(sbGetAll('daily_log?order=date.asc')),sbRace(sbGetAll('food_master?order=name.asc,id.asc')),sbRace(sbGetAll('food_log?order=date.asc,id.asc'))]);
     DL=res[0].map(dlFromDB);FM=res[1];FL=res[2].map(flFromDB);
     // Load recipes separately so missing table doesn't break the app
     try{
-      var rRows=await sbRace(sbGet('recipes?order=name.asc'));
+      var rRows=await sbRace(sbGetAll('recipes?order=name.asc,id.asc'));
       RM=rRows.map(function(r){return Object.assign({},r,{ingredients:typeof r.ingredients==='string'?JSON.parse(r.ingredients):r.ingredients||[]});});
     }catch(re){console.warn('Recipes table missing - run SQL to create it:',re.message);RM=[];}
     try{
-      var exRows=await sbRace(sbGet('expenses?order=name.asc'));
+      var exRows=await sbRace(sbGetAll('expenses?order=name.asc,id.asc'));
       EX=Array.isArray(exRows)?exRows:[];
     }catch(ee){console.warn('Expenses table missing:',ee.message);EX=[];}
     if(!DL.length&&!FM.length&&tabAllowed('food')){setSyncStatus('busy','First run - seeding...');await seedDatabase();}
@@ -1084,7 +1231,7 @@ function sw(tab){
   if(tab==='analytics')renderAnalytics();
   if(tab==='daily'){setToday('d-date');renderDailyTable();}
   if(tab==='food'){renderFoodLog();populateFoodSel();}
-  if(tab==='food')checkAutoFillYesterday();if(tab==='recipes'){populateRecipeFoodSel();renderRecipeIngredients();renderRecipeList();}if(tab==='master')renderMaster();if(tab==='budget')renderExpenses();if(tab==='invest')initVestedModule();
+  if(tab==='exercise')renderGym();if(tab==='recipes'){populateRecipeFoodSel();renderRecipeIngredients();renderRecipeList();}if(tab==='master')renderMaster();if(tab==='budget')renderExpenses();if(tab==='invest')initVestedModule();
   // Sync bottom nav
   document.querySelectorAll('#bottom-nav button').forEach(function(b){
     b.classList.toggle('active',b.dataset.tab===tab);
@@ -1147,7 +1294,7 @@ function importData(e){
              var rows=data.foodLog.map(function(f){return{date:f.date,food:f.food,grams:f.grams,cal:f.cal,pro:f.pro,fat:f.fat,car:f.car};});
              return insertChunks('food_log',rows,50);
            })
-           .then(function(){return sbGet('food_log?order=date.asc,id.asc');})
+           .then(function(){return sbGetAll('food_log?order=date.asc,id.asc');})
            .then(function(rows){FL=rows.map(flFromDB);msg.push(data.foodLog.length+' food log items');})
            .catch(function(err){throw new Error('food_log: '+err.message);});
       }
@@ -1388,6 +1535,7 @@ function fShift(d){var cur=document.getElementById('f-date').value||today();var 
 function renderFoodLog(){
   var date=document.getElementById('f-date').value||today();
   document.getElementById('f-label').textContent=fmtL(date);
+  try{fCopyRefresh();}catch(e){}
   var items=FL.filter(function(f){return f.date===date;});
   var tC=items.reduce(function(s,f){return s+f.cal;},0),tP=items.reduce(function(s,f){return s+f.pro;},0),tF=items.reduce(function(s,f){return s+f.fat;},0),tB=items.reduce(function(s,f){return s+f.car;},0);
   document.getElementById('f-macros').innerHTML='<div class="card green"><div class="card-lbl">Calories</div><div class="card-val">'+Math.round(tC)+'</div></div><div class="card"><div class="card-lbl">Protein</div><div class="card-val">'+tP.toFixed(1)+'</div><div class="card-sub">g</div></div><div class="card amber"><div class="card-lbl">Fat</div><div class="card-val">'+tF.toFixed(1)+'</div><div class="card-sub">g</div></div><div class="card blue"><div class="card-lbl">Carbs</div><div class="card-val">'+tB.toFixed(1)+'</div><div class="card-sub">g</div></div>';
@@ -1504,11 +1652,11 @@ var ALL_PROFILES=[];      // used by the admin screens only
 var ADMIN_SETTINGS=null;  // used by the admin Settings screen only
 var ADMIN_VIEW='requests';// requests | users | settings
 var _PROFILE_MISSING=false;
-var TAB_FEATURE={dash:'can_health',analytics:'can_health',daily:'can_health',
+var TAB_FEATURE={dash:'can_health',analytics:'can_health',daily:'can_health',exercise:'can_health',
   food:'can_food',recipes:'can_food',master:'can_food',
   budget:'can_budget',invest:'can_invest'};
 var FEATURE_FLAGS=[
-  {flag:'can_health',label:'🏃 Health'},
+  {flag:'can_health',label:'🏃 Health + Exercise'},
   {flag:'can_food',label:'🥗 Food'},
   {flag:'can_budget',label:'💰 Budget'},
   {flag:'can_invest',label:'📈 Invest'}
@@ -1530,7 +1678,7 @@ function tabAllowed(tab){
   return !feature||MY_PROFILE[feature]===true;
 }
 function firstAllowedTab(){
-  var order=['dash','analytics','daily','food','recipes','master','budget','invest','admin'];
+  var order=['dash','analytics','daily','exercise','food','recipes','master','budget','invest','admin'];
   for(var i=0;i<order.length;i++){if(tabAllowed(order[i]))return order[i];}
   return null;
 }
@@ -1598,6 +1746,8 @@ function applyFeatureGating(){
   ['admin-nav-btn','admin-nav-btn-mobile'].forEach(function(id){
     var b=document.getElementById(id);if(b)b.style.display=tabAllowed('admin')?'':'none';
   });
+  var _bn=document.getElementById('bottom-nav');
+  if(_bn){var _vis=0;_bn.querySelectorAll('button').forEach(function(b){if(b.style.display!=='none')_vis++;});_bn.classList.toggle('bn-many',_vis>8);}
   var cur=document.querySelector('.sec.active');
   var curTab=cur?cur.id.replace('sec-',''):null;
   if(!curTab||!tabAllowed(curTab)){
@@ -2010,41 +2160,818 @@ function copySignupLink(btn){
 }
 
 // =====================================================================
-// AUTO-FILL TODAY'S MEALS FROM YESTERDAY
+// FOOD LOG: COPY ITEMS FROM ANOTHER DAY
+// (replaces the old automatic copy of yesterday's meals: nothing is copied
+//  unless you tick the box, pick a day and press the button)
 // =====================================================================
-var _autoFillChecked=false;
-async function checkAutoFillYesterday(){
-  var todayStr=today();
-  var dateShown=document.getElementById('f-date').value||todayStr;
-  if(dateShown!==todayStr)return; // only auto-fill when viewing the actual current date
-  if(_autoFillChecked)return;
-  _autoFillChecked=true;
-
-  var todaysItems=FL.filter(function(f){return f.date===todayStr;});
-  if(todaysItems.length)return; // already has entries - never overwrite
-
-  var yDate=new Date(todayStr+'T00:00:00');
-  yDate.setDate(yDate.getDate()-1);
-  var yStr=yDate.toISOString().split('T')[0];
-  var yItems=FL.filter(function(f){return f.date===yStr;});
-  if(!yItems.length)return; // nothing to copy
-
-  setSyncStatus('busy','Auto-filling from yesterday...');
+function _fcAddDays(s,n){var d=new Date(s+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
+function fCopyRefresh(){
+  var on=document.getElementById('f-copy-on'),dt=document.getElementById('f-copy-date'),
+      btn=document.getElementById('f-copy-btn'),info=document.getElementById('f-copy-info');
+  if(!on||!dt||!btn||!info)return;
+  var fd=document.getElementById('f-date');
+  var target=(fd&&fd.value)||today();
+  var enabled=on.checked;
+  dt.disabled=!enabled;
+  if(enabled&&!dt.value)dt.value=_fcAddDays(target,-1);
+  if(!enabled){btn.disabled=true;btn.textContent='Copy';info.textContent='';return;}
+  var src=dt.value;
+  if(!src){btn.disabled=true;btn.textContent='Copy';info.textContent='Pick the day to copy from';return;}
+  if(src===target){btn.disabled=true;btn.textContent='Copy';info.textContent='Pick a different day from the one shown above';return;}
+  var n=FL.filter(function(f){return f.date===src;}).length;
+  info.textContent=n?(n+' item'+(n!==1?'s':'')+' logged on '+fmtL(src)):('Nothing logged on '+fmtL(src));
+  btn.disabled=!n||_fCopyBusy;
+  btn.textContent=n?('Copy '+n+' item'+(n!==1?'s':'')+' to '+fmtS(target)):'Copy';
+}
+function fCopyToggle(){
+  var on=document.getElementById('f-copy-on'),dt=document.getElementById('f-copy-date');
+  if(on&&on.checked&&dt){var fd=document.getElementById('f-date');dt.value=_fcAddDays((fd&&fd.value)||today(),-1);}
+  fCopyRefresh();
+}
+var _fCopyBusy=false;
+async function fCopyFromDate(){
+  if(_fCopyBusy)return;
+  var on=document.getElementById('f-copy-on');if(!on||!on.checked)return;
+  var fd=document.getElementById('f-date');
+  var target=(fd&&fd.value)||today();
+  var src=document.getElementById('f-copy-date').value;
+  if(!src||src===target){fCopyRefresh();return;}
+  var items=FL.filter(function(f){return f.date===src;});
+  if(!items.length){fCopyRefresh();return;}
+  var existing=FL.filter(function(f){return f.date===target;}).length;
+  if(existing&&!confirm(fmtL(target)+' already has '+existing+' item'+(existing!==1?'s':'')+'.\n\nAdd '+items.length+' more from '+fmtL(src)+'?'))return;
+  var rows=items.map(function(s){return{date:target,food:s.food,grams:s.grams,cal:s.cal,pro:s.pro,fat:s.fat,car:s.car,user_id:_uid()};});
+  var btn=document.getElementById('f-copy-btn');
+  _fCopyBusy=true;btn.disabled=true;btn.textContent='Copying...';
+  setSyncStatus('busy','Copying...');
   try{
-    for(var i=0;i<yItems.length;i++){
-      var src=yItems[i];
-      var newItem={date:todayStr,food:src.food,grams:src.grams,cal:src.cal,pro:src.pro,fat:src.fat,car:src.car,user_id:_uid()};
-      var saved=await sbPost('food_log',newItem);
-      var savedRow=Array.isArray(saved)?saved[0]:saved;
-      FL.push(flFromDB(savedRow));
-    }
+    // one request for all items: either every item is added or none is
+    var saved=await sbPost('food_log',rows);
+    var arr=Array.isArray(saved)?saved:(saved?[saved]:[]);
+    arr.forEach(function(r){FL.push(flFromDB(r));});
+    on.checked=false;
+    _fCopyBusy=false;
     renderFoodLog();
-    showMsg('f-msg','Auto-filled '+yItems.length+' item'+(yItems.length!==1?'s':'')+' from yesterday \u2014 edit or remove as needed');
+    showMsg('f-copy-msg','Copied '+arr.length+' item'+(arr.length!==1?'s':'')+' from '+fmtL(src)+' — edit or remove as needed');
     setSyncStatus('ok','');
   }catch(e){
-    setSyncStatus('error','Auto-fill failed');
-    console.error('Auto-fill error:',e);
+    console.error('Copy failed:',e);
+    showMsg('f-copy-msg','Copy failed — nothing was added',true);
+    setSyncStatus('error','Copy failed');
+  }finally{_fCopyBusy=false;fCopyRefresh();}
+}
+
+// =====================================================================
+// EXERCISE MODULE (part of Health Tracking)
+//   Workout   - log sets (weight x reps) per day; load a routine or single exercises
+//   Exercises - your exercise list
+//   Combos    - groups of exercises
+//   Routines  - groups of combos
+//   Analytics - progress per exercise + overall training trends
+// Everything is stored per account; the database only shows your own rows.
+// =====================================================================
+var GYM={loaded:false,loading:null,error:null,ex:[],combos:[],routines:[],sets:[]};
+var GYM_VIEW='log';
+var GYM_DATE=null;
+var GYM_CH={};
+var GYM_EDIT={ex:null,combo:null,routine:null};
+var GYM_DRAFT={combo:[],comboName:'',comboNotes:'',routine:[],routineName:'',routineNotes:''};
+var GYM_STATS_EX=null;
+var GYM_PLAN_MEM={};
+var GYM_MUSCLES=['Chest','Back','Shoulders','Arms','Legs','Glutes','Core','Full body','Cardio','Other'];
+var GYM_COLORS={'Chest':'#1a6b4a','Back':'#1a4b8c','Shoulders':'#c47b1a','Arms':'#6b1a8c','Legs':'#c43a1a',
+  'Glutes':'#d4618c','Core':'#2a9d8f','Full body':'#5a6b7a','Cardio':'#e9a23b','Other':'#9a9a9a'};
+var GYM_STARTER=[
+  {name:'Bench Press',muscle:'Chest'},{name:'Incline Dumbbell Press',muscle:'Chest'},{name:'Push-up',muscle:'Chest'},
+  {name:'Pull-up',muscle:'Back'},{name:'Lat Pulldown',muscle:'Back'},{name:'Seated Cable Row',muscle:'Back'},{name:'Deadlift',muscle:'Back'},
+  {name:'Overhead Press',muscle:'Shoulders'},{name:'Lateral Raise',muscle:'Shoulders'},
+  {name:'Bicep Curl',muscle:'Arms'},{name:'Tricep Pushdown',muscle:'Arms'},
+  {name:'Squat',muscle:'Legs'},{name:'Leg Press',muscle:'Legs'},{name:'Romanian Deadlift',muscle:'Legs'},{name:'Calf Raise',muscle:'Legs'},
+  {name:'Hip Thrust',muscle:'Glutes'},{name:'Hanging Leg Raise',muscle:'Core'},{name:'Cable Crunch',muscle:'Core'}
+];
+
+// ── small helpers ───────────────────────────────────────────────────────
+function gymAddDays(s,n){var d=new Date(s+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
+function gymWeekStart(s){var d=new Date(s+'T00:00:00Z');var dy=d.getUTCDay();d.setUTCDate(d.getUTCDate()-(dy===0?6:dy-1));return d.toISOString().slice(0,10);}
+function gymNum(v){var n=parseFloat(v);return isFinite(n)?n:0;}
+function gymKg(n){n=+n||0;return String(Math.round(n*100)/100);}
+function gymVol(n){n=Math.round(+n||0);return n>=100000?(Math.round(n/100)/10)+'k':n.toLocaleString('en-IN');}
+function gymOne(n,word){return n+' '+word+(n===1?'':'s');}
+function gymOneDec(n){return String(Math.round((+n||0)*10)/10);}
+function gymIds(v){
+  if(typeof v==='string'){try{v=JSON.parse(v);}catch(e){return[];}}
+  if(!Array.isArray(v))return[];
+  return v.map(function(x){return Number(x);}).filter(function(x){return isFinite(x)&&x>0;});
+}
+function gymFind(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i];return null;}
+function gymEx(id){return gymFind(GYM.ex,id);}
+function gymCombo(id){return gymFind(GYM.combos,id);}
+function gymRoutine(id){return gymFind(GYM.routines,id);}
+function gymSetFromDB(r){return{id:Number(r.id),date:r.date,exercise_id:Number(r.exercise_id),weight:gymNum(r.weight),reps:parseInt(r.reps,10)||0};}
+function gymByName(a,b){return String(a.name).localeCompare(String(b.name));}
+function gymErr(e){
+  var m=(e&&e.message)||String(e||'');
+  try{var j=JSON.parse(m);
+    if(j&&j.code==='23505')return 'That name is already used';
+    if(j&&(j.code==='42501'||/row-level security/i.test(j.message||'')))return 'Not allowed — Health Tracking must be switched on for your account';
+    if(j&&j.code==='23503')return 'That exercise no longer exists — reload the page';
+    if(j&&j.message)return 'Could not save: '+j.message;
+  }catch(x){}
+  if(/HTTP 409/.test(m))return 'That name is already used';
+  if(/HTTP 40[13]/.test(m))return 'Not allowed — Health Tracking must be switched on for your account';
+  return 'Could not save: '+m.slice(0,140);
+}
+var _gymToastT=null;
+function gymToast(text,isErr){
+  var el=document.getElementById('gym-toast');
+  if(!el){el=document.createElement('div');el.id='gym-toast';el.setAttribute('role','status');el.setAttribute('aria-live','polite');document.body.appendChild(el);}
+  el.textContent=text;el.className='gym-toast show'+(isErr?' err':'');
+  clearTimeout(_gymToastT);_gymToastT=setTimeout(function(){el.className='gym-toast';},isErr?4500:2600);
+}
+function gymDestroyCharts(){Object.keys(GYM_CH).forEach(function(k){try{GYM_CH[k].destroy();}catch(e){}delete GYM_CH[k];});}
+function gymChart(id,cfg){
+  if(GYM_CH[id]){try{GYM_CH[id].destroy();}catch(e){}delete GYM_CH[id];}
+  var c=document.getElementById(id);if(!c||typeof Chart==='undefined')return;
+  GYM_CH[id]=new Chart(c,cfg);
+}
+function gymExOptions(placeholder,skip){
+  var groups={};GYM.ex.forEach(function(e){var m=e.muscle||'Other';(groups[m]=groups[m]||[]).push(e);});
+  var order=GYM_MUSCLES.concat(Object.keys(groups).filter(function(k){return GYM_MUSCLES.indexOf(k)<0;}));
+  return '<option value="">'+escHtml(placeholder)+'</option>'+order.filter(function(m){return groups[m];}).map(function(m){
+    return '<optgroup label="'+escHtml(m)+'">'+groups[m].slice().sort(gymByName).map(function(e){
+      return '<option value="'+e.id+'"'+(skip&&skip.indexOf(e.id)>=0?' disabled':'')+'>'+escHtml(e.name)+'</option>';}).join('')+'</optgroup>';
+  }).join('');
+}
+
+// ── loading ─────────────────────────────────────────────────────────────
+function gymLoad(force){
+  if(GYM.loading)return GYM.loading;
+  if(GYM.loaded&&!force)return Promise.resolve();
+  GYM.error=null;
+  GYM.loading=Promise.all([
+    sbGetAll('gym_exercises?order=name.asc,id.asc'),
+    sbGetAll('gym_combos?order=name.asc,id.asc'),
+    sbGetAll('gym_routines?order=name.asc,id.asc'),
+    sbGetAll('gym_sets?order=date.asc,id.asc')
+  ]).then(function(r){
+    GYM.ex=(r[0]||[]).map(function(e){return{id:Number(e.id),name:e.name,muscle:e.muscle||'Other',notes:e.notes||''};});
+    GYM.combos=(r[1]||[]).map(function(c){return{id:Number(c.id),name:c.name,notes:c.notes||'',exercise_ids:gymIds(c.exercise_ids)};});
+    GYM.routines=(r[2]||[]).map(function(x){return{id:Number(x.id),name:x.name,notes:x.notes||'',combo_ids:gymIds(x.combo_ids)};});
+    GYM.sets=(r[3]||[]).map(gymSetFromDB);
+    GYM.loaded=true;
+  }).catch(function(e){GYM.error=e;console.error('Exercise data could not be loaded:',e);})
+    .then(function(){GYM.loading=null;});
+  return GYM.loading;
+}
+
+// ── main render ─────────────────────────────────────────────────────────
+function renderGym(){
+  var sec=document.getElementById('sec-exercise');if(!sec)return;
+  gymBind();
+  if(!GYM_DATE)GYM_DATE=today();
+  sec.querySelectorAll('.gym-tab').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-gview')===GYM_VIEW);});
+  ['log','ex','combos','routines','stats'].forEach(function(v){var p=document.getElementById('gym-pane-'+v);if(p)p.style.display=(v===GYM_VIEW&&GYM.loaded)?'':'none';});
+  var note=document.getElementById('gym-load-msg');
+  if(!GYM.loaded){
+    if(GYM.error){
+      var missing=/HTTP 404/.test(String(GYM.error.message||''));
+      note.innerHTML='<div class="gym-empty">'+(missing
+        ?'The exercise tables are not set up in the database yet (run <b>ketometrics_exercise_module.sql</b> in Supabase).'
+        :'Could not load your exercise data: '+escHtml(String(GYM.error.message||GYM.error).slice(0,120)))+
+        ' <button type="button" class="ghost gym-sm" data-gact="reload">Try again</button></div>';
+    }else{
+      note.innerHTML='<div class="gym-empty">Loading your exercise data…</div>';
+      gymLoad().then(function(){renderGym();});
+    }
+    note.style.display='';
+    return;
   }
+  note.style.display='none';note.innerHTML='';
+  if(GYM_VIEW!=='stats')gymDestroyCharts();
+  if(GYM_VIEW==='log')gymRenderLog();
+  else if(GYM_VIEW==='ex')gymRenderExercises();
+  else if(GYM_VIEW==='combos')gymRenderCombos();
+  else if(GYM_VIEW==='routines')gymRenderRoutines();
+  else gymRenderStats();
+}
+
+// ── per-exercise history ────────────────────────────────────────────────
+function gymE1RM(w,r){if(!(w>0)||!(r>0))return 0;if(r===1)return w;return w*(1+r/30);}   // Epley estimate
+function gymSessions(exId){
+  var by={};
+  GYM.sets.forEach(function(s){if(s.exercise_id!==exId)return;(by[s.date]=by[s.date]||[]).push(s);});
+  return Object.keys(by).sort().map(function(d){
+    var ss=by[d].sort(function(a,b){return a.id-b.id;});
+    var top=0,maxR=0,vol=0,e1=0,reps=0;
+    ss.forEach(function(s){if(s.weight>top)top=s.weight;if(s.reps>maxR)maxR=s.reps;vol+=s.weight*s.reps;reps+=s.reps;var e=gymE1RM(s.weight,s.reps);if(e>e1)e1=e;});
+    var repsAtTop=0;ss.forEach(function(s){if(s.weight===top&&s.reps>repsAtTop)repsAtTop=s.reps;});
+    return{date:d,sets:ss,top:top,repsAtTop:repsAtTop,maxReps:maxR,volume:vol,e1rm:e1,totalReps:reps};
+  });
+}
+function gymTopSet(sets){var b=null;sets.forEach(function(s){if(!b||s.weight>b.weight||(s.weight===b.weight&&s.reps>b.reps))b=s;});return b;}
+function gymBest(exId){
+  var b={maxW:0,maxWReps:0,maxWDate:null,maxR:0,maxRW:0,maxRDate:null,e1:0,e1Date:null,vol:0,volDate:null,tot:0,totDate:null,sessions:0};
+  var ss=gymSessions(exId);b.sessions=ss.length;
+  ss.forEach(function(se){
+    se.sets.forEach(function(s){
+      if(s.weight>b.maxW||(s.weight===b.maxW&&s.reps>b.maxWReps&&s.weight>0)){b.maxW=s.weight;b.maxWReps=s.reps;b.maxWDate=se.date;}
+      if(s.reps>b.maxR){b.maxR=s.reps;b.maxRW=s.weight;b.maxRDate=se.date;}
+      var e=gymE1RM(s.weight,s.reps);if(e>b.e1){b.e1=e;b.e1Date=se.date;}
+    });
+    if(se.volume>b.vol){b.vol=se.volume;b.volDate=se.date;}
+    if(se.totalReps>b.tot){b.tot=se.totalReps;b.totDate=se.date;}
+  });
+  return b;
+}
+// Personal bests in the order they happened (a first session is the baseline, not a record)
+function gymPREvents(){
+  var ev=[],st={};
+  GYM.sets.slice().sort(function(a,b){return a.date<b.date?-1:(a.date>b.date?1:a.id-b.id);}).forEach(function(s){
+    var k=st[s.exercise_id]||(st[s.exercise_id]={w:null,e:null,r:null,first:s.date});
+    var e1=gymE1RM(s.weight,s.reps);
+    if(s.date!==k.first){
+      if(s.weight>0&&k.w!==null&&s.weight>k.w)ev.push({date:s.date,ex:s.exercise_id,kind:'weight',w:s.weight,r:s.reps,prev:k.w});
+      else if(s.weight>0&&k.e!==null&&e1>k.e+0.01)ev.push({date:s.date,ex:s.exercise_id,kind:'e1rm',w:s.weight,r:s.reps,val:e1,prev:k.e});
+      else if(s.weight===0&&k.r!==null&&s.reps>k.r)ev.push({date:s.date,ex:s.exercise_id,kind:'reps',w:0,r:s.reps,prev:k.r});
+    }
+    k.w=k.w===null?s.weight:Math.max(k.w,s.weight);
+    k.e=k.e===null?e1:Math.max(k.e,e1);
+    if(s.weight===0)k.r=k.r===null?s.reps:Math.max(k.r,s.reps);
+  });
+  return ev;
+}
+
+// ── day plan (which exercises are on a given day before any set is logged) ──
+function gymPlanKey(date){return 'km_gym_plan:'+(_uid()||'')+':'+date;}
+function gymPlanGet(date){
+  if(GYM_PLAN_MEM[date])return GYM_PLAN_MEM[date].slice();
+  var v=[];try{v=JSON.parse(localStorage.getItem(gymPlanKey(date))||'[]');}catch(e){v=[];}
+  if(!Array.isArray(v))v=[];
+  v=v.filter(function(x){return x&&isFinite(Number(x.id));}).map(function(x){return{id:Number(x.id),from:typeof x.from==='string'?x.from:''};});
+  GYM_PLAN_MEM[date]=v;return v.slice();
+}
+function gymPlanSet(date,plan){
+  GYM_PLAN_MEM[date]=plan.slice();
+  try{if(plan.length)localStorage.setItem(gymPlanKey(date),JSON.stringify(plan));else localStorage.removeItem(gymPlanKey(date));}catch(e){}
+}
+function gymPlanAdd(date,exId,from){var p=gymPlanGet(date);if(!p.some(function(x){return x.id===exId;})){p.push({id:exId,from:from||''});gymPlanSet(date,p);return true;}return false;}
+function gymPlanRemove(date,exId){gymPlanSet(date,gymPlanGet(date).filter(function(x){return x.id!==exId;}));}
+function gymLoadRoutine(rid){
+  var r=gymRoutine(rid);if(!r)return;
+  var date=GYM_DATE||today(),added=0;
+  r.combo_ids.forEach(function(cid){
+    var c=gymCombo(cid);if(!c)return;
+    c.exercise_ids.forEach(function(eid){if(gymEx(eid)&&gymPlanAdd(date,eid,c.name))added++;});
+  });
+  gymToast(added?('Loaded '+r.name+': '+gymOne(added,'exercise')):(r.name+' is already on this day'));
+  gymRenderLog();
+}
+
+// ── Workout (log) ───────────────────────────────────────────────────────
+function gymRenderLog(){
+  var p=document.getElementById('gym-pane-log');if(!p)return;
+  var date=GYM_DATE||today();
+  var plan=gymPlanGet(date);
+  var daySets=GYM.sets.filter(function(s){return s.date===date;});
+  var ids=[];
+  plan.forEach(function(x){if(ids.indexOf(x.id)<0&&gymEx(x.id))ids.push(x.id);});
+  daySets.slice().sort(function(a,b){return a.id-b.id;}).forEach(function(s){if(ids.indexOf(s.exercise_id)<0&&gymEx(s.exercise_id))ids.push(s.exercise_id);});
+  var html='<div class="date-nav"><button type="button" data-gact="log-day" data-d="-1" aria-label="Previous day">&#8249;</button>'+
+    '<input type="date" id="gym-log-date" value="'+escHtml(date)+'"><button type="button" data-gact="log-day" data-d="1" aria-label="Next day">&#8250;</button>'+
+    '<span class="gym-date-lbl">'+escHtml(fmtL(date))+'</span></div>';
+  if(!GYM.ex.length){
+    p.innerHTML=html+'<div class="gym-empty">Add your exercises first, then come back here to log weight, sets and reps.'+
+      ' <button type="button" class="primary gym-sm" data-gact="view" data-gview="ex">Go to Exercises</button></div>';
+    return;
+  }
+  var vol=daySets.reduce(function(a,s){return a+s.weight*s.reps;},0);
+  var done={};daySets.forEach(function(s){done[s.exercise_id]=1;});
+  html+='<div class="cards gym-cards"><div class="card green"><div class="card-lbl">Exercises done</div><div class="card-val">'+Object.keys(done).length+'</div></div>'+
+    '<div class="card"><div class="card-lbl">Sets</div><div class="card-val">'+daySets.length+'</div></div>'+
+    '<div class="card blue"><div class="card-lbl">Volume</div><div class="card-val">'+gymVol(vol)+'</div><div class="card-sub">kg &times; reps</div></div></div>';
+  html+='<div class="panel"><div class="panel-title">Plan this workout</div>'+
+    '<div class="gym-pick-row"><select id="gym-log-routine" aria-label="Routine"><option value="">'+(GYM.routines.length?'Load a routine…':'No routines yet (create one under Routines)')+'</option>'+
+      GYM.routines.slice().sort(gymByName).map(function(r){return '<option value="'+r.id+'">'+escHtml(r.name)+'</option>';}).join('')+
+    '</select><button type="button" class="ghost" data-gact="log-routine"'+(GYM.routines.length?'':' disabled')+'>Load</button></div>'+
+    '<div class="gym-pick-row"><select id="gym-log-ex" aria-label="Exercise">'+gymExOptions('Add a single exercise…',ids)+'</select>'+
+    '<button type="button" class="ghost" data-gact="log-ex">Add</button></div></div>';
+  if(!ids.length)html+='<div class="gym-empty">Nothing planned for '+escHtml(fmtL(date))+' yet. Load a routine or add an exercise above.</div>';
+  ids.forEach(function(id){html+=gymCardHtml(id,date,plan);});
+  p.innerHTML=html;
+}
+function gymCardHtml(id,date,plan){
+  var e=gymEx(id);if(!e)return '';
+  var sets=GYM.sets.filter(function(s){return s.date===date&&s.exercise_id===id;}).sort(function(a,b){return a.id-b.id;});
+  var before=gymSessions(id).filter(function(s){return s.date<date;});
+  var prev=before.length?before[before.length-1]:null;
+  var best=gymBest(id);
+  var pre=sets.length?sets[sets.length-1]:(prev?gymTopSet(prev.sets):null);
+  var from='';plan.forEach(function(x){if(x.id===id&&x.from)from=x.from;});
+  var hint=prev?('Last time ('+fmtS(prev.date)+'): '+prev.sets.map(function(s){return gymKg(s.weight)+'×'+s.reps;}).join(', ')):'First time — no history yet';
+  if(best.maxW>0)hint+=' · Best '+gymKg(best.maxW)+' kg × '+best.maxWReps;
+  var rows=sets.map(function(s,i){
+    return '<tr><td>'+(i+1)+'</td><td>'+gymKg(s.weight)+'</td><td>'+s.reps+'</td><td>'+gymVol(s.weight*s.reps)+'</td>'+
+      '<td><button type="button" class="del-btn" data-gact="set-del" data-id="'+s.id+'" aria-label="Delete set '+(i+1)+'">&#215;</button></td></tr>';
+  }).join('');
+  return '<div class="gym-card" data-ex="'+id+'">'+
+    '<div class="gym-card-head"><div class="gym-card-tt"><div class="gym-card-title">'+escHtml(e.name)+'</div>'+
+      '<div class="gym-card-sub">'+escHtml(e.muscle||'Other')+(from?' · '+escHtml(from):'')+'</div></div>'+
+      (sets.length?'<span class="gym-pill">'+gymOne(sets.length,'set')+'</span>':'<button type="button" class="ghost gym-sm" data-gact="plan-rm" data-id="'+id+'">Remove</button>')+'</div>'+
+    '<div class="gym-hint">'+escHtml(hint)+'</div>'+
+    (rows?'<table class="gym-sets"><thead><tr><th>Set</th><th>kg</th><th>Reps</th><th>Volume</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>':'')+
+    '<div class="gym-add-set">'+
+      '<label class="gym-num"><input type="number" inputmode="decimal" min="0" max="1999" step="0.5" class="gym-in-w" placeholder="0" value="'+(pre?gymKg(pre.weight):'')+'" aria-label="Weight in kg"><span>kg</span></label>'+
+      '<span class="gym-x">&times;</span>'+
+      '<label class="gym-num"><input type="number" inputmode="numeric" min="1" max="9999" step="1" class="gym-in-r" placeholder="0" value="'+(pre?pre.reps:'')+'" aria-label="Reps"><span>reps</span></label>'+
+      '<button type="button" class="primary gym-sm" data-gact="set-add" data-id="'+id+'">+ Add set</button>'+
+    '</div></div>';
+}
+async function gymAddSet(exId,card){
+  if(!card)return;
+  var e=gymEx(exId);if(!e)return;
+  var wIn=card.querySelector('.gym-in-w'),rIn=card.querySelector('.gym-in-r');
+  var wRaw=(wIn.value||'').trim(),w=wRaw===''?0:parseFloat(wRaw),r=parseInt(rIn.value,10);
+  if(!isFinite(w)||w<0||w>=2000){gymToast('Check the weight (kg)',true);wIn.focus();return;}
+  if(!(r>=1&&r<=9999)){gymToast('Enter the number of reps',true);rIn.focus();return;}
+  w=Math.round(w*100)/100;
+  var date=GYM_DATE||today();
+  var before=gymBest(exId),hadHistory=GYM.sets.some(function(s){return s.exercise_id===exId&&s.date!==date;});
+  var btn=card.querySelector('[data-gact="set-add"]');if(btn)btn.disabled=true;
+  try{
+    var saved=await sbPost('gym_sets',{date:date,exercise_id:exId,weight:w,reps:r,user_id:_uid()});
+    var row=Array.isArray(saved)?saved[0]:saved;
+    if(!row||row.id==null)throw new Error('No row returned');
+    GYM.sets.push(gymSetFromDB(row));
+    gymPlanAdd(date,exId,null);
+    var msg='Set saved: '+gymKg(w)+' kg × '+r;
+    if(hadHistory&&w>0&&w>before.maxW)msg='New best weight for '+e.name+': '+gymKg(w)+' kg (was '+gymKg(before.maxW)+')';
+    else if(hadHistory&&w>0&&gymE1RM(w,r)>before.e1+0.01)msg='New best for '+e.name+': '+gymKg(w)+' kg × '+r+' (est. 1-rep max '+gymKg(Math.round(gymE1RM(w,r)*10)/10)+' kg)';
+    else if(hadHistory&&w===0&&r>before.maxR)msg='New best for '+e.name+': '+r+' reps';
+    gymToast(msg);
+    gymRenderLog();
+    var again=document.querySelector('#gym-pane-log .gym-card[data-ex="'+exId+'"] .gym-in-r');
+    if(again&&window.matchMedia&&!window.matchMedia('(pointer:coarse)').matches)again.focus();
+  }catch(err){
+    if(btn)btn.disabled=false;
+    gymToast(gymErr(err),true);
+  }
+}
+async function gymDeleteSet(id){
+  var s=gymFind(GYM.sets,id);if(!s)return;
+  var e=gymEx(s.exercise_id);
+  if(!confirm('Delete this set?\n\n'+(e?e.name+': ':'')+gymKg(s.weight)+' kg × '+s.reps+' on '+fmtL(s.date)))return;
+  try{
+    await sbDel('gym_sets','id=eq.'+id);
+    GYM.sets=GYM.sets.filter(function(x){return x.id!==id;});
+    gymToast('Set deleted');
+    gymRenderLog();
+  }catch(err){gymToast(gymErr(err),true);}
+}
+
+// ── Exercises ───────────────────────────────────────────────────────────
+function gymRenderExercises(){
+  var p=document.getElementById('gym-pane-ex');if(!p)return;
+  var ed=GYM_EDIT.ex!=null?gymEx(GYM_EDIT.ex):null;
+  if(GYM_EDIT.ex!=null&&!ed)GYM_EDIT.ex=null;
+  var count={};GYM.sets.forEach(function(s){var c=count[s.exercise_id]||(count[s.exercise_id]={n:0,last:''});c.n++;if(s.date>c.last)c.last=s.date;});
+  var mus=ed?ed.muscle:'Chest';
+  var opts=GYM_MUSCLES.concat(GYM_MUSCLES.indexOf(mus)<0?[mus]:[]).map(function(m){return '<option'+(m===mus?' selected':'')+'>'+escHtml(m)+'</option>';}).join('');
+  var html='<div class="panel" id="gym-ex-form"><div class="panel-title">'+(ed?'Edit exercise':'Add an exercise')+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="fg"><label for="gym-ex-name">Name</label><input type="text" id="gym-ex-name" maxlength="80" placeholder="e.g. Bench Press" value="'+escHtml(ed?ed.name:'')+'"></div>'+
+      '<div class="fg"><label for="gym-ex-muscle">Muscle group</label><select id="gym-ex-muscle">'+opts+'</select></div>'+
+      '<div class="fg"><label for="gym-ex-notes">Notes (optional)</label><input type="text" id="gym-ex-notes" maxlength="300" placeholder="e.g. grip, machine settings" value="'+escHtml(ed?ed.notes:'')+'"></div>'+
+    '</div><div class="btn-row"><button type="button" class="primary" data-gact="ex-save">'+(ed?'Save changes':'Add exercise')+'</button>'+
+    (ed?'<button type="button" class="ghost" data-gact="ex-cancel">Cancel</button>':'')+'</div></div>';
+  if(!GYM.ex.length){
+    html+='<div class="gym-empty">No exercises yet. Add your own above, or start with a list of common gym exercises you can rename or delete later.'+
+      ' <button type="button" class="ghost gym-sm" data-gact="starter">Add starter list</button></div>';
+  }else{
+    var groups={};GYM.ex.forEach(function(e){var m=e.muscle||'Other';(groups[m]=groups[m]||[]).push(e);});
+    var order=GYM_MUSCLES.concat(Object.keys(groups).filter(function(k){return GYM_MUSCLES.indexOf(k)<0;}));
+    html+=order.filter(function(m){return groups[m];}).map(function(m){
+      return '<div class="sh">'+escHtml(m)+' &middot; '+groups[m].length+'</div><div class="gym-list">'+groups[m].slice().sort(gymByName).map(function(e){
+        var c=count[e.id];
+        return '<div class="gym-row"><div class="gym-row-main"><div class="gym-row-name">'+escHtml(e.name)+'</div>'+
+          '<div class="gym-row-sub">'+(c?gymOne(c.n,'set')+' logged &middot; last '+escHtml(fmtS(c.last)):'Not logged yet')+(e.notes?' &middot; '+escHtml(e.notes):'')+'</div></div>'+
+          '<div class="gym-row-act"><button type="button" class="ghost gym-sm" data-gact="ex-edit" data-id="'+e.id+'">Edit</button>'+
+          '<button type="button" class="del-btn" data-gact="ex-del" data-id="'+e.id+'" aria-label="Delete '+escHtml(e.name)+'">&#215;</button></div></div>';
+      }).join('')+'</div>';
+    }).join('');
+  }
+  p.innerHTML=html;
+}
+async function gymSaveExercise(){
+  var nameEl=document.getElementById('gym-ex-name');if(!nameEl)return;
+  var name=(nameEl.value||'').trim().replace(/\s+/g,' ');
+  var muscle=document.getElementById('gym-ex-muscle').value||'Other';
+  var notes=(document.getElementById('gym-ex-notes').value||'').trim();
+  if(!name){gymToast('Enter a name for the exercise',true);nameEl.focus();return;}
+  var editing=GYM_EDIT.ex;
+  if(GYM.ex.some(function(e){return e.id!==editing&&e.name.toLowerCase()===name.toLowerCase();})){gymToast('You already have "'+name+'"',true);return;}
+  try{
+    if(editing!=null){
+      await sbPatch('gym_exercises','id=eq.'+editing,{name:name,muscle:muscle,notes:notes});
+      var e=gymEx(editing);if(e){e.name=name;e.muscle=muscle;e.notes=notes;}
+      GYM_EDIT.ex=null;gymToast('Saved');
+    }else{
+      var saved=await sbPost('gym_exercises',{name:name,muscle:muscle,notes:notes,user_id:_uid()});
+      var row=Array.isArray(saved)?saved[0]:saved;
+      if(row)GYM.ex.push({id:Number(row.id),name:row.name,muscle:row.muscle||muscle,notes:row.notes||''});
+      gymToast('Added '+name);
+    }
+    GYM.ex.sort(gymByName);
+    gymRenderExercises();
+    var n2=document.getElementById('gym-ex-name');if(n2&&editing==null)n2.focus();
+  }catch(err){gymToast(gymErr(err),true);}
+}
+async function gymDeleteExercise(id){
+  var e=gymEx(id);if(!e)return;
+  var n=GYM.sets.filter(function(s){return s.exercise_id===id;}).length;
+  var inCombos=GYM.combos.filter(function(c){return c.exercise_ids.indexOf(id)>=0;});
+  var q='Delete "'+e.name+'"?';
+  if(n)q+='\n\nThis also deletes its '+gymOne(n,'logged set')+'. This cannot be undone.';
+  if(inCombos.length)q+='\n\nIt will be taken out of '+gymOne(inCombos.length,'combo')+': '+inCombos.map(function(c){return c.name;}).join(', ')+'.';
+  if(!confirm(q))return;
+  try{
+    for(var i=0;i<inCombos.length;i++){
+      var c=inCombos[i],keep=c.exercise_ids.filter(function(x){return x!==id;});
+      await sbPatch('gym_combos','id=eq.'+c.id,{exercise_ids:keep});
+      c.exercise_ids=keep;
+    }
+    await sbDel('gym_exercises','id=eq.'+id);          // its logged sets are deleted with it (database rule)
+    GYM.ex=GYM.ex.filter(function(x){return x.id!==id;});
+    GYM.sets=GYM.sets.filter(function(s){return s.exercise_id!==id;});
+    Object.keys(GYM_PLAN_MEM).forEach(function(d){gymPlanSet(d,GYM_PLAN_MEM[d].filter(function(x){return x.id!==id;}));});
+    GYM_DRAFT.combo=GYM_DRAFT.combo.filter(function(x){return x!==id;});
+    if(GYM_EDIT.ex===id)GYM_EDIT.ex=null;
+    if(GYM_STATS_EX===id)GYM_STATS_EX=null;
+    gymToast('Deleted '+e.name);
+    gymRenderExercises();
+  }catch(err){gymToast(gymErr(err),true);}
+}
+async function gymAddStarter(){
+  if(GYM.ex.length)return;
+  if(!confirm('Add '+GYM_STARTER.length+' common gym exercises?\n\nYou can rename or delete any of them later.'))return;
+  try{
+    var saved=await sbPost('gym_exercises',GYM_STARTER.map(function(s){return{name:s.name,muscle:s.muscle,notes:'',user_id:_uid()};}));
+    (Array.isArray(saved)?saved:[]).forEach(function(r){GYM.ex.push({id:Number(r.id),name:r.name,muscle:r.muscle||'Other',notes:r.notes||''});});
+    GYM.ex.sort(gymByName);
+    gymToast('Added '+gymOne(GYM.ex.length,'exercise'));
+    gymRenderExercises();
+  }catch(err){gymToast(gymErr(err),true);}
+}
+
+// ── Combos and Routines (same editor, different building blocks) ─────────
+function gymDraftRead(kind){
+  var n=document.getElementById('gym-'+kind+'-name'),no=document.getElementById('gym-'+kind+'-notes');
+  if(n)GYM_DRAFT[kind+'Name']=n.value;
+  if(no)GYM_DRAFT[kind+'Notes']=no.value;
+}
+function gymRenderKind(kind){if(kind==='combo')gymRenderCombos();else gymRenderRoutines();}
+function gymDraftAdd(kind){
+  gymDraftRead(kind);
+  var sel=document.getElementById('gym-'+kind+'-pick');var v=parseInt(sel&&sel.value,10);
+  if(!v){gymToast(kind==='combo'?'Pick an exercise to add':'Pick a combo to add',true);return;}
+  if(GYM_DRAFT[kind].indexOf(v)>=0){gymToast('Already in the list',true);return;}
+  GYM_DRAFT[kind].push(v);gymRenderKind(kind);
+  var s2=document.getElementById('gym-'+kind+'-pick');if(s2)s2.focus();
+}
+function gymDraftMove(kind,i,d){gymDraftRead(kind);var a=GYM_DRAFT[kind],j=i+d;if(i<0||j<0||i>=a.length||j>=a.length)return;var t=a[i];a[i]=a[j];a[j]=t;gymRenderKind(kind);}
+function gymDraftRm(kind,i){gymDraftRead(kind);if(i>=0&&i<GYM_DRAFT[kind].length)GYM_DRAFT[kind].splice(i,1);gymRenderKind(kind);}
+function gymStartEdit(kind,id){
+  var obj=kind==='combo'?gymCombo(id):gymRoutine(id);if(!obj)return;
+  GYM_EDIT[kind]=id;
+  GYM_DRAFT[kind]=(kind==='combo'?obj.exercise_ids:obj.combo_ids).slice();
+  GYM_DRAFT[kind+'Name']=obj.name;GYM_DRAFT[kind+'Notes']=obj.notes||'';
+  gymRenderKind(kind);
+  var f=document.getElementById('gym-'+kind+'-form');if(f&&f.scrollIntoView)f.scrollIntoView({block:'start',behavior:'smooth'});
+}
+function gymCancelEdit(kind){GYM_EDIT[kind]=null;GYM_DRAFT[kind]=[];GYM_DRAFT[kind+'Name']='';GYM_DRAFT[kind+'Notes']='';gymRenderKind(kind);}
+function gymEditorHtml(kind){
+  var isCombo=kind==='combo';
+  var editing=GYM_EDIT[kind]!=null;
+  var items=GYM_DRAFT[kind].filter(function(id){return isCombo?gymEx(id):gymCombo(id);});
+  GYM_DRAFT[kind]=items;
+  var pick=isCombo?gymExOptions('Choose an exercise…',items)
+    :'<option value="">'+(GYM.combos.length?'Choose a combo…':'No combos yet')+'</option>'+GYM.combos.slice().sort(gymByName).map(function(c){
+        return '<option value="'+c.id+'"'+(items.indexOf(c.id)>=0?' disabled':'')+'>'+escHtml(c.name)+'</option>';}).join('');
+  var list=items.length?'<ol class="gym-draft">'+items.map(function(id,i){
+      var label=isCombo?gymEx(id).name:gymCombo(id).name;
+      var sub=isCombo?(gymEx(id).muscle||''):gymCombo(id).exercise_ids.map(function(x){var e=gymEx(x);return e?e.name:null;}).filter(Boolean).join(', ');
+      return '<li><div class="gym-draft-txt"><span>'+escHtml(label)+'</span><small>'+escHtml(sub)+'</small></div><span class="gym-draft-act">'+
+        '<button type="button" class="ghost gym-xs" data-gact="'+kind+'-up" data-idx="'+i+'" aria-label="Move up"'+(i===0?' disabled':'')+'>&#8593;</button>'+
+        '<button type="button" class="ghost gym-xs" data-gact="'+kind+'-down" data-idx="'+i+'" aria-label="Move down"'+(i===items.length-1?' disabled':'')+'>&#8595;</button>'+
+        '<button type="button" class="del-btn" data-gact="'+kind+'-rm" data-idx="'+i+'" aria-label="Remove">&#215;</button></span></li>';
+    }).join('')+'</ol>'
+    :'<div class="gym-hint">'+(isCombo?'No exercises added yet.':'No combos added yet.')+'</div>';
+  return '<div class="panel" id="gym-'+kind+'-form"><div class="panel-title">'+(editing?(isCombo?'Edit combo':'Edit routine'):(isCombo?'Create a combo':'Create a routine'))+'</div>'+
+    '<div class="form-grid">'+
+      '<div class="fg"><label for="gym-'+kind+'-name">Name</label><input type="text" id="gym-'+kind+'-name" maxlength="80" placeholder="'+(isCombo?'e.g. Chest &amp; triceps superset':'e.g. Push day')+'" value="'+escHtml(GYM_DRAFT[kind+'Name'])+'"></div>'+
+      '<div class="fg"><label for="gym-'+kind+'-notes">Notes (optional)</label><input type="text" id="gym-'+kind+'-notes" maxlength="300" value="'+escHtml(GYM_DRAFT[kind+'Notes'])+'"></div>'+
+    '</div>'+
+    '<div class="gym-pick-row"><select id="gym-'+kind+'-pick" aria-label="'+(isCombo?'Exercise':'Combo')+'">'+pick+'</select>'+
+      '<button type="button" class="ghost" data-gact="'+kind+'-pick">'+(isCombo?'Add exercise':'Add combo')+'</button></div>'+
+    list+
+    '<div class="btn-row" style="margin-top:10px"><button type="button" class="primary" data-gact="'+kind+'-save">'+(editing?'Save changes':(isCombo?'Save combo':'Save routine'))+'</button>'+
+      (editing||items.length||GYM_DRAFT[kind+'Name']?'<button type="button" class="ghost" data-gact="'+kind+'-cancel">'+(editing?'Cancel':'Clear')+'</button>':'')+'</div></div>';
+}
+function gymRenderCombos(){
+  var p=document.getElementById('gym-pane-combos');if(!p)return;
+  if(!GYM.ex.length){p.innerHTML='<div class="gym-empty">A combo is a group of exercises (for example a superset). Add exercises first. <button type="button" class="primary gym-sm" data-gact="view" data-gview="ex">Go to Exercises</button></div>';return;}
+  var used={};GYM.routines.forEach(function(r){r.combo_ids.forEach(function(c){used[c]=(used[c]||0)+1;});});
+  var html=gymEditorHtml('combo');
+  html+='<div class="sh">Your combos &middot; '+GYM.combos.length+'</div>';
+  if(!GYM.combos.length)html+='<div class="gym-empty">No combos yet.</div>';
+  else html+='<div class="gym-list">'+GYM.combos.slice().sort(gymByName).map(function(c){
+    var names=c.exercise_ids.map(function(x){var e=gymEx(x);return e?e.name:null;}).filter(Boolean);
+    return '<div class="gym-row"><div class="gym-row-main"><div class="gym-row-name">'+escHtml(c.name)+'</div>'+
+      '<div class="gym-row-sub">'+(names.length?names.map(escHtml).join(' &rarr; '):'<i>no exercises</i>')+(used[c.id]?' &middot; in '+gymOne(used[c.id],'routine'):'')+(c.notes?' &middot; '+escHtml(c.notes):'')+'</div></div>'+
+      '<div class="gym-row-act"><button type="button" class="ghost gym-sm" data-gact="combo-edit" data-id="'+c.id+'">Edit</button>'+
+      '<button type="button" class="del-btn" data-gact="combo-del" data-id="'+c.id+'" aria-label="Delete '+escHtml(c.name)+'">&#215;</button></div></div>';
+  }).join('')+'</div>';
+  p.innerHTML=html;
+}
+function gymRenderRoutines(){
+  var p=document.getElementById('gym-pane-routines');if(!p)return;
+  if(!GYM.combos.length){p.innerHTML='<div class="gym-empty">A routine is built from combos. Create a combo first. <button type="button" class="primary gym-sm" data-gact="view" data-gview="combos">Go to Combos</button></div>';return;}
+  var html=gymEditorHtml('routine');
+  html+='<div class="sh">Your routines &middot; '+GYM.routines.length+'</div>';
+  if(!GYM.routines.length)html+='<div class="gym-empty">No routines yet.</div>';
+  else html+='<div class="gym-list">'+GYM.routines.slice().sort(gymByName).map(function(r){
+    var parts=r.combo_ids.map(function(cid){var c=gymCombo(cid);if(!c)return '';
+      var names=c.exercise_ids.map(function(x){var e=gymEx(x);return e?e.name:null;}).filter(Boolean);
+      return '<div class="gym-rt-combo"><b>'+escHtml(c.name)+'</b>'+(names.length?': '+names.map(escHtml).join(', '):'')+'</div>';}).join('');
+    return '<div class="gym-row gym-row-tall"><div class="gym-row-main"><div class="gym-row-name">'+escHtml(r.name)+'</div>'+
+      (parts||'<div class="gym-row-sub"><i>no combos</i></div>')+(r.notes?'<div class="gym-row-sub">'+escHtml(r.notes)+'</div>':'')+'</div>'+
+      '<div class="gym-row-act"><button type="button" class="primary gym-sm" data-gact="rt-start" data-id="'+r.id+'">Start today</button>'+
+      '<button type="button" class="ghost gym-sm" data-gact="routine-edit" data-id="'+r.id+'">Edit</button>'+
+      '<button type="button" class="del-btn" data-gact="routine-del" data-id="'+r.id+'" aria-label="Delete '+escHtml(r.name)+'">&#215;</button></div></div>';
+  }).join('')+'</div>';
+  p.innerHTML=html;
+}
+async function gymSaveKind(kind){
+  gymDraftRead(kind);
+  var isCombo=kind==='combo',table=isCombo?'gym_combos':'gym_routines',field=isCombo?'exercise_ids':'combo_ids';
+  var list=isCombo?GYM.combos:GYM.routines;
+  var name=(GYM_DRAFT[kind+'Name']||'').trim().replace(/\s+/g,' ');
+  var notes=(GYM_DRAFT[kind+'Notes']||'').trim();
+  var ids=GYM_DRAFT[kind].filter(function(id){return isCombo?gymEx(id):gymCombo(id);});
+  var editing=GYM_EDIT[kind];
+  if(!name){gymToast('Enter a name',true);var n=document.getElementById('gym-'+kind+'-name');if(n)n.focus();return;}
+  if(!ids.length){gymToast(isCombo?'Add at least one exercise':'Add at least one combo',true);return;}
+  if(list.some(function(x){return x.id!==editing&&x.name.toLowerCase()===name.toLowerCase();})){gymToast('You already have "'+name+'"',true);return;}
+  var body={name:name,notes:notes};body[field]=ids;
+  try{
+    if(editing!=null){
+      await sbPatch(table,'id=eq.'+editing,body);
+      var o=gymFind(list,editing);if(o){o.name=name;o.notes=notes;o[field]=ids.slice();}
+    }else{
+      body.user_id=_uid();
+      var saved=await sbPost(table,body);
+      var row=Array.isArray(saved)?saved[0]:saved;
+      if(row){var item={id:Number(row.id),name:row.name,notes:row.notes||''};item[field]=gymIds(row[field]);list.push(item);}
+    }
+    gymToast((editing!=null?'Saved ':'Created ')+name);
+    gymCancelEdit(kind);
+  }catch(err){gymToast(gymErr(err),true);}
+}
+async function gymDeleteCombo(id){
+  var c=gymCombo(id);if(!c)return;
+  var inR=GYM.routines.filter(function(r){return r.combo_ids.indexOf(id)>=0;});
+  var q='Delete combo "'+c.name+'"?\n\nYour exercises and logged sets are kept.';
+  if(inR.length)q+='\n\nIt will be taken out of '+gymOne(inR.length,'routine')+': '+inR.map(function(r){return r.name;}).join(', ')+'.';
+  if(!confirm(q))return;
+  try{
+    for(var i=0;i<inR.length;i++){
+      var r=inR[i],keep=r.combo_ids.filter(function(x){return x!==id;});
+      await sbPatch('gym_routines','id=eq.'+r.id,{combo_ids:keep});
+      r.combo_ids=keep;
+    }
+    await sbDel('gym_combos','id=eq.'+id);
+    GYM.combos=GYM.combos.filter(function(x){return x.id!==id;});
+    GYM_DRAFT.routine=GYM_DRAFT.routine.filter(function(x){return x!==id;});
+    if(GYM_EDIT.combo===id){gymCancelEdit('combo');}
+    gymToast('Deleted '+c.name);
+    gymRenderCombos();
+  }catch(err){gymToast(gymErr(err),true);}
+}
+async function gymDeleteRoutine(id){
+  var r=gymRoutine(id);if(!r)return;
+  if(!confirm('Delete routine "'+r.name+'"?\n\nIts combos, exercises and your logged sets are kept.'))return;
+  try{
+    await sbDel('gym_routines','id=eq.'+id);
+    GYM.routines=GYM.routines.filter(function(x){return x.id!==id;});
+    if(GYM_EDIT.routine===id){gymCancelEdit('routine');}
+    gymToast('Deleted '+r.name);
+    gymRenderRoutines();
+  }catch(err){gymToast(gymErr(err),true);}
+}
+
+// ── Analytics ───────────────────────────────────────────────────────────
+function gymRenderStats(){
+  var p=document.getElementById('gym-pane-stats');if(!p)return;
+  gymDestroyCharts();
+  if(!GYM.sets.length){p.innerHTML='<div class="gym-empty">Log a few workouts and your progress shows up here: weight and reps over time, personal bests, weekly volume and more.</div>';return;}
+  var td=today(),wk=gymWeekStart(td),wkEnd=gymAddDays(wk,6),lastWk=gymAddDays(wk,-7),d30=gymAddDays(td,-29);
+  var days30={},wkSets=0,wkVol=0,lwVol=0;
+  GYM.sets.forEach(function(s){
+    if(s.date>=d30&&s.date<=td)days30[s.date]=1;
+    if(s.date>=wk&&s.date<=wkEnd){wkSets++;wkVol+=s.weight*s.reps;}
+    if(s.date>=lastWk&&s.date<wk)lwVol+=s.weight*s.reps;
+  });
+  var events=gymPREvents();
+  var pr30=events.filter(function(e){return e.date>=d30;}).length;
+  var delta=lwVol>0?Math.round((wkVol-lwVol)/lwVol*100):null;
+  // weeks in a row with at least one workout (this week counts once it has one)
+  var streak=0,w=wk;
+  var trainedWeek=function(start){var end=gymAddDays(start,6);return GYM.sets.some(function(s){return s.date>=start&&s.date<=end;});};
+  if(!trainedWeek(w))w=gymAddDays(w,-7);
+  while(trainedWeek(w)&&streak<520){streak++;w=gymAddDays(w,-7);}
+  var used=GYM.ex.filter(function(e){return GYM.sets.some(function(s){return s.exercise_id===e.id;});});
+  if(!GYM_STATS_EX||!used.some(function(e){return e.id===GYM_STATS_EX;})){
+    var last=GYM.sets.slice().sort(function(a,b){return a.date<b.date?1:(a.date>b.date?-1:b.id-a.id);})[0];
+    GYM_STATS_EX=last?last.exercise_id:(used[0]&&used[0].id);
+  }
+  var html='<div class="cards gym-cards">'+
+    '<div class="card green"><div class="card-lbl">Workouts &middot; 30 days</div><div class="card-val">'+Object.keys(days30).length+'</div></div>'+
+    '<div class="card"><div class="card-lbl">Sets this week</div><div class="card-val">'+wkSets+'</div></div>'+
+    '<div class="card blue"><div class="card-lbl">Volume this week</div><div class="card-val">'+gymVol(wkVol)+'</div><div class="card-sub">'+(delta===null?'kg &times; reps':((delta>=0?'&#9650; +':'&#9660; ')+delta+'% vs last week'))+'</div></div>'+
+    '<div class="card amber"><div class="card-lbl">Personal bests &middot; 30 d</div><div class="card-val">'+pr30+'</div><div class="card-sub">'+gymOne(streak,'week')+' in a row</div></div></div>';
+  html+='<div class="panel"><div class="gym-pick-row"><select id="gym-stats-ex" aria-label="Exercise to analyse">'+
+    used.slice().sort(gymByName).map(function(e){return '<option value="'+e.id+'"'+(e.id===GYM_STATS_EX?' selected':'')+'>'+escHtml(e.name)+'</option>';}).join('')+
+    '</select></div><div id="gym-trend"></div></div>';
+  html+='<div class="chart-wrap"><div class="chart-title" id="gym-c-wr-title">Top weight and best reps per workout</div><div style="position:relative;height:210px"><canvas id="gym-c-wr"></canvas></div></div>'+
+    '<div class="chart-wrap" id="gym-c-e1-wrap"><div class="chart-title">Estimated 1-rep max (kg)</div><div style="position:relative;height:170px"><canvas id="gym-c-e1"></canvas></div></div>'+
+    '<div class="chart-wrap"><div class="chart-title">Volume per workout (kg &times; reps)</div><div style="position:relative;height:160px"><canvas id="gym-c-vol"></canvas></div></div>'+
+    '<div id="gym-bests"></div>';
+  html+='<div class="sh">All exercises</div>'+
+    '<div class="chart-wrap"><div class="chart-title">Weekly volume by muscle group (last 12 weeks)</div><div style="position:relative;height:210px"><canvas id="gym-c-wk"></canvas></div></div>'+
+    '<div class="gym-two">'+
+      '<div class="chart-wrap"><div class="chart-title">Workouts per week</div><div style="position:relative;height:170px"><canvas id="gym-c-freq"></canvas></div></div>'+
+      '<div class="chart-wrap"><div class="chart-title">Sets per muscle group (30 days)</div><div style="position:relative;height:170px"><canvas id="gym-c-split"></canvas></div></div>'+
+    '</div>'+
+    '<div class="sh">Recent personal bests</div><div id="gym-pr-list"></div>';
+  p.innerHTML=html;
+  // one part failing must not blank the rest of the page
+  try{gymDrawExercise(GYM_STATS_EX);}catch(err){console.error('Exercise analytics:',err);}
+  try{gymDrawOverall(events);}catch(err){console.error('Overall analytics:',err);}
+}
+function gymTrendLine(label,a,b,unit,fmt){
+  var f=fmt||gymKg;
+  var d=b-a,cls=d>0.0001?'up':(d<-0.0001?'down':'flat');
+  var pct=a>0?Math.round(d/a*100):null;
+  return '<div class="gym-trend '+cls+'"><span class="gym-trend-l">'+escHtml(label)+'</span><span class="gym-trend-v">'+f(a)+' &rarr; '+f(b)+(unit?' '+unit:'')+'</span>'+
+    '<span class="gym-trend-d">'+(cls==='up'?'&#9650; +':(cls==='down'?'&#9660; ':'&#9632; '))+f(d)+(pct!==null&&cls!=='flat'?' ('+(pct>0?'+':'')+pct+'%)':'')+'</span></div>';
+}
+function gymDrawExercise(exId){
+  var e=gymEx(exId),ss=e?gymSessions(exId):[];
+  var trend=document.getElementById('gym-trend'),bests=document.getElementById('gym-bests');
+  if(!e||!ss.length){if(trend)trend.innerHTML='';if(bests)bests.innerHTML='';return;}
+  var weighted=ss.some(function(s){return s.top>0;});
+  var first=ss[0],last=ss[ss.length-1],prev=ss.length>1?ss[ss.length-2]:null;
+  var t='';
+  if(ss.length<2)t='<div class="gym-hint">Log '+escHtml(e.name)+' on at least two days to see whether weight or reps are going up.</div>';
+  else{
+    t+='<div class="gym-trend-h">Since your first workout ('+escHtml(fmtS(first.date))+')</div>';
+    if(weighted){t+=gymTrendLine('Top weight',first.top,last.top,'kg');t+=gymTrendLine('Est. 1-rep max',first.e1rm,last.e1rm,'kg',gymOneDec);}
+    t+=gymTrendLine('Best reps in a set',first.maxReps,last.maxReps,'');
+    t+=weighted?gymTrendLine('Volume',first.volume,last.volume,'',gymVol):gymTrendLine('Total reps',first.totalReps,last.totalReps,'');
+    if(prev&&ss.length>2){
+      t+='<div class="gym-trend-h">Compared with the workout before ('+escHtml(fmtS(prev.date))+')</div>';
+      if(weighted)t+=gymTrendLine('Top weight',prev.top,last.top,'kg');
+      t+=gymTrendLine('Best reps in a set',prev.maxReps,last.maxReps,'');
+      t+=weighted?gymTrendLine('Volume',prev.volume,last.volume,'',gymVol):gymTrendLine('Total reps',prev.totalReps,last.totalReps,'');
+    }
+  }
+  if(trend)trend.innerHTML=t;
+  var b=gymBest(exId);
+  var cell=function(lbl,val,sub){return '<div class="card"><div class="card-lbl">'+lbl+'</div><div class="card-val">'+val+'</div><div class="card-sub">'+sub+'</div></div>';};
+  var on=function(d){return d?escHtml(fmtS(d)):'';};
+  if(bests)bests.innerHTML='<div class="sh">Personal bests &middot; '+escHtml(e.name)+'</div><div class="cards gym-cards">'+
+    (weighted?cell('Heaviest set',gymKg(b.maxW)+'<small> kg</small>','&times; '+b.maxWReps+' &middot; '+on(b.maxWDate)):'')+
+    cell('Most reps',b.maxR,(b.maxRW>0?'at '+gymKg(b.maxRW)+' kg &middot; ':'')+on(b.maxRDate))+
+    (weighted?cell('Best est. 1RM',gymKg(Math.round(b.e1*10)/10)+'<small> kg</small>',on(b.e1Date)):'')+
+    (weighted?cell('Best volume',gymVol(b.vol),on(b.volDate)):cell('Most reps in a workout',b.tot,on(b.totDate)))+
+    cell('Workouts',b.sessions,'with this exercise')+'</div>';
+  var labels=ss.map(function(s){return fmtS(s.date);});
+  var axis={x:{ticks:{maxTicksLimit:8,font:{size:10}},grid:{display:false}}};
+  var ds=[];
+  if(weighted)ds.push({label:'Top weight (kg)',data:ss.map(function(s){return s.top;}),borderColor:'#1a6b4a',backgroundColor:'rgba(26,107,74,.1)',borderWidth:2,pointRadius:ss.length>40?0:3,tension:0.25,yAxisID:'y',fill:false});
+  ds.push({label:'Best reps',data:ss.map(function(s){return s.maxReps;}),borderColor:'#c47b1a',backgroundColor:'rgba(196,123,26,.1)',borderWidth:2,borderDash:weighted?[5,4]:[],pointRadius:ss.length>40?0:3,tension:0.25,yAxisID:weighted?'y1':'y',fill:false});
+  var scales={x:axis.x,y:{position:'left',ticks:{font:{size:10}},grid:{color:'rgba(0,0,0,.05)'},title:{display:true,text:weighted?'kg':'reps',font:{size:10}}}};
+  if(weighted)scales.y1={position:'right',ticks:{font:{size:10},precision:0},grid:{display:false},title:{display:true,text:'reps',font:{size:10}}};
+  var tt=document.getElementById('gym-c-wr-title');if(tt)tt.textContent=weighted?'Top weight and best reps per workout':'Best reps per workout (bodyweight)';
+  gymChart('gym-c-wr',{type:'line',data:{labels:labels,datasets:ds},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{display:weighted,labels:{boxWidth:12,font:{size:11}}}},scales:scales}});
+  var e1w=document.getElementById('gym-c-e1-wrap');
+  if(weighted){
+    if(e1w)e1w.style.display='';
+    gymChart('gym-c-e1',{type:'line',data:{labels:labels,datasets:[{data:ss.map(function(s){return Math.round(s.e1rm*10)/10;}),borderColor:'#1a4b8c',backgroundColor:'rgba(26,75,140,.08)',borderWidth:2,pointRadius:ss.length>40?0:3,fill:true,tension:0.25}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:axis.x,y:{ticks:{font:{size:10}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+  }else if(e1w)e1w.style.display='none';
+  gymChart('gym-c-vol',{type:'bar',data:{labels:labels,datasets:[{data:ss.map(function(s){return Math.round(weighted?s.volume:s.totalReps);}),backgroundColor:'rgba(107,26,140,.45)',borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:axis.x,y:{ticks:{font:{size:10}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+}
+function gymDrawOverall(events){
+  var td=today(),wk=gymWeekStart(td),weeks=[];
+  for(var i=11;i>=0;i--)weeks.push(gymAddDays(wk,-7*i));
+  var first=weeks[0],last=gymAddDays(wk,6);
+  var mus={},dayByWeek={};
+  weeks.forEach(function(w){dayByWeek[w]={};});
+  GYM.sets.forEach(function(s){
+    if(s.date<first||s.date>last)return;
+    var w=gymWeekStart(s.date),e=gymEx(s.exercise_id),m=e?(e.muscle||'Other'):'Other';
+    mus[m]=mus[m]||weeks.map(function(){return 0;});
+    mus[m][weeks.indexOf(w)]+=s.weight*s.reps;
+    if(dayByWeek[w])dayByWeek[w][s.date]=1;
+  });
+  var order=GYM_MUSCLES.concat(Object.keys(mus).filter(function(k){return GYM_MUSCLES.indexOf(k)<0;})).filter(function(m){return mus[m];});
+  var labels=weeks.map(function(w){return fmtS(w);});
+  gymChart('gym-c-wk',{type:'bar',data:{labels:labels,datasets:order.map(function(m){return{label:m,data:mus[m].map(function(v){return Math.round(v);}),backgroundColor:GYM_COLORS[m]||'#9a9a9a',borderRadius:2,stack:'v'};})},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}}},
+      scales:{x:{stacked:true,ticks:{maxTicksLimit:12,font:{size:10}},grid:{display:false}},y:{stacked:true,ticks:{font:{size:10}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+  gymChart('gym-c-freq',{type:'bar',data:{labels:labels,datasets:[{data:weeks.map(function(w){return Object.keys(dayByWeek[w]).length;}),backgroundColor:'rgba(26,107,74,.55)',borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{maxTicksLimit:6,font:{size:10}},grid:{display:false}},y:{beginAtZero:true,suggestedMax:4,ticks:{precision:0,font:{size:10}},grid:{color:'rgba(0,0,0,.05)'}}}}});
+  var d30=gymAddDays(td,-29),split={};
+  GYM.sets.forEach(function(s){if(s.date<d30||s.date>td)return;var e=gymEx(s.exercise_id),m=e?(e.muscle||'Other'):'Other';split[m]=(split[m]||0)+1;});
+  var sk=Object.keys(split).sort(function(a,b){return split[b]-split[a];});
+  var splitWrap=document.getElementById('gym-c-split');
+  if(sk.length){
+    gymChart('gym-c-split',{type:'doughnut',data:{labels:sk.map(function(m){return m+' ('+split[m]+')';}),datasets:[{data:sk.map(function(m){return split[m];}),backgroundColor:sk.map(function(m){return GYM_COLORS[m]||'#9a9a9a';}),borderWidth:1}]},
+      options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}}}}});
+  }else if(splitWrap){splitWrap.parentNode.innerHTML='<div class="gym-hint" style="padding:20px 0">No sets in the last 30 days.</div>';}
+  var list=document.getElementById('gym-pr-list');
+  if(list){
+    var recent=events.slice(-10).reverse();
+    list.innerHTML=recent.length?'<div class="gym-list">'+recent.map(function(ev){
+      var e=gymEx(ev.ex);var name=e?e.name:'(deleted exercise)';
+      var what=ev.kind==='weight'?(gymKg(ev.w)+' kg &times; '+ev.r+' <small>(was '+gymKg(ev.prev)+' kg)</small>')
+        :ev.kind==='e1rm'?(gymKg(ev.w)+' kg &times; '+ev.r+' <small>(est. 1RM '+gymKg(Math.round(ev.val*10)/10)+' kg)</small>')
+        :(ev.r+' reps <small>(was '+ev.prev+')</small>');
+      return '<div class="gym-row"><div class="gym-row-main"><div class="gym-row-name">'+escHtml(name)+'</div><div class="gym-row-sub">'+what+'</div></div>'+
+        '<span class="gym-pill">'+escHtml(fmtS(ev.date))+'</span></div>';
+    }).join('')+'</div>':'<div class="gym-empty">No personal bests yet: they appear when you beat an earlier workout.</div>';
+  }
+}
+
+// ── events (one listener for the whole Exercise tab) ─────────────────────
+var _gymBound=false;
+function gymShiftDay(d){GYM_DATE=gymAddDays(GYM_DATE||today(),d);gymRenderLog();}
+function gymBind(){
+  if(_gymBound)return;
+  var sec=document.getElementById('sec-exercise');if(!sec)return;
+  _gymBound=true;
+  sec.addEventListener('click',function(ev){
+    var t=ev.target.closest?ev.target.closest('[data-gact]'):null;
+    if(!t||!sec.contains(t)||t.disabled)return;
+    var act=t.getAttribute('data-gact');
+    var id=parseInt(t.getAttribute('data-id'),10),idx=parseInt(t.getAttribute('data-idx'),10);
+    switch(act){
+      case 'view':GYM_VIEW=t.getAttribute('data-gview')||'log';renderGym();break;
+      case 'reload':GYM.error=null;gymLoad(true).then(function(){renderGym();});renderGym();break;
+      case 'ex-save':gymSaveExercise();break;
+      case 'ex-edit':GYM_EDIT.ex=id;gymRenderExercises();var f=document.getElementById('gym-ex-form');if(f&&f.scrollIntoView)f.scrollIntoView({block:'start',behavior:'smooth'});var n=document.getElementById('gym-ex-name');if(n)n.focus();break;
+      case 'ex-cancel':GYM_EDIT.ex=null;gymRenderExercises();break;
+      case 'ex-del':gymDeleteExercise(id);break;
+      case 'starter':gymAddStarter();break;
+      case 'combo-pick':gymDraftAdd('combo');break;
+      case 'combo-up':gymDraftMove('combo',idx,-1);break;
+      case 'combo-down':gymDraftMove('combo',idx,1);break;
+      case 'combo-rm':gymDraftRm('combo',idx);break;
+      case 'combo-save':gymSaveKind('combo');break;
+      case 'combo-cancel':gymCancelEdit('combo');break;
+      case 'combo-edit':gymStartEdit('combo',id);break;
+      case 'combo-del':gymDeleteCombo(id);break;
+      case 'routine-pick':gymDraftAdd('routine');break;
+      case 'routine-up':gymDraftMove('routine',idx,-1);break;
+      case 'routine-down':gymDraftMove('routine',idx,1);break;
+      case 'routine-rm':gymDraftRm('routine',idx);break;
+      case 'routine-save':gymSaveKind('routine');break;
+      case 'routine-cancel':gymCancelEdit('routine');break;
+      case 'routine-edit':gymStartEdit('routine',id);break;
+      case 'routine-del':gymDeleteRoutine(id);break;
+      case 'rt-start':GYM_VIEW='log';GYM_DATE=today();renderGym();gymLoadRoutine(id);break;
+      case 'log-day':gymShiftDay(parseInt(t.getAttribute('data-d'),10)||0);break;
+      case 'log-routine':var rs=document.getElementById('gym-log-routine'),rid=parseInt(rs&&rs.value,10);if(rid)gymLoadRoutine(rid);else gymToast('Pick a routine first',true);break;
+      case 'log-ex':var es=document.getElementById('gym-log-ex'),eid=parseInt(es&&es.value,10);if(eid){gymPlanAdd(GYM_DATE||today(),eid,'');gymRenderLog();}else gymToast('Pick an exercise first',true);break;
+      case 'set-add':gymAddSet(id,t.closest('.gym-card'));break;
+      case 'set-del':gymDeleteSet(id);break;
+      case 'plan-rm':gymPlanRemove(GYM_DATE||today(),id);gymRenderLog();break;
+    }
+  });
+  sec.addEventListener('change',function(ev){
+    var t=ev.target;
+    if(t.id==='gym-log-date'&&t.value){GYM_DATE=t.value;gymRenderLog();}
+    else if(t.id==='gym-stats-ex'){GYM_STATS_EX=parseInt(t.value,10)||null;gymRenderStats();}
+  });
+  sec.addEventListener('keydown',function(ev){
+    if(ev.key!=='Enter')return;
+    var t=ev.target;
+    if(t.classList&&(t.classList.contains('gym-in-w')||t.classList.contains('gym-in-r'))){
+      ev.preventDefault();var card=t.closest('.gym-card'),b=card&&card.querySelector('[data-gact="set-add"]');if(b&&!b.disabled)b.click();
+    }else if(t.id==='gym-ex-name'||t.id==='gym-ex-notes'){ev.preventDefault();gymSaveExercise();}
+  });
 }
 
 // =====================================================================
@@ -2670,7 +3597,7 @@ function _clearSession(){
   // Wipe cached personal data so the next person on this browser never sees it
   try{
     Object.keys(localStorage).forEach(function(k){
-      if(k==='km_vested_data'||k==='km_av_prices'||k.indexOf('km_vested_data_')===0)localStorage.removeItem(k);
+      if(k==='km_vested_data'||k==='km_av_prices'||k.indexOf('km_vested_data_')===0||k.indexOf('km_gym_plan:')===0)localStorage.removeItem(k);
     });
   }catch(e){}
 }
@@ -3793,7 +4720,6 @@ async function _runApp(){
   if(!firstAllowedTab()){setSyncStatus('ok','');return;}   // waiting for approval / no features: nothing to load
   try{await initData();}catch(e){console.error('initData failed:',e);}
   try{setToday('d-date');}catch(e){}
-  try{checkAutoFillYesterday();}catch(e){}
   try{var _fd=document.getElementById('f-date');if(_fd)_fd.value=today();}catch(e){}
   try{var _fl=document.getElementById('f-label');if(_fl)_fl.textContent=fmtL(today());}catch(e){}
   try{renderDash();}catch(e){console.error('renderDash failed:',e);}
@@ -3840,6 +4766,16 @@ async function _runApp(){
       <polyline points="9 16 11 18 15 14"/>
     </svg></span>
     <span>Daily</span>
+  </button>
+  <button data-tab="exercise" onclick="sw('exercise')">
+    <span class="bn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="6.5" y1="6.5" x2="6.5" y2="17.5"/>
+      <line x1="17.5" y1="6.5" x2="17.5" y2="17.5"/>
+      <line x1="3.5" y1="9" x2="3.5" y2="15"/>
+      <line x1="20.5" y1="9" x2="20.5" y2="15"/>
+      <line x1="6.5" y1="12" x2="17.5" y2="12"/>
+    </svg></span>
+    <span>Gym</span>
   </button>
   <button data-tab="food" onclick="sw('food')">
     <span class="bn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
