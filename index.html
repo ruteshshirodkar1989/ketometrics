@@ -544,7 +544,25 @@ button,input,select,a{touch-action:manipulation}
 .chg-pass-box h3{margin:0 0 16px;font-size:16px;color:#0d3d25;display:flex;justify-content:space-between;align-items:center}
 
 
-/* ── BUDGET MODULE ───────────────────────────────────── */
+/* ── ADMIN PORTAL ───────────────────────────────────── */
+.au-row{display:flex;align-items:center;gap:14px;padding:12px 14px;
+  border-bottom:1px solid rgba(0,0,0,.05);flex-wrap:wrap}
+.au-row:last-child{border-bottom:none}
+.au-info{min-width:160px;flex:1}
+.au-email{font-size:13px;font-weight:600}
+.au-meta{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:1px}
+.au-toggles{display:flex;gap:14px;flex-wrap:wrap}
+.au-toggle{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text2);cursor:pointer}
+.au-switch{position:relative;width:34px;height:19px;flex-shrink:0}
+.au-switch input{opacity:0;width:0;height:0}
+.au-slider{position:absolute;inset:0;background:#d1d5db;border-radius:20px;cursor:pointer;transition:.15s}
+.au-slider:before{content:'';position:absolute;width:14px;height:14px;left:2.5px;top:2.5px;
+  background:#fff;border-radius:50%;transition:.15s}
+.au-switch input:checked+.au-slider{background:var(--accent)}
+.au-switch input:checked+.au-slider:before{transform:translateX(15px)}
+.au-admin-badge{font-size:9px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  padding:2px 7px;border-radius:10px;background:#fef3c7;color:#92400e;margin-left:6px}
+#no-access-msg{padding:70px 20px;text-align:center;color:var(--text3)}
 .cat-badge{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.5px;
   text-transform:uppercase;padding:2px 6px;border-radius:10px;
   background:var(--accent-light);color:var(--accent);margin-left:5px;vertical-align:middle}
@@ -704,6 +722,61 @@ tr:hover td{background:#f9fafb}
   #sec-budget #ex-kpi-cards{grid-template-columns:1fr 1fr}
 }
 
+
+/* ── SIGN-UP REQUEST + ADMIN (requests / users / settings) ───────────── */
+.login-request-link{text-align:center;margin-top:10px;font-size:13px;color:#6b7280}
+.login-request-link button{background:none;border:none;color:#1a6b4a;font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline;padding:4px}
+.login-request-link button:hover{color:#0d3d25}
+.login-card .fg textarea{width:100%;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;box-sizing:border-box;resize:vertical;min-height:58px;transition:border-color .15s}
+.login-card .fg textarea:focus{outline:none;border-color:#1a6b4a}
+.adm-badge{display:inline-block;min-width:17px;height:17px;padding:0 5px;border-radius:9px;background:#dc2626;color:#fff;font-size:10px;font-weight:700;line-height:17px;text-align:center;margin-left:5px;vertical-align:middle}
+nav button.active .adm-badge{background:#fff;color:#dc2626}
+#admin-nav-btn-mobile{position:relative}
+.adm-badge.bn{position:absolute;top:1px;left:calc(50% + 4px);margin-left:0;min-width:16px;height:16px;line-height:16px;font-size:9px}
+.adm-tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.adm-tab{background:var(--surface);border:1px solid var(--border);color:var(--text2);padding:7px 16px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer}
+.adm-tab:hover{background:var(--surface2)}
+.adm-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.adm-tab.active .adm-badge{background:#fff;color:#dc2626}
+.adm-msg{font-size:12px;min-height:18px;margin:0 0 8px 2px}
+.adm-help{font-size:12px;color:var(--text3);margin:-4px 0 12px;line-height:1.5}
+.adm-empty{padding:22px 12px;text-align:center;color:var(--text3);font-size:13px;line-height:1.5}
+.admin-req-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:10px}
+.arc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.arc-name{font-size:14px;font-weight:600;word-break:break-word}
+.arc-email{font-size:12px;color:var(--text2);word-break:break-all}
+.arc-note{font-size:12.5px;color:var(--text2);background:var(--surface2);border-radius:8px;padding:8px 10px;margin-top:8px;word-break:break-word}
+.arc-meta{font-size:11px;color:var(--text3);margin-top:6px}
+.arc-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.adm-declined{margin-top:14px}
+.adm-declined summary{cursor:pointer;font-size:12px;color:var(--text2);margin-bottom:8px}
+.auc-btns{display:flex;gap:6px;flex-shrink:0}
+.adm-set-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.adm-set-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.adm-set-sub{font-size:12px;color:var(--text3);line-height:1.5}
+.adm-link-box{display:flex;gap:8px;align-items:center}
+.adm-link-box input{flex:1;min-width:0;font-family:'DM Mono',monospace;font-size:12px;padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface2);color:var(--text2)}
+.adm-note{margin-top:20px;font-size:12px;color:var(--text2);background:var(--amber-light);border:1px solid rgba(196,123,26,.2);border-radius:var(--radius-sm);padding:10px 12px;line-height:1.55}
+.adm-note ul{margin:6px 0 0 18px}
+.adm-note li{margin-bottom:3px}
+.adm-banner{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:var(--amber-light);border:1px solid rgba(196,123,26,.25);color:#7a4a0c;border-radius:var(--radius);padding:10px 14px;margin-bottom:12px;font-size:13px}
+.adm-banner-actions{display:flex;gap:6px}
+.adm-banner-actions button{padding:5px 12px;font-size:12px;min-height:0}
+main:has(#sec-admin.active) .adm-banner{display:none}
+@media(max-width:640px){.adm-set-row{flex-direction:column;align-items:flex-start}.adm-banner-actions button{min-height:0}}
+
+html.km-quick #login-screen{display:none}   /* remembered session: keep the login screen hidden while the app starts */
+/* ── ADMIN PANEL ───────────────────────────────────────── */
+.admin-user-card{background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px 16px;margin-bottom:10px}
+.auc-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.auc-email{font-size:13px;font-weight:600;margin-bottom:4px}
+.auc-flags{display:flex;flex-wrap:wrap;gap:7px}
+@media(max-width:640px){
+  .auc-header{flex-direction:column;gap:8px}
+  .auc-flags{gap:6px}
+}
+
 </style>
 </head>
 <body>
@@ -720,6 +793,8 @@ tr:hover td{background:#f9fafb}
     <button data-tab="master" onclick="sw('master')">Food Master</button>
     <button data-tab="budget" onclick="sw('budget')">Budget</button>
     <button data-tab="invest" onclick="sw('invest')">Invest</button>
+    <button id="admin-nav-btn" data-tab="admin" onclick="sw('admin')" style="display:none">⚙️ Admin<span class="adm-badge" id="adm-badge" style="display:none"></span></button>
+    <button data-tab="admin" onclick="sw('admin')" style="display:none">Admin</button>
   </nav>
   <div class="hdr-actions"><button class="hbtn" onclick="openMFASetup()" id="mfa-btn" title="Security" style="display:none">&#128274;</button>
     <button class="hbtn ac" onclick="exportData()">&#8595; Export</button>
@@ -905,7 +980,7 @@ tr:hover td{background:#f9fafb}
   <div class="tbl-wrap"><table><thead><tr><th></th><th>Food name</th><th>Cal/100g</th><th>Protein</th><th>Fat</th><th>Carbs</th><th>Notes</th><th></th></tr></thead><tbody id="m-tbody"></tbody></table></div>
 </div>
 
-<script type="application/json" id="_seed">{"daily":[{"date":"2026-02-01","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-02","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-03","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-04","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-05","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-06","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-07","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-08","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-09","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-10","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-11","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-12","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-13","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-14","weight":88,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-15","weight":83.2,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-16","weight":83.55,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-17","weight":84.15,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-18","weight":84.25,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-19","weight":84.55,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-20","weight":84.7,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-21","weight":84.15,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-22","weight":83.8,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-23","weight":82.7,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-24","weight":82.55,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-25","weight":82.85,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-26","weight":82.2,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-27","weight":82.4,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-02-28","weight":82.2,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-01","weight":81.8,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":22.9,"skeletalMuscle":34.2,"notes":""},{"date":"2026-03-02","weight":81.95,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-03","weight":81.85,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-04","weight":81.85,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-05","weight":82.45,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-06","weight":81.65,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":23.2,"skeletalMuscle":33.9,"notes":""},{"date":"2026-03-07","weight":81.7,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-08","weight":81.9,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-09","weight":82.5,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-10","weight":82.4,"exercise":"Walking","ketones":0.6,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-11","weight":82.25,"exercise":"Walking","ketones":0.2,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-12","weight":82.8,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":23,"skeletalMuscle":34.6,"notes":""},{"date":"2026-03-13","weight":82.2,"exercise":"Walking","ketones":0.2,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-14","weight":82.2,"exercise":"Walking","ketones":1.2,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-15","weight":81.7,"exercise":"Walking","ketones":0.8,"glucose":"","gki":"","bodyFat":21.5,"skeletalMuscle":34.9,"notes":""},{"date":"2026-03-16","weight":80.75,"exercise":"Walking","ketones":0.2,"glucose":"","gki":"","bodyFat":22.8,"skeletalMuscle":33.7,"notes":""},{"date":"2026-03-17","weight":81.5,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-18","weight":81.5,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-19","weight":81.3,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-20","weight":81.1,"exercise":"Walking","ketones":0,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-21","weight":80.65,"exercise":"Walking","ketones":1.2,"glucose":"","gki":"","bodyFat":23.1,"skeletalMuscle":33.6,"notes":""},{"date":"2026-03-22","weight":80.5,"exercise":"Walking","ketones":1.1,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-23","weight":80,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":19.2,"skeletalMuscle":35.7,"notes":""},{"date":"2026-03-24","weight":80,"exercise":"Walking","ketones":1.2,"glucose":"","gki":"","bodyFat":20.7,"skeletalMuscle":34.5,"notes":""},{"date":"2026-03-25","weight":80.2,"exercise":"Walking","ketones":1.2,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-26","weight":80.45,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-27","weight":80.45,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-28","weight":80.45,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-29","weight":80.1,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-30","weight":79.75,"exercise":"","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-03-31","weight":80.1,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-01","weight":80.05,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-02","weight":80.2,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-03","weight":80.35,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-04","weight":80.55,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-05","weight":80,"exercise":"Walking","ketones":0.2,"glucose":"","gki":"","bodyFat":22.3,"skeletalMuscle":33.7,"notes":""},{"date":"2026-04-06","weight":79.45,"exercise":"Walking","ketones":0.6,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-07","weight":79.45,"exercise":"Walking","ketones":1.1,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-08","weight":79.7,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-09","weight":79.1,"exercise":"Walking","ketones":0.6,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-10","weight":78.85,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":21.1,"skeletalMuscle":33.8,"notes":""},{"date":"2026-04-11","weight":78.7,"exercise":"Walking","ketones":0.8,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-12","weight":78.65,"exercise":"Walking","ketones":0.9,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-13","weight":78.1,"exercise":"Walking","ketones":0.1,"glucose":"","gki":"","bodyFat":20.4,"skeletalMuscle":33.8,"notes":""},{"date":"2026-04-14","weight":78.15,"exercise":"Walking","ketones":0.8,"glucose":"","gki":"","bodyFat":20.7,"skeletalMuscle":33.6,"notes":""},{"date":"2026-04-15","weight":78.5,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":20.5,"skeletalMuscle":33.7,"notes":""},{"date":"2026-04-16","weight":78.35,"exercise":"Walking","ketones":0.4,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-17","weight":78,"exercise":"Walking","ketones":0.9,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-18","weight":76.75,"exercise":"Walking","ketones":0.4,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-19","weight":77.9,"exercise":"Walking","ketones":0.7,"glucose":"","gki":"","bodyFat":18.1,"skeletalMuscle":34.9,"notes":""},{"date":"2026-04-20","weight":78.05,"exercise":"Walking","ketones":0.3,"glucose":"","gki":"","bodyFat":"","skeletalMuscle":"","notes":""},{"date":"2026-04-25","weight":77.7,"exercise":"Walking","ketones":"0.6","glucose":"81","gki":"7.49","bodyFat":"19.6","skeletalMuscle":"34","notes":""},{"date":"2026-04-28","weight":77.95,"exercise":"","ketones":"0.9","glucose":"85","gki":"5.24","bodyFat":"20.2","skeletalMuscle":"33.8","notes":""},{"date":"2026-04-29","weight":78,"exercise":"","ketones":"0.6","glucose":"83","gki":"7.68","bodyFat":"20.8","skeletalMuscle":"33.5","notes":""},{"date":"2026-04-30","weight":78,"exercise":"Walking","ketones":"0.1","glucose":"93","gki":"51.61","bodyFat":"17.9","skeletalMuscle":"35","notes":""},{"date":"2026-05-01","weight":78,"exercise":"Walking","ketones":"0.2","glucose":"95","gki":"26.36","bodyFat":"19.5","skeletalMuscle":"34.2","notes":""},{"date":"2026-05-02","weight":78,"exercise":"Walking","ketones":"0","glucose":"105","gki":"","bodyFat":"18.4","skeletalMuscle":"34.8","notes":""},{"date":"2026-05-03","weight":78,"exercise":"","ketones":"0.1","glucose":"83","gki":"46.06","bodyFat":"20.2","skeletalMuscle":"33.8","notes":""},{"date":"2026-05-04","weight":80.7,"exercise":"","ketones":"0","glucose":"104","gki":"","bodyFat":"21.7","skeletalMuscle":"33","notes":""},{"date":"2026-05-05","weight":80.6,"exercise":"","ketones":"0.2","glucose":"102","gki":"28.3","bodyFat":"21.4","skeletalMuscle":"34.4","notes":""},{"date":"2026-05-06","weight":79.5,"exercise":"","ketones":"0","glucose":"88","gki":"","bodyFat":"20.6","skeletalMuscle":"34.3","notes":""},{"date":"2026-05-07","weight":79.5,"exercise":"No walking","ketones":"0.3","glucose":"82","gki":"15.17","bodyFat":"20.9","skeletalMuscle":"34.2","notes":""},{"date":"2026-05-08","weight":78.7,"exercise":"","ketones":"0.1","glucose":"85","gki":"47.17","bodyFat":"19.4","skeletalMuscle":"34.6","notes":""},{"date":"2026-05-09","weight":78.7,"exercise":"","ketones":"0.5","glucose":"84","gki":"9.32","bodyFat":"21.3","skeletalMuscle":"33.6","notes":""},{"date":"2026-05-10","weight":78.7,"exercise":"","ketones":"0.2","glucose":"87","gki":"24.14","bodyFat":"19.5","skeletalMuscle":"34.5","notes":""},{"date":"2026-05-11","weight":77.9,"exercise":"","ketones":"0.3","glucose":"85","gki":"15.72","bodyFat":"19.7","skeletalMuscle":"34.1","notes":""},{"date":"2026-05-12","weight":77.9,"exercise":"No walking","ketones":"0.4","glucose":"82","gki":"11.38","bodyFat":"19.7","skeletalMuscle":"34.1","notes":""},{"date":"2026-05-13","weight":77.6,"exercise":"No","ketones":"0.3","glucose":"83","gki":"15.35","bodyFat":"18.8","skeletalMuscle":"34.4","notes":""},{"date":"2026-05-14","weight":77.2,"exercise":"No","ketones":"0.5","glucose":"76","gki":"8.44","bodyFat":"18.8","skeletalMuscle":"34.2","notes":""},{"date":"2026-05-15","weight":77.1,"exercise":"No","ketones":"0.5","glucose":"83","gki":"9.21","bodyFat":"17.2","skeletalMuscle":"34.9","notes":""},{"date":"2026-05-16","weight":77,"exercise":"No","ketones":"0.6","glucose":"76","gki":"7.03","bodyFat":"19.5","skeletalMuscle":"33.7","notes":""},{"date":"2026-05-17","weight":77,"exercise":"No","ketones":"0","glucose":"96","gki":"","bodyFat":"19.3","skeletalMuscle":"33.8","notes":""},{"date":"2026-05-18","weight":77.1,"exercise":"No","ketones":"0.1","glucose":"83","gki":"46.06","bodyFat":"18.2","skeletalMuscle":"34.4","notes":""},{"date":"2026-05-19","weight":77,"exercise":"No","ketones":"0.4","glucose":"85","gki":"11.79","bodyFat":"19.5","skeletalMuscle":"34.7","notes":""},{"date":"2026-05-20","weight":76.8,"exercise":"No","ketones":"0.4","glucose":"82","gki":"11.38","bodyFat":"18.30","skeletalMuscle":"34.2","notes":""},{"date":"2026-05-21","weight":76.8,"exercise":"No","ketones":"1.1","glucose":"79","gki":"3.99","bodyFat":"18.8","skeletalMuscle":"34","notes":""},{"date":"2026-05-22","weight":77,"exercise":"No","ketones":"","glucose":"","gki":"","bodyFat":"18.2","skeletalMuscle":"34.4","notes":""},{"date":"2026-05-25","weight":79.05,"exercise":"Walking","ketones":"","glucose":"","gki":"","bodyFat":"21.2","skeletalMuscle":"34","notes":""}],"fm":[{"id":1,"name":"Milk Gokul","cal":92,"pro":3.6,"fat":6.5,"car":4.8,"notes":""},{"id":2,"name":"protein","cal":135,"pro":25,"fat":0,"car":2,"notes":""},{"id":3,"name":"Chicken Haryali","cal":337,"pro":47.8,"fat":11.4,"car":7.3,"notes":"Check your brand"},{"id":4,"name":"Egg","cal":320,"pro":28.1,"fat":21.3,"car":1.6,"notes":""},{"id":5,"name":"Onion","cal":30,"pro":0.3,"fat":0,"car":2.8,"notes":""},{"id":6,"name":"Cheese slice Amul Normal","cal":311,"pro":20,"fat":25,"car":1.6,"notes":"Approximate"},{"id":7,"name":"Mayo fabsta","cal":474.45,"pro":0.18,"fat":47.25,"car":12.12,"notes":""},{"id":8,"name":"Gouda Cheese","cal":348,"pro":24.5,"fat":27,"car":1.7,"notes":""},{"id":9,"name":"Yummiez Seekh kabab","cal":216,"pro":17.57,"fat":13.9,"car":4.63,"notes":""},{"id":10,"name":"Punjab Sindh Ghee","cal":989,"pro":0,"fat":99,"car":0,"notes":""},{"id":11,"name":"A+ Cheese Slices","cal":316,"pro":18,"fat":25,"car":4.8,"notes":""},{"id":12,"name":"Chicken Gravy easy","cal":232,"pro":46.1,"fat":5,"car":2.8,"notes":"Only chicken"},{"id":13,"name":"Toum Garlic Sauce","cal":688,"pro":1.8,"fat":73.2,"car":9.5,"notes":""},{"id":14,"name":"Amul Masti Dahi","cal":65,"pro":4,"fat":3.1,"car":4.6,"notes":""},{"id":15,"name":"Noto mini","cal":30,"pro":0.9,"fat":2,"car":1,"notes":""},{"id":16,"name":"Noto Mini New","cal":41.1,"pro":0.6,"fat":2.7,"car":4.8,"notes":""},{"id":1777378099822,"name":"Yummies chicken kebab","cal":211,"pro":17.57,"fat":13.6,"car":4.63,"notes":""},{"id":1777525913582,"name":"Almonds","cal":579,"pro":21.2,"fat":51.6,"car":19.7,"notes":""},{"id":1777525971873,"name":"Cashew","cal":605,"pro":24,"fat":49,"car":30.2,"notes":""},{"id":1777526033130,"name":"Pistacio","cal":560,"pro":20.6,"fat":44.4,"car":28,"notes":""},{"id":1777545981355,"name":"Peanut","cal":567,"pro":25.8,"fat":49.2,"car":16.1,"notes":""},{"id":1778127797406,"name":"Nutrabay Concentrate Cold Coffee","cal":136,"pro":25.52,"fat":2.37,"car":3.23,"notes":""},{"id":1778127915502,"name":"Amul Cheese Cubes","cal":311,"pro":20,"fat":25,"car":1.5,"notes":""},{"id":1778142029600,"name":"Prawns","cal":106,"pro":20,"fat":0.3,"car":1,"notes":""},{"id":1778486236626,"name":"Chicken leg","cal":595,"pro":50,"fat":15,"car":0,"notes":""},{"id":1778486354289,"name":"Chicken Tandoori Masala","cal":48.5,"pro":0.8,"fat":3.1,"car":3.4,"notes":"100 grams is for 1 leg piece masala"},{"id":1778659756936,"name":"King Fish","cal":105,"pro":20.28,"fat":2,"car":0,"notes":""}],"fl":[{"date":"2026-03-20","food":"Milk Gokul","grams":200,"cal":184,"pro":7.2,"fat":13,"car":9.6},{"date":"2026-03-20","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-20","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-20","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-03-20","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-03-21","food":"Milk Gokul","grams":200,"cal":184,"pro":7.2,"fat":13,"car":9.6},{"date":"2026-03-21","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-21","food":"Yummiez Seekh kabab","grams":200,"cal":432,"pro":35.1,"fat":27.8,"car":9.3},{"date":"2026-03-21","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-03-22","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-22","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-22","food":"Yummiez Seekh kabab","grams":300,"cal":648,"pro":52.7,"fat":41.7,"car":13.9},{"date":"2026-03-23","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-23","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-23","food":"Yummiez Seekh kabab","grams":300,"cal":648,"pro":52.7,"fat":41.7,"car":13.9},{"date":"2026-03-23","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-03-23","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-03-24","food":"Milk Gokul","grams":200,"cal":184,"pro":7.2,"fat":13,"car":9.6},{"date":"2026-03-24","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-24","food":"Yummiez Seekh kabab","grams":300,"cal":648,"pro":52.7,"fat":41.7,"car":13.9},{"date":"2026-03-24","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-03-24","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-03-25","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-25","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-25","food":"Punjab Sindh Ghee","grams":25,"cal":247.3,"pro":0,"fat":24.8,"car":0},{"date":"2026-03-25","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-25","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-03-26","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-26","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-26","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-26","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-03-26","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-03-26","food":"A+ Cheese Slices","grams":100,"cal":316,"pro":18,"fat":25,"car":4.8},{"date":"2026-03-30","food":"A+ Cheese Slices","grams":100,"cal":316,"pro":18,"fat":25,"car":4.8},{"date":"2026-03-30","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-03-30","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-30","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-03-30","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-31","food":"A+ Cheese Slices","grams":100,"cal":316,"pro":18,"fat":25,"car":4.8},{"date":"2026-03-31","food":"Milk Gokul","grams":200,"cal":184,"pro":7.2,"fat":13,"car":9.6},{"date":"2026-03-31","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-03-31","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-03-31","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-01","food":"A+ Cheese Slices","grams":160,"cal":505.6,"pro":28.8,"fat":40,"car":7.7},{"date":"2026-04-01","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-04-01","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-01","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-01","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-01","food":"Cheese slice Amul Normal","grams":40,"cal":124.4,"pro":8,"fat":10,"car":0.6},{"date":"2026-04-02","food":"Milk Gokul","grams":300,"cal":276,"pro":10.8,"fat":19.5,"car":14.4},{"date":"2026-04-02","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-02","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-02","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-02","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-04-03","food":"Milk Gokul","grams":250,"cal":230,"pro":9,"fat":16.3,"car":12},{"date":"2026-04-03","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-03","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-03","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-04-04","food":"Milk Gokul","grams":250,"cal":230,"pro":9,"fat":16.3,"car":12},{"date":"2026-04-04","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-04","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-04","food":"Cheese slice Amul Normal","grams":200,"cal":622,"pro":40,"fat":50,"car":3.2},{"date":"2026-04-04","food":"Egg","grams":50,"cal":160,"pro":14.1,"fat":10.7,"car":0.8},{"date":"2026-04-05","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-05","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-05","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-05","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-05","food":"Punjab Sindh Ghee","grams":100,"cal":989,"pro":0,"fat":99,"car":0},{"date":"2026-04-06","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-06","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-06","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-06","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-06","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-06","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-06","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-07","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-07","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-07","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-07","food":"Punjab Sindh Ghee","grams":25,"cal":247.3,"pro":0,"fat":24.8,"car":0},{"date":"2026-04-07","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-07","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-08","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-08","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-08","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-08","food":"Punjab Sindh Ghee","grams":25,"cal":247.3,"pro":0,"fat":24.8,"car":0},{"date":"2026-04-08","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-08","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-08","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-09","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-09","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-09","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-09","food":"Chicken Gravy easy","grams":100,"cal":232,"pro":46.1,"fat":5,"car":2.8},{"date":"2026-04-09","food":"Toum Garlic Sauce","grams":50,"cal":344,"pro":0.9,"fat":36.6,"car":4.8},{"date":"2026-04-09","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-10","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-10","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-10","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-10","food":"Chicken Gravy easy","grams":100,"cal":232,"pro":46.1,"fat":5,"car":2.8},{"date":"2026-04-10","food":"Toum Garlic Sauce","grams":50,"cal":344,"pro":0.9,"fat":36.6,"car":4.8},{"date":"2026-04-10","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-10","food":"Amul Masti Dahi","grams":100,"cal":65,"pro":4,"fat":3.1,"car":4.6},{"date":"2026-04-11","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-11","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-11","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-11","food":"Chicken Gravy easy","grams":100,"cal":232,"pro":46.1,"fat":5,"car":2.8},{"date":"2026-04-11","food":"Toum Garlic Sauce","grams":50,"cal":344,"pro":0.9,"fat":36.6,"car":4.8},{"date":"2026-04-11","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-11","food":"Amul Masti Dahi","grams":100,"cal":65,"pro":4,"fat":3.1,"car":4.6},{"date":"2026-04-11","food":"Noto mini","grams":900,"cal":270,"pro":8.1,"fat":18,"car":9},{"date":"2026-04-12","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-12","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-12","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-12","food":"Chicken Gravy easy","grams":100,"cal":232,"pro":46.1,"fat":5,"car":2.8},{"date":"2026-04-12","food":"Toum Garlic Sauce","grams":50,"cal":344,"pro":0.9,"fat":36.6,"car":4.8},{"date":"2026-04-12","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-12","food":"Amul Masti Dahi","grams":100,"cal":65,"pro":4,"fat":3.1,"car":4.6},{"date":"2026-04-12","food":"Noto mini","grams":1800,"cal":540,"pro":16.2,"fat":36,"car":18},{"date":"2026-04-13","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-13","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-13","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-13","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-13","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-13","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-14","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-14","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-14","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-14","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-14","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-15","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-15","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-15","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-15","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-15","food":"Cheese slice Amul Normal","grams":100,"cal":311,"pro":20,"fat":25,"car":1.6},{"date":"2026-04-15","food":"Noto mini","grams":900,"cal":270,"pro":8.1,"fat":18,"car":9},{"date":"2026-04-15","food":"Egg","grams":50,"cal":160,"pro":14.1,"fat":10.7,"car":0.8},{"date":"2026-04-16","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-16","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-16","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-16","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-17","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-17","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-17","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-17","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-18","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-18","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-18","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-18","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-19","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-19","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-19","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-04-20","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-20","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-20","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-04-20","food":"Noto Mini New","grams":200,"cal":82.2,"pro":1.2,"fat":5.4,"car":9.6},{"date":"2026-04-25","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-04-25","food":"protein","grams":200,"cal":270,"pro":50,"fat":0,"car":4},{"date":"2026-04-25","food":"Punjab Sindh Ghee","grams":60,"cal":593.4,"pro":0,"fat":59.4,"car":0},{"date":"2026-04-28","food":"Egg","grams":75,"cal":240,"pro":21.1,"fat":16,"car":1.2},{"date":"2026-04-28","food":"Chicken Haryali","grams":100,"cal":337,"pro":47.8,"fat":11.4,"car":7.3},{"date":"2026-04-28","food":"Yummiez Seekh kabab","grams":400,"cal":864,"pro":70.3,"fat":55.6,"car":18.5},{"date":"2026-04-28","food":"Noto Mini New","grams":200,"cal":82.2,"pro":1.2,"fat":5.4,"car":9.6},{"date":"2026-04-29","food":"Almonds","grams":25,"cal":144.8,"pro":5.3,"fat":12.9,"car":4.9},{"date":"2026-04-29","food":"Pistacio","grams":10,"cal":56,"pro":2.1,"fat":4.4,"car":2.8},{"date":"2026-04-30","food":"Almonds","grams":20,"cal":115.8,"pro":4.2,"fat":10.3,"car":3.9},{"date":"2026-04-30","food":"Pistacio","grams":10,"cal":56,"pro":2.1,"fat":4.4,"car":2.8},{"date":"2026-04-30","food":"Peanut","grams":150,"cal":850.5,"pro":38.7,"fat":73.8,"car":24.1},{"date":"2026-05-07","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-07","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-07","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-07","food":"Punjab Sindh Ghee","grams":30,"cal":296.7,"pro":0,"fat":29.7,"car":0},{"date":"2026-05-07","food":"Prawns","grams":30,"cal":31.8,"pro":6,"fat":0.1,"car":0.3},{"date":"2026-05-07","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-07","food":"Amul Cheese Cubes","grams":25,"cal":77.8,"pro":5,"fat":6.3,"car":0.4},{"date":"2026-05-07","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-08","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-08","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-08","food":"Amul Cheese Cubes","grams":75,"cal":233.3,"pro":15,"fat":18.8,"car":1.1},{"date":"2026-05-08","food":"Punjab Sindh Ghee","grams":100,"cal":989,"pro":0,"fat":99,"car":0},{"date":"2026-05-08","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-09","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-09","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-09","food":"Punjab Sindh Ghee","grams":100,"cal":989,"pro":0,"fat":99,"car":0},{"date":"2026-05-09","food":"Prawns","grams":50,"cal":53,"pro":10,"fat":0.1,"car":0.5},{"date":"2026-05-09","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-09","food":"Peanut","grams":30,"cal":170.1,"pro":7.7,"fat":14.8,"car":4.8},{"date":"2026-05-10","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-10","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-10","food":"Punjab Sindh Ghee","grams":100,"cal":989,"pro":0,"fat":99,"car":0},{"date":"2026-05-10","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-10","food":"Amul Cheese Cubes","grams":100,"cal":311,"pro":20,"fat":25,"car":1.5},{"date":"2026-05-11","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-11","food":"Punjab Sindh Ghee","grams":60,"cal":593.4,"pro":0,"fat":59.4,"car":0},{"date":"2026-05-11","food":"Milk Gokul","grams":126,"cal":115.9,"pro":4.5,"fat":8.2,"car":6},{"date":"2026-05-11","food":"Chicken leg","grams":100,"cal":595,"pro":50,"fat":15,"car":0},{"date":"2026-05-11","food":"Chicken Tandoori Masala","grams":200,"cal":97,"pro":1.6,"fat":6.2,"car":6.8},{"date":"2026-05-11","food":"Amul Cheese Cubes","grams":75,"cal":233.3,"pro":15,"fat":18.8,"car":1.1},{"date":"2026-05-12","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-12","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-12","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-12","food":"Chicken Tandoori Masala","grams":100,"cal":48.5,"pro":0.8,"fat":3.1,"car":3.4},{"date":"2026-05-12","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-05-12","food":"Chicken leg","grams":50,"cal":297.5,"pro":25,"fat":7.5,"car":0},{"date":"2026-05-12","food":"Egg","grams":100,"cal":320,"pro":28.1,"fat":21.3,"car":1.6},{"date":"2026-05-12","food":"Almonds","grams":20,"cal":115.8,"pro":4.2,"fat":10.3,"car":3.9},{"date":"2026-05-12","food":"Amul Cheese Cubes","grams":75,"cal":233.3,"pro":15,"fat":18.8,"car":1.1},{"date":"2026-05-13","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-13","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-13","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-13","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-05-13","food":"King Fish","grams":250,"cal":262.5,"pro":50.7,"fat":5,"car":0},{"date":"2026-05-14","food":"King Fish","grams":250,"cal":262.5,"pro":50.7,"fat":5,"car":0},{"date":"2026-05-14","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-14","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-05-14","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-14","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-14","food":"Amul Cheese Cubes","grams":75,"cal":233.3,"pro":15,"fat":18.8,"car":1.1},{"date":"2026-05-15","food":"King Fish","grams":200,"cal":210,"pro":40.6,"fat":4,"car":0},{"date":"2026-05-15","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-15","food":"Punjab Sindh Ghee","grams":40,"cal":395.6,"pro":0,"fat":39.6,"car":0},{"date":"2026-05-15","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-15","food":"Amul Cheese Cubes","grams":100,"cal":311,"pro":20,"fat":25,"car":1.5},{"date":"2026-05-16","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-05-16","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-16","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-16","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-17","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-17","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-17","food":"Amul Cheese Cubes","grams":100,"cal":311,"pro":20,"fat":25,"car":1.5},{"date":"2026-05-17","food":"King Fish","grams":150,"cal":157.5,"pro":30.4,"fat":3,"car":0},{"date":"2026-05-20","food":"King Fish","grams":150,"cal":157.5,"pro":30.4,"fat":3,"car":0},{"date":"2026-05-20","food":"Milk Gokul","grams":100,"cal":92,"pro":3.6,"fat":6.5,"car":4.8},{"date":"2026-05-20","food":"Amul Cheese Cubes","grams":50,"cal":155.5,"pro":10,"fat":12.5,"car":0.8},{"date":"2026-05-20","food":"Nutrabay Concentrate Cold Coffee","grams":200,"cal":272,"pro":51,"fat":4.7,"car":6.5},{"date":"2026-05-20","food":"Punjab Sindh Ghee","grams":50,"cal":494.5,"pro":0,"fat":49.5,"car":0},{"date":"2026-05-22","food":"King Fish","grams":300,"cal":315,"pro":60.8,"fat":6,"car":0},{"date":"2026-05-24","food":"King Fish","grams":300,"cal":315,"pro":60.8,"fat":6,"car":0},{"date":"2026-05-25","food":"King Fish","grams":300,"cal":315,"pro":60.8,"fat":6,"car":0}]}</script>
+<script type="application/json" id="_seed">{"daily":[],"fm":[{"name":"Milk Gokul","cal":92,"pro":3.6,"fat":6.5,"car":4.8,"notes":""},{"name":"protein","cal":135,"pro":25,"fat":0,"car":2,"notes":""},{"name":"Chicken Haryali","cal":337,"pro":47.8,"fat":11.4,"car":7.3,"notes":"Check your brand"},{"name":"Egg","cal":320,"pro":28.1,"fat":21.3,"car":1.6,"notes":""},{"name":"Onion","cal":30,"pro":0.3,"fat":0,"car":2.8,"notes":""},{"name":"Cheese slice Amul Normal","cal":311,"pro":20,"fat":25,"car":1.6,"notes":"Approximate"},{"name":"Mayo fabsta","cal":474.45,"pro":0.18,"fat":47.25,"car":12.12,"notes":""},{"name":"Gouda Cheese","cal":348,"pro":24.5,"fat":27,"car":1.7,"notes":""},{"name":"Yummiez Seekh kabab","cal":216,"pro":17.57,"fat":13.9,"car":4.63,"notes":""},{"name":"Punjab Sindh Ghee","cal":989,"pro":0,"fat":99,"car":0,"notes":""},{"name":"A+ Cheese Slices","cal":316,"pro":18,"fat":25,"car":4.8,"notes":""},{"name":"Chicken Gravy easy","cal":232,"pro":46.1,"fat":5,"car":2.8,"notes":"Only chicken"},{"name":"Toum Garlic Sauce","cal":688,"pro":1.8,"fat":73.2,"car":9.5,"notes":""},{"name":"Amul Masti Dahi","cal":65,"pro":4,"fat":3.1,"car":4.6,"notes":""},{"name":"Noto mini","cal":30,"pro":0.9,"fat":2,"car":1,"notes":""},{"name":"Noto Mini New","cal":41.1,"pro":0.6,"fat":2.7,"car":4.8,"notes":""},{"name":"Yummies chicken kebab","cal":211,"pro":17.57,"fat":13.6,"car":4.63,"notes":""},{"name":"Almonds","cal":579,"pro":21.2,"fat":51.6,"car":19.7,"notes":""},{"name":"Cashew","cal":605,"pro":24,"fat":49,"car":30.2,"notes":""},{"name":"Pistacio","cal":560,"pro":20.6,"fat":44.4,"car":28,"notes":""},{"name":"Peanut","cal":567,"pro":25.8,"fat":49.2,"car":16.1,"notes":""},{"name":"Nutrabay Concentrate Cold Coffee","cal":136,"pro":25.52,"fat":2.37,"car":3.23,"notes":""},{"name":"Amul Cheese Cubes","cal":311,"pro":20,"fat":25,"car":1.5,"notes":""},{"name":"Prawns","cal":106,"pro":20,"fat":0.3,"car":1,"notes":""},{"name":"Chicken leg","cal":595,"pro":50,"fat":15,"car":0,"notes":""},{"name":"Chicken Tandoori Masala","cal":48.5,"pro":0.8,"fat":3.1,"car":3.4,"notes":"100 grams is for 1 leg piece masala"},{"name":"King Fish","cal":105,"pro":20.28,"fat":2,"car":0,"notes":""}],"fl":[]}</script>
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -931,7 +1006,13 @@ var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI
 // =====================================================================
 // SUPABASE HELPERS
 // =====================================================================
-function sbH(x){return Object.assign({'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},x||{});}
+function sbH(x){
+  // Signed in: send the user's token. Signed out: send the key only (new sb_publishable_ keys are not JWTs, so never as a Bearer).
+  var hd={'apikey':SB_KEY,'Content-Type':'application/json'};
+  var tok=SESSION&&SESSION.access_token?SESSION.access_token:(/^eyJ/.test(SB_KEY)?SB_KEY:null);
+  if(tok)hd['Authorization']='Bearer '+tok;
+  return Object.assign(hd,x||{});
+}
 function sbGet(ep){return fetch(SB_URL+ep,{headers:sbH()}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});}
 function sbPost(table,data,prefer){return fetch(SB_URL+table,{method:'POST',headers:sbH({'Prefer':prefer||'return=representation'}),body:JSON.stringify(data)}).then(function(r){if(!r.ok)return r.text().then(function(t){throw new Error(t);});var ct=r.headers.get('content-type')||'';return ct.indexOf('json')>=0?r.json():r.text().then(function(t){return t||null;});});}
 function insertChunks(table,rows,size){var chunks=[],i=0;while(i<rows.length){chunks.push(rows.slice(i,i+size));i+=size;}return chunks.reduce(function(p,chunk){return p.then(function(){return sbPost(table,chunk,'return=minimal');});},Promise.resolve());}
@@ -944,7 +1025,8 @@ function sbRace(p){return Promise.race([p,sbTimeout(8000)]);}
 // =====================================================================
 // COLUMN MAPPERS
 // =====================================================================
-function dlToDB(r){return{date:r.date,weight:r.weight!==''?r.weight:null,exercise:r.exercise||'',ketones:r.ketones!==''?String(r.ketones):'',glucose:r.glucose!==''?String(r.glucose):'',gki:r.gki!==''?String(r.gki):'',body_fat:r.bodyFat!==''?String(r.bodyFat):'',skeletal_muscle:r.skeletalMuscle!==''?String(r.skeletalMuscle):'',notes:r.notes||''};}
+function _uid(){return SESSION&&SESSION.user?SESSION.user.id:null;}
+function dlToDB(r){return{date:r.date,weight:r.weight!==''?r.weight:null,exercise:r.exercise||'',ketones:r.ketones!==''?String(r.ketones):'',glucose:r.glucose!==''?String(r.glucose):'',gki:r.gki!==''?String(r.gki):'',body_fat:r.bodyFat!==''?String(r.bodyFat):'',skeletal_muscle:r.skeletalMuscle!==''?String(r.skeletalMuscle):'',notes:r.notes||'',user_id:_uid()};}
 function dlFromDB(r){return{date:r.date,weight:r.weight!=null?r.weight:'',exercise:r.exercise||'',ketones:r.ketones!=null&&r.ketones!==''?r.ketones:'',glucose:r.glucose!=null&&r.glucose!==''?r.glucose:'',gki:r.gki!=null&&r.gki!==''?r.gki:'',bodyFat:r.body_fat!=null&&r.body_fat!==''?r.body_fat:'',skeletalMuscle:r.skeletal_muscle!=null&&r.skeletal_muscle!==''?r.skeletal_muscle:'',notes:r.notes||''};}
 function flFromDB(r){return{_id:r.id,date:r.date,food:r.food,grams:r.grams,cal:r.cal,pro:r.pro,fat:r.fat,car:r.car};}
 
@@ -967,29 +1049,30 @@ async function initData(){
       var exRows=await sbRace(sbGet('expenses?order=name.asc'));
       EX=Array.isArray(exRows)?exRows:[];
     }catch(ee){console.warn('Expenses table missing:',ee.message);EX=[];}
-    if(!DL.length&&!FM.length){setSyncStatus('busy','First run - seeding...');await seedDatabase();}
+    if(!DL.length&&!FM.length&&tabAllowed('food')){setSyncStatus('busy','First run - seeding...');await seedDatabase();}
     else{setSyncStatus('ok','Connected OK');setTimeout(function(){setSyncStatus('ok','');},3000);}
   }catch(e){
     console.error('DB connection error:',e);
     setSyncStatus('error',(e&&e.message)?e.message.slice(0,60):'Connection failed');
-    DL=SEED_DAILY.map(function(r){return JSON.parse(JSON.stringify(r));});
-    FM=SEED_FM.map(function(r){return JSON.parse(JSON.stringify(r));});
-    FL=SEED_FL.map(function(r){return JSON.parse(JSON.stringify(r));});
+    // Never fall back to bundled data: show an empty app + the error instead.
+    DL=[];FM=[];FL=[];RM=[];EX=[];
   }
 }
 async function seedDatabase(){
-  DL=SEED_DAILY.map(function(r){return JSON.parse(JSON.stringify(r));});
-  FM=SEED_FM.map(function(r){return JSON.parse(JSON.stringify(r));});
+  // Only seed the generic food reference list for brand-new accounts.
+  // Personal history (daily_log, food_log) is intentionally NOT auto-seeded,
+  // so a new user starts with their own clean, empty log.
+  var _t0=Date.now();
+  FM=SEED_FM.map(function(r,i){return Object.assign({},JSON.parse(JSON.stringify(r)),{id:_t0+i});});
   try{
-    await Promise.all([sbUpsert('daily_log',DL.map(dlToDB)),sbUpsert('food_master',FM)]);
-    var flData=SEED_FL.map(function(f){return{date:f.date,food:f.food,grams:f.grams,cal:f.cal,pro:f.pro,fat:f.fat,car:f.car};});
-    await sbPost('food_log',flData,'return=representation');
-    var rows=await sbGet('food_log?order=date.asc,id.asc');FL=rows.map(flFromDB);
+    await sbUpsert('food_master',FM.map(function(f){return Object.assign({},f,{user_id:_uid()});}));
+    DL=[];FL=[];
     setSyncStatus('ok','Seeded OK');setTimeout(function(){setSyncStatus('ok','');},3000);
   }catch(e){console.error('Seed error:',e);setSyncStatus('error','Seed failed');}
 }
 
 function sw(tab){
+  if(!tabAllowed(tab))return;
   document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('active');});
   // Only deactivate main nav buttons (not vested sub-nav)
   document.querySelectorAll('header nav button, #bottom-nav button').forEach(function(b){b.classList.remove('active');});
@@ -1007,6 +1090,7 @@ function sw(tab){
     b.classList.toggle('active',b.dataset.tab===tab);
   });
   if(tab==='invest')setTimeout(function(){initVestedModule();},50);
+  if(tab==='admin')renderAdminPanel();
 }
 function today(){return new Date().toISOString().split('T')[0];}
 function setToday(id){document.getElementById(id).value=today();}
@@ -1338,7 +1422,7 @@ function addFood(){
     var f=FM.find(function(x){return x.id===id;});if(!f)return;
     itemName=f.name;cal=+(f.cal*g/100).toFixed(1);pro=+(f.pro*g/100).toFixed(1);fat=+(f.fat*g/100).toFixed(1);car=+(f.car*g/100).toFixed(1);
   }
-  var item={date:date,food:itemName,grams:g,cal:cal,pro:pro,fat:fat,car:car};
+  var item={date:date,food:itemName,grams:g,cal:cal,pro:pro,fat:fat,car:car,user_id:_uid()};
   setSyncStatus('busy','Adding...');
   sbPost('food_log',item).then(function(rows){
     var saved=Array.isArray(rows)?rows[0]:rows;FL.push(flFromDB(saved));
@@ -1385,13 +1469,13 @@ function addMaster(){
   if(editingFoodId){
     var idx=-1;for(var i=0;i<FM.length;i++){if(FM[i].id===editingFoodId){idx=i;break;}}
     if(idx<0)return;
-    var upd=Object.assign({},FM[idx],{name:name,cal:parseFloat(document.getElementById('m-cal').value)||0,pro:parseFloat(document.getElementById('m-pro').value)||0,fat:parseFloat(document.getElementById('m-fat').value)||0,car:parseFloat(document.getElementById('m-car').value)||0,notes:document.getElementById('m-notes').value.trim()});
+    var upd=Object.assign({},FM[idx],{name:name,cal:parseFloat(document.getElementById('m-cal').value)||0,pro:parseFloat(document.getElementById('m-pro').value)||0,fat:parseFloat(document.getElementById('m-fat').value)||0,car:parseFloat(document.getElementById('m-car').value)||0,notes:document.getElementById('m-notes').value.trim(),user_id:_uid()});
     setSyncStatus('busy','Saving...');
     sbUpsert('food_master',upd).then(function(){FM[idx]=upd;cancelEditMaster();renderMaster();showMsg('m-msg','Updated');setSyncStatus('ok','');}).catch(function(e){showMsg('m-msg','Update failed',true);setSyncStatus('error','Save failed');console.error(e);});
   }else{
     var exists=false;for(var j=0;j<FM.length;j++){if(FM[j].name.toLowerCase()===name.toLowerCase()){exists=true;break;}}
     if(exists){showMsg('m-msg','Already exists',true);return;}
-    var ni={id:Date.now(),name:name,cal:parseFloat(document.getElementById('m-cal').value)||0,pro:parseFloat(document.getElementById('m-pro').value)||0,fat:parseFloat(document.getElementById('m-fat').value)||0,car:parseFloat(document.getElementById('m-car').value)||0,notes:document.getElementById('m-notes').value.trim()};
+    var ni={id:Date.now(),name:name,cal:parseFloat(document.getElementById('m-cal').value)||0,pro:parseFloat(document.getElementById('m-pro').value)||0,fat:parseFloat(document.getElementById('m-fat').value)||0,car:parseFloat(document.getElementById('m-car').value)||0,notes:document.getElementById('m-notes').value.trim(),user_id:_uid()};
     setSyncStatus('busy','Saving...');
     sbUpsert('food_master',ni).then(function(){FM.push(ni);['m-name','m-cal','m-pro','m-fat','m-car','m-notes'].forEach(function(id){document.getElementById(id).value='';});renderMaster();showMsg('m-msg','Added');setSyncStatus('ok','');}).catch(function(e){showMsg('m-msg','Add failed',true);setSyncStatus('error','Save failed');console.error(e);});
   }
@@ -1410,6 +1494,520 @@ function renderMaster(){
   document.getElementById('m-tbody').innerHTML=rows.length?rows.map(function(f){return'<tr><td style="white-space:nowrap"><button class="ghost" style="padding:2px 8px;font-size:11px;margin-right:3px" onclick="editMaster('+f.id+')">Edit</button><button class="del-btn" onclick="delMaster('+f.id+')">&#215;</button></td><td style="font-family:\'DM Sans\',sans-serif;font-weight:500">'+f.name+'</td><td>'+f.cal+'</td><td>'+f.pro+'</td><td>'+f.fat+'</td><td>'+f.car+'</td><td style="font-family:\'DM Sans\',sans-serif;color:var(--text3)">'+(f.notes||'')+'</td></tr>';}).join(''):'<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:20px">No foods found</td></tr>';
 }
 
+
+// =====================================================================
+// =====================================================================
+// MULTI-USER ACCESS CONTROL
+// =====================================================================
+var MY_PROFILE=null;      // null until loaded. null = NO access (the app fails closed)
+var ALL_PROFILES=[];      // used by the admin screens only
+var ADMIN_SETTINGS=null;  // used by the admin Settings screen only
+var ADMIN_VIEW='requests';// requests | users | settings
+var _PROFILE_MISSING=false;
+var TAB_FEATURE={dash:'can_health',analytics:'can_health',daily:'can_health',
+  food:'can_food',recipes:'can_food',master:'can_food',
+  budget:'can_budget',invest:'can_invest'};
+var FEATURE_FLAGS=[
+  {flag:'can_health',label:'🏃 Health'},
+  {flag:'can_food',label:'🥗 Food'},
+  {flag:'can_budget',label:'💰 Budget'},
+  {flag:'can_invest',label:'📈 Invest'}
+];
+
+// Escape anything that came from the database or a user before it goes into innerHTML
+function escHtml(s){
+  return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+// This only hides tabs (UI). The real lock is Row Level Security in the database.
+function tabAllowed(tab){
+  if(!MY_PROFILE)return false;                    // profile not loaded / not found = no access
+  if(MY_PROFILE.status==='pending'||MY_PROFILE.status==='rejected')return false;   // not approved (the database enforces this too)
+  if(tab==='admin')return MY_PROFILE.is_admin===true;
+  var feature=TAB_FEATURE[tab];
+  return !feature||MY_PROFILE[feature]===true;
+}
+function firstAllowedTab(){
+  var order=['dash','analytics','daily','food','recipes','master','budget','invest','admin'];
+  for(var i=0;i<order.length;i++){if(tabAllowed(order[i]))return order[i];}
+  return null;
+}
+
+// What a person sees when there is nothing they may open yet
+function _noAccessKind(){
+  if(_PROFILE_MISSING)return 'missing';
+  var st=MY_PROFILE&&MY_PROFILE.status;
+  if(st==='pending')return 'pending';
+  if(st==='rejected')return 'rejected';
+  return 'nofeatures';
+}
+var NO_ACCESS_TEXT={
+  missing:{icon:'&#128274;',title:'Could not load your access',
+    body:'Your account profile could not be loaded. Check your connection and reload, or ask the admin.',again:true},
+  pending:{icon:'&#9203;',title:'Your request is waiting for approval',
+    body:'Thanks! The owner reviews every request. Once yours is approved you will get Health Tracking here, with your own private data. Come back later and press Check again.',again:true},
+  rejected:{icon:'&#128683;',title:'Your request was not approved',
+    body:'The owner did not approve this account. If you think this is a mistake, contact them directly.',again:false},
+  nofeatures:{icon:'&#128274;',title:'Waiting for access',
+    body:'Your account is set up but no features are enabled yet.<br>Ask the admin to grant access.',again:true}
+};
+function showNoAccessMessage(kind){
+  document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('active');});
+  var main=document.querySelector('main');
+  if(!main)return;
+  var t=NO_ACCESS_TEXT[kind]||NO_ACCESS_TEXT.nofeatures;
+  var div=document.getElementById('no-access-msg');
+  if(!div){div=document.createElement('div');div.id='no-access-msg';main.appendChild(div);}
+  div.innerHTML='<div style="font-size:36px;margin-bottom:10px">'+t.icon+'</div>'+
+    '<div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:6px">'+t.title+'</div>'+
+    '<div style="font-size:13px;max-width:420px;margin:0 auto 16px">'+t.body+'</div>'+
+    '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'+
+    (t.again?'<button type="button" class="primary" id="noacc-again">Check again</button>':'')+
+    '<button type="button" class="ghost" id="noacc-out">Sign out</button></div>';
+  var again=document.getElementById('noacc-again');if(again)again.onclick=function(){location.reload();};
+  var out=document.getElementById('noacc-out');if(out)out.onclick=function(){doLogout();};
+  div.style.display='block';
+}
+function hideNoAccessMessage(){var d=document.getElementById('no-access-msg');if(d)d.style.display='none';}
+
+async function loadMyProfile(){
+  MY_PROFILE=null;_PROFILE_MISSING=false;
+  if(!SESSION||!SESSION.user)return;
+  try{
+    var rows=await sbGet('profiles?id=eq.'+encodeURIComponent(_uid())+'&select=*');
+    MY_PROFILE=(Array.isArray(rows)&&rows[0])?rows[0]:null;
+  }catch(e){console.warn('Could not load profile:',e.message);}
+  if(!MY_PROFILE){
+    // FAIL CLOSED: no profile row (or the request failed) = no access.
+    // Profiles are created only by the database trigger. The browser never creates or edits them.
+    _PROFILE_MISSING=true;
+    MY_PROFILE={is_admin:false,status:'unknown',can_health:false,can_food:false,can_budget:false,can_invest:false};
+  }
+  applyFeatureGating();
+  if(MY_PROFILE.is_admin===true&&tabAllowed('admin')){refreshAdminBadge(true);startAdminPoll();}
+}
+
+function applyFeatureGating(){
+  if(!MY_PROFILE)return;
+  document.querySelectorAll('[data-tab]').forEach(function(btn){
+    if(btn.dataset.tab==='admin')return;
+    btn.style.display=tabAllowed(btn.dataset.tab)?'':'none';
+  });
+  ['admin-nav-btn','admin-nav-btn-mobile'].forEach(function(id){
+    var b=document.getElementById(id);if(b)b.style.display=tabAllowed('admin')?'':'none';
+  });
+  var cur=document.querySelector('.sec.active');
+  var curTab=cur?cur.id.replace('sec-',''):null;
+  if(!curTab||!tabAllowed(curTab)){
+    var t=firstAllowedTab();
+    if(t){hideNoAccessMessage();sw(t);}
+    else showNoAccessMessage(_noAccessKind());
+  }else{hideNoAccessMessage();}
+}
+
+// ── Admin: talking to the database ───────────────────────────────────────
+var _refreshP=null;
+function _refreshSession(){
+  if(!_refreshP){
+    _refreshP=(async function(){
+      try{
+        var s=SESSION;if(!s||!s.refresh_token)return false;
+        var r=await fetch(AUTH_URL+'/token?grant_type=refresh_token',{
+          method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY},
+          body:JSON.stringify({refresh_token:s.refresh_token})
+        });
+        var d=await r.json();
+        if(d&&d.access_token){var rem=!!localStorage.getItem('km_sess');SESSION=d;_storeSession(d,rem);return true;}
+      }catch(e){}
+      return false;
+    })().then(function(ok){_refreshP=null;return ok;});
+  }
+  return _refreshP;
+}
+// Calls a database function. One automatic retry with a fresh sign-in token if the old one expired.
+async function _rpc(name,args){
+  var go=function(){return fetch(SB_URL+'rpc/'+name,{method:'POST',headers:sbH(),body:JSON.stringify(args||{})});};
+  var resp=await go();
+  if(resp.status===401&&await _refreshSession())resp=await go();
+  var data=null;try{data=await resp.json();}catch(e){}
+  if(!resp.ok){
+    throw new Error((data&&(data.message||data.msg||data.hint))||('HTTP '+resp.status));
+  }
+  return data;
+}
+function _fmtWhen(iso){
+  if(!iso)return '';
+  var t=new Date(iso).getTime();
+  if(isNaN(t))return '';
+  var m=Math.floor((Date.now()-t)/60000);
+  if(m<1)return 'just now';
+  if(m<60)return m+' min ago';
+  var h=Math.floor(m/60);
+  if(h<24)return h+' h ago';
+  var d=Math.floor(h/24);
+  if(d<14)return d+' day'+(d===1?'':'s')+' ago';
+  return new Date(t).toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'});
+}
+function _admMsg(text,isErr){
+  var el=document.getElementById('adm-msg');
+  if(!el)return;
+  el.style.color=isErr?'var(--red)':'var(--accent)';
+  el.textContent=text||'';
+  if(text&&!isErr){clearTimeout(_admMsg._t);_admMsg._t=setTimeout(function(){el.textContent='';},4000);}
+}
+
+// ── Admin: "people are waiting" badge, banner and polling ─────────────────
+var _lastPending=0,_bannerDismissed=false,_adminPoll=null;
+function setAdminBadge(n){
+  ['adm-badge','adm-badge-mobile','adm-tab-badge'].forEach(function(id){
+    var b=document.getElementById(id);if(!b)return;
+    b.textContent=n>99?'99+':String(n);
+    b.style.display=n>0?'':'none';
+  });
+}
+function showPendingBanner(n){
+  var main=document.querySelector('main');
+  if(!main)return;
+  var b=document.getElementById('adm-banner');
+  var onAdmin=!!document.querySelector('#sec-admin.active');   // the Requests list is already on screen then
+  if(n<=0||_bannerDismissed||onAdmin){if(b)b.style.display='none';return;}
+  if(!b){
+    b=document.createElement('div');b.id='adm-banner';b.className='adm-banner';
+    main.insertBefore(b,main.firstChild);
+    b.addEventListener('click',function(ev){
+      var t=ev.target&&ev.target.closest?ev.target.closest('[data-banner]'):null;
+      if(!t)return;
+      if(t.getAttribute('data-banner')==='review'){ADMIN_VIEW='requests';sw('admin');}
+      else{_bannerDismissed=true;b.style.display='none';}
+    });
+  }
+  b.innerHTML='<span>&#128276; <b>'+n+'</b> '+(n===1?'person is':'people are')+' waiting for your approval.</span>'+
+    '<span class="adm-banner-actions"><button type="button" class="primary" data-banner="review">Review</button>'+
+    '<button type="button" class="ghost" data-banner="dismiss">Dismiss</button></span>';
+  b.style.display='';
+}
+async function refreshAdminBadge(showBanner){
+  if(!MY_PROFILE||MY_PROFILE.is_admin!==true)return;
+  try{
+    var data=await _rpc('admin_get_profiles');
+    if(!Array.isArray(data))return;
+    var n=data.filter(function(p){return p.status==='pending';}).length;
+    if(n>_lastPending)_bannerDismissed=false;       // somebody new asked: show the banner again
+    _lastPending=n;
+    setAdminBadge(n);
+    if(showBanner)showPendingBanner(n);
+  }catch(e){/* badge is a convenience; the Requests screen shows real errors */}
+}
+function startAdminPoll(){
+  if(_adminPoll)return;
+  _adminPoll=setInterval(function(){
+    if(document.visibilityState==='visible')refreshAdminBadge(true);
+  },120000);
+}
+
+// ── Admin screens ────────────────────────────────────────────────────────
+function _pill(attrs,label,on){
+  return '<button type="button" '+attrs+' '
+    +'style="border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:500;padding:6px 12px;border-radius:20px;transition:all .2s;'
+    +(on?'background:#d1fae5;color:#065f46':'background:#f3f4f6;color:#6b7280')+'">'
+    +(on?'✓ ':'✗ ')+escHtml(label)+'</button>';
+}
+function _adminFlagBtn(flag,label,on){
+  return _pill('class="auc-flag" data-act="flag" data-flag="'+escHtml(flag)+'" data-label="'+escHtml(label)+'"',label,on);
+}
+function _showAdminPane(view){
+  ['requests','users','settings'].forEach(function(v){
+    var pane=document.getElementById('adm-pane-'+v);if(pane)pane.style.display=(v===view)?'':'none';
+  });
+  document.querySelectorAll('#adm-tabs .adm-tab').forEach(function(b){
+    b.classList.toggle('active',b.getAttribute('data-adm')===view);
+  });
+}
+function _bindAdminEvents(){
+  var root=document.getElementById('sec-admin');
+  if(!root||root._km_bound)return;
+  root._km_bound=true;
+  // One delegated click handler (no inline onclick, so nothing from the database is ever executed as code)
+  root.addEventListener('click',function(ev){
+    var t=ev.target;if(!t||!t.closest)return;
+    var tab=t.closest('.adm-tab');
+    if(tab){
+      ADMIN_VIEW=tab.getAttribute('data-adm')||'requests';_showAdminPane(ADMIN_VIEW);
+      if(ADMIN_VIEW==='requests')renderAdminPanel();   // always fetch fresh requests (nothing unsaved lives there)
+      else renderAdminView();
+      return;
+    }
+    var btn=t.closest('[data-act]');if(!btn)return;
+    var act=btn.getAttribute('data-act');
+    var card=btn.closest('[data-uid]');
+    var uid=card?card.getAttribute('data-uid'):null;
+    if(act==='approve'||act==='reject')return decideRequest(uid,act,card);
+    if(act==='remove')return removeUser(uid,card);
+    if(act==='flag')return toggleFeature(uid,btn);
+    if(act==='save')return saveUserAccess(uid,card);
+    if(act==='set-flag')return toggleSetting(btn);
+    if(act==='set-save')return saveSettings(btn);
+    if(act==='copy-link')return copySignupLink(btn);
+    if(act==='retry')return renderAdminPanel();
+  });
+}
+
+async function renderAdminPanel(){
+  var list=document.getElementById('admin-user-list');
+  if(!list)return;
+  if(!MY_PROFILE||MY_PROFILE.is_admin!==true){
+    list.innerHTML='<div style="color:var(--text3);font-size:13px;padding:12px">Admin access required.</div>';
+    return;
+  }
+  _bindAdminEvents();
+  _showAdminPane(ADMIN_VIEW);
+  var bn=document.getElementById('adm-banner');if(bn)bn.style.display='none';
+  var loading='<div style="color:var(--text3);font-size:13px;padding:12px">Loading…</div>';
+  var rl=document.getElementById('admin-request-list');if(rl)rl.innerHTML=loading;
+  list.innerHTML=loading;
+  try{
+    var data=await _rpc('admin_get_profiles');
+    if(!Array.isArray(data))throw new Error('Unexpected answer from the database');
+    ALL_PROFILES=data;
+    var n=data.filter(function(p){return p.status==='pending';}).length;
+    _lastPending=n;setAdminBadge(n);
+  }catch(e){
+    var msg='<div style="color:var(--red);font-size:13px;padding:12px">Could not load accounts: '+escHtml(e.message)
+      +' <button type="button" class="ghost" data-act="retry" style="margin-left:8px">Try again</button></div>';
+    if(rl)rl.innerHTML=msg;list.innerHTML=msg;
+    return;
+  }
+  renderAdminView();
+}
+function renderAdminView(){
+  if(ADMIN_VIEW==='users')renderUserList();
+  else if(ADMIN_VIEW==='settings')renderSettings();
+  else renderRequests();
+}
+
+function _emailBadge(p){
+  return p.email_verified===true
+    ?'<span class="cat-badge">✓ Email confirmed</span>'
+    :'<span class="cat-badge" title="They have not clicked the link in their confirmation email yet" style="background:#fef3c7;color:#92400e">Email not confirmed</span>';
+}
+function _reqCard(p,declined){
+  return '<div class="admin-req-card" data-uid="'+escHtml(p.id)+'">'
+    +'<div class="arc-top"><div style="min-width:0">'
+    +'<div class="arc-name">'+escHtml(p.display_name||'(no name given)')+'</div>'
+    +'<div class="arc-email">'+escHtml(p.email||p.id)+'</div></div>'
+    +'<div>'+_emailBadge(p)+'</div></div>'
+    +(p.request_note?'<div class="arc-note">“'+escHtml(p.request_note)+'”</div>':'')
+    +'<div class="arc-meta">'+(declined?'Declined '+escHtml(_fmtWhen(p.decided_at)):'Requested '+escHtml(_fmtWhen(p.created_at)))+'</div>'
+    +'<div class="arc-actions">'
+    +'<button type="button" class="primary" data-act="approve">'+(declined?'Approve anyway':'Approve')+'</button>'
+    +(declined?'<button type="button" class="ghost" data-act="remove">Remove</button>':'<button type="button" class="ghost" data-act="reject">Decline</button>')
+    +'</div></div>';
+}
+function renderRequests(){
+  var el=document.getElementById('admin-request-list');
+  if(!el)return;
+  var pending=ALL_PROFILES.filter(function(p){return p.status==='pending';});
+  var declined=ALL_PROFILES.filter(function(p){return p.status==='rejected';});
+  // confirmed e-mail first, newest first
+  pending.sort(function(a,b){
+    if((b.email_verified===true)!==(a.email_verified===true))return b.email_verified===true?1:-1;
+    return String(b.created_at).localeCompare(String(a.created_at));
+  });
+  var html='';
+  if(!pending.length){
+    html+='<div class="adm-empty">No requests waiting. When someone uses your Request access link, they show up here.</div>';
+  }else{
+    html+=pending.map(function(p){return _reqCard(p,false);}).join('');
+  }
+  if(declined.length){
+    html+='<details class="adm-declined"><summary>Declined ('+declined.length+')</summary>'
+      +declined.map(function(p){return _reqCard(p,true);}).join('')+'</details>';
+  }
+  el.innerHTML=html;
+}
+
+function renderUserList(){
+  var el=document.getElementById('admin-user-list');
+  if(!el)return;
+  var users=ALL_PROFILES.filter(function(p){return (p.status||'approved')==='approved';});
+  users.sort(function(a,b){
+    if((b.is_admin===true)!==(a.is_admin===true))return b.is_admin===true?1:-1;
+    return String(a.created_at).localeCompare(String(b.created_at));
+  });
+  if(!users.length){el.innerHTML='<div class="adm-empty">No approved accounts yet.</div>';return;}
+  el.innerHTML=users.map(function(p){
+    var you=p.id===_uid();
+    var last=p.last_sign_in_at?('Last signed in '+_fmtWhen(p.last_sign_in_at)):'Has not signed in yet';
+    return '<div class="admin-user-card" data-uid="'+escHtml(p.id)+'">'
+      +'<div class="auc-header"><div>'
+      +'<div class="auc-email">'+escHtml(p.email||p.id)+(you?' <span class="cat-badge">You</span>':'')
+      +(p.is_admin?' <span class="cat-badge" style="background:#fef3c7;color:#92400e">Admin</span>':'')+'</div>'
+      +'<div class="auc-name"><input type="text" class="auc-name-input" maxlength="60" placeholder="Display name (optional)" value="'+escHtml(p.display_name||'')+'" '
+      +'style="font-size:12px;border:1px solid var(--border);border-radius:5px;padding:4px 8px;font-family:inherit;background:var(--surface);color:var(--text);width:180px"></div>'
+      +'<div class="arc-meta" style="margin-top:4px">'+escHtml(last)+'</div>'
+      +'</div>'
+      +'<div class="auc-btns"><button type="button" class="ghost auc-save" data-act="save" style="font-size:11px;padding:4px 10px">Save</button>'
+      +((!you&&!p.is_admin)?'<button type="button" class="ghost auc-remove" data-act="remove" style="font-size:11px;padding:4px 10px;color:var(--red)">Remove</button>':'')
+      +'</div></div>'
+      +'<div class="auc-flags">'+FEATURE_FLAGS.map(function(f){return _adminFlagBtn(f.flag,f.label,p[f.flag]===true);}).join('')+'</div>'
+      +'<div class="auc-msg" style="font-size:11px;color:var(--accent);min-height:16px;margin-top:6px"></div>'
+      +'</div>';
+  }).join('');
+}
+
+function _who(p){return (p&&(p.display_name||p.email))||'this person';}
+async function decideRequest(uid,decision,card){
+  var p=ALL_PROFILES.find(function(x){return x.id===uid;});
+  if(!p)return;
+  var q=decision==='approve'
+    ?'Approve '+_who(p)+(p.email&&p.display_name?' ('+p.email+')':'')+'?\n\nThey will be able to sign in and use the features set under Settings (Health Tracking by default).'
+    :'Decline the request from '+_who(p)+'?\n\nThey will not get access.';
+  if(!confirm(q))return;
+  var btns=card?card.querySelectorAll('button'):[];
+  btns.forEach(function(b){b.disabled=true;});
+  try{
+    await _rpc('admin_decide_request',{target_id:uid,p_decision:decision});
+    _admMsg((decision==='approve'?'Approved ':'Declined ')+_who(p)+'.');
+    await renderAdminPanel();
+  }catch(e){
+    btns.forEach(function(b){b.disabled=false;});
+    _admMsg('Could not save: '+e.message,true);
+  }
+}
+async function removeUser(uid,card){
+  var p=ALL_PROFILES.find(function(x){return x.id===uid;});
+  if(!p)return;
+  if(!confirm('Remove '+_who(p)+' permanently?\n\nTheir login and ALL of their data will be deleted. This cannot be undone.'))return;
+  var btns=card?card.querySelectorAll('button'):[];
+  btns.forEach(function(b){b.disabled=true;});
+  try{
+    await _rpc('admin_delete_user',{target_id:uid});
+    _admMsg('Removed '+_who(p)+'.');
+    await renderAdminPanel();
+  }catch(e){
+    btns.forEach(function(b){b.disabled=false;});
+    _admMsg('Could not remove: '+e.message,true);
+  }
+}
+
+function toggleFeature(uid,btn){
+  var p=ALL_PROFILES.find(function(x){return x.id===uid;});
+  if(!p)return;
+  var flag=btn.getAttribute('data-flag');
+  p[flag]=!(p[flag]===true);
+  var on=p[flag]===true;
+  btn.style.background=on?'#d1fae5':'#f3f4f6';
+  btn.style.color=on?'#065f46':'#6b7280';
+  btn.textContent=(on?'✓ ':'✗ ')+btn.getAttribute('data-label');
+}
+
+async function saveUserAccess(uid,card){
+  var p=ALL_PROFILES.find(function(x){return x.id===uid;});
+  if(!p)return;
+  var nameEl=card.querySelector('.auc-name-input');
+  var msgEl=card.querySelector('.auc-msg');
+  if(msgEl){msgEl.style.color='var(--accent)';msgEl.textContent='Saving...';}
+  try{
+    await _rpc('admin_update_profile',{
+      target_id:uid,
+      p_can_health:p.can_health===true,
+      p_can_food:p.can_food===true,
+      p_can_budget:p.can_budget===true,
+      p_can_invest:p.can_invest===true,
+      p_display_name:nameEl?nameEl.value.trim().slice(0,60):''
+    });
+    p.display_name=nameEl?nameEl.value.trim().slice(0,60):'';
+    if(uid===_uid()){
+      MY_PROFILE.can_health=p.can_health===true;MY_PROFILE.can_food=p.can_food===true;
+      MY_PROFILE.can_budget=p.can_budget===true;MY_PROFILE.can_invest=p.can_invest===true;
+      applyFeatureGating();
+    }
+    if(msgEl)msgEl.textContent='Saved ✓';
+    setTimeout(function(){if(msgEl)msgEl.textContent='';},3000);
+  }catch(e){
+    if(msgEl){msgEl.style.color='var(--red)';msgEl.textContent='Error: '+e.message;}
+  }
+}
+
+// ── Admin: Settings ───────────────────────────────────────────────────────
+async function renderSettings(){
+  var el=document.getElementById('admin-settings');
+  if(!el)return;
+  if(!ADMIN_SETTINGS){
+    el.innerHTML='<div style="color:var(--text3);font-size:13px;padding:12px">Loading…</div>';
+    try{
+      var rows=await _rpc('admin_get_settings');
+      ADMIN_SETTINGS=(Array.isArray(rows)&&rows[0])?rows[0]:null;
+      if(!ADMIN_SETTINGS)throw new Error('No settings found');
+    }catch(e){
+      el.innerHTML='<div style="color:var(--red);font-size:13px;padding:12px">Could not load settings: '+escHtml(e.message)
+        +'<br>If this says the function does not exist, run the latest SQL file in Supabase first.'
+        +' <button type="button" class="ghost" data-act="retry" style="margin-left:8px">Try again</button></div>';
+      return;
+    }
+  }
+  var s=ADMIN_SETTINGS;
+  var link=window.location.origin+window.location.pathname+'#request';
+  el.innerHTML=
+    '<div class="adm-set-row"><div style="min-width:0"><div class="adm-set-title">Accept new access requests</div>'
+    +'<div class="adm-set-sub">On: the login page shows a “Request access” link. Off: the link is hidden and anyone who signs up anyway is declined automatically.</div></div>'
+    +_pill('class="set-flag" data-act="set-flag" data-key="accept_requests" data-label="Accepting requests"','Accepting requests',s.accept_requests===true)+'</div>'
+    +'<div class="adm-set-row" style="display:block"><div class="adm-set-title">When you approve someone, switch on</div>'
+    +'<div class="adm-set-sub" style="margin-bottom:8px">You can change any person’s features later under Users.</div>'
+    +'<div class="auc-flags">'+FEATURE_FLAGS.map(function(f){
+        return _pill('class="set-flag" data-act="set-flag" data-key="default_'+escHtml(f.flag)+'" data-label="'+escHtml(f.label)+'"',f.label,s['default_'+f.flag]===true);
+      }).join('')+'</div></div>'
+    +'<div class="btn-row" style="margin:12px 0 4px"><button type="button" class="primary" data-act="set-save">Save settings</button>'
+    +'<span id="adm-set-msg" style="font-size:12px"></span></div>'
+    +'<div class="adm-set-title" style="margin-top:22px">Sign-up link</div>'
+    +'<div class="adm-set-sub" style="margin-bottom:6px">Send this to someone who wants an account. They fill in the form and you approve them here.</div>'
+    +'<div class="adm-link-box"><input type="text" readonly id="adm-signup-link" value="'+escHtml(link)+'">'
+    +'<button type="button" class="ghost" data-act="copy-link">Copy</button></div>'
+    +'<div class="adm-note"><b>Supabase settings this relies on</b> (Dashboard → Authentication):'
+    +'<ul><li>Email sign-ups: <b>Allow new users to sign up = ON</b>. Anonymous sign-ins: <b>OFF</b>.</li>'
+    +'<li>If <b>Confirm email</b> is ON, Supabase must be able to email other people: set up your own SMTP sender under Authentication → Emails → SMTP. Its built-in sender only reaches your own team address.</li>'
+    +'<li>Approving someone does <b>not</b> send them an email. Tell them they can sign in.</li></ul></div>';
+}
+function toggleSetting(btn){
+  if(!ADMIN_SETTINGS)return;
+  var key=btn.getAttribute('data-key');
+  ADMIN_SETTINGS[key]=!(ADMIN_SETTINGS[key]===true);
+  var on=ADMIN_SETTINGS[key]===true;
+  btn.style.background=on?'#d1fae5':'#f3f4f6';
+  btn.style.color=on?'#065f46':'#6b7280';
+  btn.textContent=(on?'✓ ':'✗ ')+btn.getAttribute('data-label');
+}
+async function saveSettings(btn){
+  var s=ADMIN_SETTINGS;if(!s)return;
+  var msg=document.getElementById('adm-set-msg');
+  if(msg){msg.style.color='var(--accent)';msg.textContent='Saving...';}
+  btn.disabled=true;
+  try{
+    await _rpc('admin_update_settings',{
+      p_accept_requests:s.accept_requests===true,
+      p_can_health:s.default_can_health===true,
+      p_can_food:s.default_can_food===true,
+      p_can_budget:s.default_can_budget===true,
+      p_can_invest:s.default_can_invest===true
+    });
+    if(msg){msg.style.color='var(--accent)';msg.textContent='Saved ✓';setTimeout(function(){msg.textContent='';},3000);}
+  }catch(e){
+    if(msg){msg.style.color='var(--red)';msg.textContent='Error: '+e.message;}
+  }
+  btn.disabled=false;
+}
+function copySignupLink(btn){
+  var inp=document.getElementById('adm-signup-link');
+  if(!inp)return;
+  var done=function(){btn.textContent='Copied ✓';setTimeout(function(){btn.textContent='Copy';},2000);};
+  var fallback=function(){try{inp.focus();inp.select();document.execCommand('copy');done();}catch(e){btn.textContent='Select + copy';}};
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(inp.value).then(done,fallback);
+    else fallback();
+  }catch(e){fallback();}
+}
 
 // =====================================================================
 // AUTO-FILL TODAY'S MEALS FROM YESTERDAY
@@ -1435,7 +2033,7 @@ async function checkAutoFillYesterday(){
   try{
     for(var i=0;i<yItems.length;i++){
       var src=yItems[i];
-      var newItem={date:todayStr,food:src.food,grams:src.grams,cal:src.cal,pro:src.pro,fat:src.fat,car:src.car};
+      var newItem={date:todayStr,food:src.food,grams:src.grams,cal:src.cal,pro:src.pro,fat:src.fat,car:src.car,user_id:_uid()};
       var saved=await sbPost('food_log',newItem);
       var savedRow=Array.isArray(saved)?saved[0]:saved;
       FL.push(flFromDB(savedRow));
@@ -1546,7 +2144,8 @@ function saveRecipe(){
     serving_size:serving,total_weight:t.weight,
     cal:t.cal,pro:t.pro,fat:t.fat,car:t.car,
     ingredients:JSON.stringify(recipeIngredients),
-    notes:document.getElementById('r-notes').value.trim()
+    notes:document.getElementById('r-notes').value.trim(),
+    user_id:_uid()
   };
   setSyncStatus('busy','Saving...');
   sbUpsert('recipes',recipe).then(function(){
@@ -1820,20 +2419,25 @@ function checkStrength(inputId,barId){
 }
 
 // ── Show / hide login sub-screens ────────────────────────────────────
+function _hideLoginSteps(){
+  ['login-form','request-form','forgot-form','reset-form','mfa-form'].forEach(function(id){
+    var e=document.getElementById(id);if(e)e.style.display='none';
+  });
+}
 function showLoginForm(){
+  _hideLoginSteps();
   document.getElementById('login-form').style.display='';
-  document.getElementById('forgot-form').style.display='none';
-  document.getElementById('reset-form').style.display='none';
-  document.getElementById('mfa-form').style.display='none';
 }
 function showForgotForm(){
-  document.getElementById('login-form').style.display='none';
+  _hideLoginSteps();
   document.getElementById('forgot-form').style.display='';
   var e=document.getElementById('login-email').value;
   if(e)document.getElementById('forgot-email').value=e;
   document.getElementById('forgot-err').textContent='';
   document.getElementById('forgot-success').style.display='none';
 }
+function showLoginInfo(msg){var el=document.getElementById('login-info');if(!el)return;el.textContent=msg||'';el.style.display=msg?'':'none';}
+function showLoginError(msg){var el=document.getElementById('login-err');if(el)el.textContent=msg||'';}
 
 // ── Forgot password — send recovery email ────────────────────────────
 async function doForgotPassword(){
@@ -1856,24 +2460,131 @@ async function doForgotPassword(){
   btn.textContent='Send Reset Email';btn.disabled=false;
 }
 
-// ── Detect recovery token in URL hash on page load ───────────────────
+// ── Request access (new person asks for an account) ─────────────────
+// The page only asks Supabase to create a login. The new account has NO access until the owner approves it
+// (the database enforces that, not this page).
+var REQ_OPEN=false;
+async function loadSignupStatus(){
+  var open=false;
+  try{
+    var r=await fetch(SB_URL+'rpc/get_signup_status',{method:'POST',headers:sbH(),body:'{}'});
+    if(r.ok){var d=await r.json();open=(d===true);}
+  }catch(e){}
+  REQ_OPEN=open;
+  var w=document.getElementById('request-link-wrap');
+  if(w)w.style.display=open?'':'none';
+  return open;
+}
+async function showRequestForm(){
+  _hideLoginSteps();
+  document.getElementById('request-form').style.display='';
+  document.getElementById('req-err').textContent='';
+  document.getElementById('req-done').style.display='none';
+  document.getElementById('req-fields').style.display='none';
+  document.getElementById('req-closed').style.display='none';
+  var open=await loadSignupStatus();
+  document.getElementById('req-closed').style.display=open?'none':'';
+  document.getElementById('req-fields').style.display=open?'':'none';
+  if(open){var n=document.getElementById('req-name');if(n)n.focus();}
+}
+function _signupErrorText(status,d){
+  var code=String((d&&(d.error_code||d.code))||'');
+  var msg=String((d&&(d.msg||d.message||d.error_description))||'');
+  if(code==='signup_disabled'||/signups? not allowed|signups? (are )?disabled/i.test(msg))
+    return 'New sign-ups are switched off right now. Please contact the owner.';
+  if(code==='user_already_exists'||/already (been )?registered/i.test(msg))
+    return 'This email already has an account. Try signing in, or use "Forgot password?".';
+  if(code==='weak_password')
+    return msg||'That password is too weak. Use a longer, less common one.';
+  if(code==='email_address_invalid'||code==='validation_failed'||/invalid.*email|email.*invalid/i.test(msg))
+    return 'That email address was not accepted. Check it and try again.';
+  if(code==='over_email_send_rate_limit'||code==='over_request_rate_limit'||status===429)
+    return 'Too many attempts. Please wait a few minutes and try again.';
+  return msg||'Could not send your request. Please try again.';
+}
+function _showRequestDone(signedIn){
+  document.getElementById('req-fields').style.display='none';
+  document.getElementById('req-done-text').textContent=signedIn
+    ?'The owner will review it. You can sign in now to see where it stands, and you will get access once it is approved.'
+    :'We sent you an email. Open it and click the confirmation link. Then the owner reviews your request, and you can sign in once it is approved. If nothing arrives within a few minutes, check your spam folder. You may also already have an account, so try signing in.';
+  document.getElementById('req-done').style.display='';
+  ['req-pass','req-pass2'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+  var bar=document.getElementById('req-strength');if(bar)bar.className='pass-strength';
+}
+async function doRequestAccess(){
+  var name=document.getElementById('req-name').value.trim();
+  var email=document.getElementById('req-email').value.trim();
+  var pass=document.getElementById('req-pass').value;
+  var pass2=document.getElementById('req-pass2').value;
+  var note=document.getElementById('req-note').value.trim();
+  var err=document.getElementById('req-err');
+  var btn=document.getElementById('req-submit');
+  err.textContent='';
+  if(!name){err.textContent='Enter your name so the owner knows who you are.';return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Enter a valid email address.';return;}
+  if(pass.length<12){err.textContent='Use a password of at least 12 characters.';return;}
+  if(pass!==pass2){err.textContent='The two passwords do not match.';return;}
+  btn.disabled=true;btn.textContent='Sending...';
+  try{
+    var redirectTo=window.location.origin+window.location.pathname;
+    var r=await fetch(AUTH_URL+'/signup?redirect_to='+encodeURIComponent(redirectTo),{
+      method:'POST',
+      headers:{'Content-Type':'application/json','apikey':SB_KEY},
+      body:JSON.stringify({email:email,password:pass,data:{full_name:name.slice(0,60),request_note:note.slice(0,300)}})
+    });
+    var d={};try{d=await r.json();}catch(e){}
+    if(r.ok&&d&&(d.id||d.user||d.access_token)){
+      if(d.access_token){
+        // E-mail confirmation is off, so Supabase signed them in at once. Do not keep that session.
+        fetch(AUTH_URL+'/logout',{method:'POST',keepalive:true,headers:{'apikey':SB_KEY,'Authorization':'Bearer '+d.access_token}}).catch(function(){});
+      }
+      _showRequestDone(!!d.access_token);
+    }else{
+      err.textContent=_signupErrorText(r.status,d);
+    }
+  }catch(e){err.textContent='Could not send your request. Check your connection and try again.';}
+  btn.disabled=false;btn.textContent='Send request';
+}
+
+// ── Detect links from Supabase e-mails (reset / invite / confirm / error) in the URL hash ──
 function checkRecoveryToken(){
   var hash=window.location.hash;
-  if(!hash)return false;
-  var params=new URLSearchParams(hash.replace('#',''));
+  if(!hash||hash.length<2)return false;
+  var params=new URLSearchParams(hash.replace(/^#/,''));
   var type=params.get('type');
   var token=params.get('access_token');
-  if(type==='recovery'&&token){
+  var errDesc=params.get('error_description');
+  if((type==='recovery'||type==='invite')&&token){
     SESSION={access_token:token};
-    // Clear hash from URL
-    history.replaceState(null,'',window.location.pathname);
-    // Show reset form
+    history.replaceState(null,'',window.location.pathname);          // clear the token from the address bar
+    document.documentElement.classList.remove('km-quick');window._quickAuth=false;
+    _hide('app-wrap');_show('login-screen','flex');
     document.getElementById('login-form').style.display='none';
     document.getElementById('reset-form').style.display='';
+    var rt=document.getElementById('reset-title');
+    if(rt)rt.textContent=(type==='invite')?'Welcome! Choose a password':'Set New Password';
     return true;
+  }
+  if(type==='signup'&&token){
+    // They clicked the confirmation link. We do not sign them in from the link; they sign in with their password.
+    history.replaceState(null,'',window.location.pathname);
+    showLoginInfo('Email confirmed ✓ The owner will review your request. Sign in any time to check on it.');
+    return false;
+  }
+  if(errDesc){
+    history.replaceState(null,'',window.location.pathname);
+    showLoginError(errDesc);
+    return false;
   }
   return false;
 }
+
+// Called when the login screen is what the person sees: decide whether to offer "Request access"
+function startLoginScreen(){
+  if(window.location.hash==='#request')showRequestForm();
+  else loadSignupStatus();
+}
+
 
 // ── Set new password (after reset link) ──────────────────────────────
 async function doResetPassword(){
@@ -1956,6 +2667,12 @@ function _storeSession(s,remember){
 }
 function _clearSession(){
   localStorage.removeItem('km_sess');sessionStorage.removeItem('km_sess');SESSION=null;
+  // Wipe cached personal data so the next person on this browser never sees it
+  try{
+    Object.keys(localStorage).forEach(function(k){
+      if(k==='km_vested_data'||k==='km_av_prices'||k.indexOf('km_vested_data_')===0)localStorage.removeItem(k);
+    });
+  }catch(e){}
 }
 
 async function checkExistingSession(){
@@ -2076,16 +2793,13 @@ document.addEventListener('DOMContentLoaded',function(){
 
 function doLogout(){
   if(!confirm('Sign out of KetoMetrics?'))return;
-  if(SESSION&&SESSION.access_token){
-    fetch(AUTH_URL+'/logout',{method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SESSION.access_token}}).catch(function(){});
-  }
-  _clearSession();
-  _show('login-screen','flex');
-  document.getElementById('login-form').style.display='';
-  document.getElementById('mfa-form').style.display='none';
-  document.getElementById('login-pass').value='';
-  document.getElementById('login-err').textContent='';
-  SESSION=null;window._appInited=false;
+  var tok=SESSION&&SESSION.access_token;
+  // Reload after sign-out so ALL in-memory data (health, food, budget, portfolio) is discarded
+  var done=function(){_clearSession();location.reload();};
+  if(tok){
+    var p=fetch(AUTH_URL+'/logout',{method:'POST',keepalive:true,headers:{'apikey':SB_KEY,'Authorization':'Bearer '+tok}}).catch(function(){});
+    Promise.race([p,new Promise(function(r){setTimeout(r,1500);})]).then(done);
+  }else{done();}
 }
 
 // ── MFA Setup ─────────────────────────────────────────────────────────
@@ -2154,22 +2868,33 @@ async function startMFAEnroll(){
     var uri=d.totp.uri||'';
     var secret=d.totp.secret||'';
     secretEl.textContent=secret;
-    // Generate QR code using a reliable image API
-    if(uri){
-      var qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=10&data='+encodeURIComponent(uri);
-      var qrImg=document.createElement('img');
-      qrImg.src=qrUrl;
-      qrImg.width=200;qrImg.height=200;
-      qrImg.style.cssText='display:block;border-radius:8px;border:1px solid #e5e7eb';
-      qrImg.onerror=function(){this.outerHTML='<div style="color:#dc2626;font-size:12px;padding:10px">QR failed to load. Use the secret key below to set up manually.</div>';};
-      qrContainer.innerHTML='';
-      qrContainer.appendChild(qrImg);
-      // Mobile: tap-to-open link
-      qrContainer.innerHTML+='<div style="text-align:center;margin-top:8px">'+
-        '<a href="'+uri+'" style="font-size:12px;color:#1a6b4a;text-decoration:underline">'+
-        '&#128247; Tap to open in Authenticator app</a></div>';
-    }else{
-      qrContainer.innerHTML='<div style="color:#dc2626;font-size:12px;padding:10px">No URI returned. Use the secret key below to set up manually.</div>';
+    // Draw the QR code locally. The secret is never sent to any third-party service.
+    qrContainer.innerHTML='';
+    var qrDrawn=false;
+    if(uri&&typeof QRCode!=='undefined'){
+      try{
+        var qrBox=document.createElement('div');
+        qrBox.style.cssText='display:inline-block;padding:10px;background:#fff;border-radius:8px;border:1px solid #e5e7eb';
+        qrContainer.appendChild(qrBox);
+        new QRCode(qrBox,{text:uri,width:200,height:200,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.L});
+        qrDrawn=true;
+      }catch(qe){console.warn('Local QR draw failed:',qe);qrContainer.innerHTML='';}
+    }
+    if(!qrDrawn){
+      var qrMsg=document.createElement('div');
+      qrMsg.style.cssText='color:#dc2626;font-size:12px;padding:10px';
+      qrMsg.textContent=uri?'Could not draw the QR code. Use the secret key below to set up manually.':'No URI returned. Use the secret key below to set up manually.';
+      qrContainer.appendChild(qrMsg);
+    }
+    if(uri&&/^otpauth:\/\//.test(uri)){
+      var qrLinkWrap=document.createElement('div');
+      qrLinkWrap.style.cssText='text-align:center;margin-top:8px';
+      var qrLink=document.createElement('a');
+      qrLink.href=uri;
+      qrLink.style.cssText='font-size:12px;color:#1a6b4a;text-decoration:underline';
+      qrLink.textContent='\u{1F4F7} Tap to open in Authenticator app';
+      qrLinkWrap.appendChild(qrLink);
+      qrContainer.appendChild(qrLinkWrap);
     }
   }catch(e){
     errEl.textContent='Error: '+e.message;
@@ -2296,7 +3021,8 @@ function saveExpense(){
     pkg_qty:parseFloat(document.getElementById('ex-pkg-qty').value)||0,
     pkg_price:parseFloat(document.getElementById('ex-pkg-price').value)||0,
     daily_use:parseFloat(document.getElementById('ex-daily-use').value)||0,
-    notes:document.getElementById('ex-notes').value.trim()
+    notes:document.getElementById('ex-notes').value.trim(),
+    user_id:_uid()
   };
   if(exMonthlyCost(ex)<=0){showMsg('ex-msg','Enter a valid amount',true);return;}
   setSyncStatus('busy','Saving...');
@@ -2439,55 +3165,31 @@ function renderExpenseList(){
 // INVEST / VESTED PORTFOLIO MODULE
 // =====================================================================
 
-var _VH=[
-  {t:'PLTR',n:'Palantir Technologies',  s:8.05527001,  b:135.82,inv:1094.05,sec:'Technology',   c:160.65,ret:200.03, rp:18.28, dc:33.11, dcp:2.63,  val:1294.08},
-  {t:'NVDA',n:'NVIDIA Corporation',      s:5.41103441,  b:215.87,inv:1168.08,sec:'Technology',   c:224.36,ret:45.94,  rp:3.93,  dc:71.53, dcp:6.26,  val:1214.02},
-  {t:'MSFT',n:'Microsoft Corp',          s:1.87293099,  b:401.61,inv:752.18, sec:'Technology',   c:460.52,ret:110.34, rp:14.67, dc:19.25, dcp:2.28,  val:862.52},
-  {t:'NOW', n:'ServiceNow Inc.',         s:5.72082585,  b:100.51,inv:575.00, sec:'Technology',   c:135.86,ret:202.23, rp:35.17, dc:65.73, dcp:9.24,  val:777.23},
-  {t:'NVO', n:'Novo Nordisk A/S',        s:11.14442493, b:45.67, inv:509.00, sec:'Healthcare',   c:44.07, ret:-17.87, rp:-3.51, dc:-16.83,dcp:-3.31, val:491.13},
-  {t:'AMD', n:'Adv. Micro Devices',      s:0.8210111,   b:205.83,inv:168.99, sec:'Technology',   c:510.13,ret:249.83, rp:147.84,dc:-4.90, dcp:-1.16, val:418.82},
-  {t:'EOSE',n:'Eos Energy Enterprises',  s:25.28154571, b:5.57,  inv:140.88, sec:'Energy',       c:8.97,  ret:85.90,  rp:60.97, dc:13.65, dcp:6.41,  val:226.78},
-  {t:'GOOGL',n:'Alphabet Inc.',          s:0.62640936,  b:277.41,inv:173.77, sec:'Technology',   c:376.37,ret:61.99,  rp:35.67, dc:-2.49, dcp:-1.04, val:235.76},
-  {t:'AMZN',n:'Amazon.com Inc.',         s:0.75915892,  b:201.67,inv:153.10, sec:'Consumer Disc',c:261.26,ret:45.24,  rp:29.55, dc:-7.12, dcp:-3.47, val:198.34},
-  {t:'TSLA',n:'Tesla Inc.',              s:0.47078267,  b:366.96,inv:172.76, sec:'Consumer Disc',c:415.88,ret:23.03,  rp:13.33, dc:-9.37, dcp:-4.57, val:195.79},
-  {t:'META',n:'Meta Platforms Inc',      s:0.30310663,  b:537.27,inv:162.85, sec:'Technology',   c:600.48,ret:19.16,  rp:11.77, dc:-9.71, dcp:-5.07, val:182.01},
-  {t:'CLPT',n:'ClearPoint Neuro Inc',    s:13.1080806,  b:9.85,  inv:129.12, sec:'Healthcare',   c:12.64, ret:36.57,  rp:28.32, dc:-0.39, dcp:-0.24, val:165.69},
-];
-var _VTX=[
-  {d:'2026-06-01',tp:'CSR', a:1179.36,bl:1184.44,ds:'Deposit'},
-  {d:'2026-06-01',tp:'SPUR',a:1171,   bl:13.52,  ds:'NVIDIA Corporation Market Buy'},
-  {d:'2026-05-29',tp:'CSR', a:514.08, bl:514.08, ds:'Deposit'},
-  {d:'2026-05-29',tp:'SPUR',a:509,    bl:5.08,   ds:'Novo Nordisk A/S Market Buy'},
-  {d:'2026-05-20',tp:'CSR', a:1738.8, bl:1736.49,ds:'Deposit'},
-  {d:'2026-05-20',tp:'SPUR',a:575,    bl:588.80, ds:'ServiceNow Inc. Market Buy'},
-  {d:'2026-05-20',tp:'SPUR',a:575,    bl:13.80,  ds:'Microsoft Corporation Market Buy'},
-  {d:'2026-05-20',tp:'SPUR',a:572.69, bl:1163.80,ds:'Palantir Technologies Market Buy'},
-  {d:'2026-04-15',tp:'CSR', a:531.22, bl:523.25, ds:'Deposit'},
-  {d:'2026-04-15',tp:'SPUR',a:521.36, bl:1.89,   ds:'Palantir Technologies Market Buy'},
-  {d:'2026-03-30',tp:'CSR', a:1008,   bl:1008.65,ds:'Deposit'},
-  {d:'2026-03-30',tp:'SPUR',a:172.76, bl:835.89, ds:'Tesla Inc. Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:177.18, bl:658.71, ds:'Microsoft Corporation Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:168.99, bl:489.72, ds:'Advanced Micro Devices Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:173.77, bl:315.95, ds:'Alphabet Inc. Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:162.85, bl:153.10, ds:'Meta Platforms Inc Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:153.10, bl:0,      ds:'Amazon.com Inc. Market Buy'},
-  {d:'2026-03-18',tp:'SSAL',a:256.39, bl:270.65, ds:'BNO Market Sell'},
-  {d:'2026-03-18',tp:'SPUR',a:140.88, bl:0.65,   ds:'Eos Energy Enterprises Market Buy'},
-  {d:'2026-03-18',tp:'SPUR',a:129.12, bl:141.53, ds:'ClearPoint Neuro Market Buy'},
-  {d:'2025-04-01',tp:'SPUR',a:155.67, bl:13.95,  ds:'BNO Market Buy'},
-  {d:'2024-06-21',tp:'SSAL',a:160.28, bl:168.21, ds:'BNO Market Sell'},
-  {d:'2023-11-14',tp:'SPUR',a:148.89, bl:7.82,   ds:'BNO Market Buy'},
-  {d:'2023-11-07',tp:'SSAL',a:155.31, bl:156.71, ds:'BNO Market Sell'},
-  {d:'2023-07-26',tp:'CSR', a:150,    bl:150,    ds:'Deposit'},
-  {d:'2023-07-26',tp:'SPUR',a:148.61, bl:1.39,   ds:'BNO Market Buy'},
-];
-var _VDEPS=5121.46,_VCOMM=14.83,_VREAL=118.81,_VCASH=13.52;
+var _VH=[];   // open positions: loaded from YOUR Supabase row, or from an Excel import. Nothing is stored in this file.
+var _VTX=[];  // transactions (newest first)
+var _VDEPS=0,_VCOMM=0,_VREAL=0,_VCASH=0;
 var _VCLR=['#2563eb','#16a34a','#9333ea','#ea580c','#0891b2','#ca8a04','#16a34a','#7c3aed','#db2777','#059669','#d97706','#64748b'];
 var _vPC=null,_vSC=null,_vPLC=null;
 var _v$=function(id){return document.getElementById(id);};
 var _vff=n=>'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 var _vfp=n=>(n>=0?'+':'')+n.toFixed(2)+'%';
 var _vfi=(n,r)=>'₹'+Math.round(n*r).toLocaleString('en-IN');
+var _vesc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+var _vsg=n=>n>=0?'+':'-';
+// Indian financial year (Apr-Mar) for a YYYY-MM-DD date
+function vFY(d){var y=+String(d).slice(0,4),m=+String(d).slice(5,7);if(!y||!m)return '';var s=m>=4?y:y-1;return 'FY '+s+'-'+String((s+1)%100).padStart(2,'0');}
+// Sortable timestamp for a Vested row ("2026-06-01" + "01:30:49 PM" -> "2026-06-01 13:30:49")
+function _vTimeKey(row){
+  var t=String(row['Time (in UTC)']||''),m=t.match(/(\d+):(\d+):(\d+)\s*(AM|PM)/i);
+  var h=m?((+m[1])%12)+(/PM/i.test(m[4])?12:0):0;
+  return String(row['Date']||'')+' '+String(h).padStart(2,'0')+':'+(m?m[2]:'00')+':'+(m?m[3]:'00');
+}
+function vCounts(){
+  var deps=_VTX.filter(t=>t.tp==='CSR'),buys=_VTX.filter(t=>t.tp==='SPUR'),sells=_VTX.filter(t=>t.tp==='SSAL');
+  var fys=[];deps.forEach(t=>{var f=vFY(t.d);if(f&&fys.indexOf(f)<0)fys.push(f);});fys.sort();
+  return {deps:deps.length,trades:buys.length+sells.length,sells:sells.length,fys:fys};
+}
+function vPl(n,one,many){return n+' '+(n===1?one:many);}
 
 function vSw(name,btn){
   document.querySelectorAll('#sec-invest .vpg').forEach(function(p){p.classList.remove('von');});
@@ -2500,12 +3202,18 @@ function vSw(name,btn){
 }
 function vRH(){
   var tv=_VH.reduce((s,h)=>s+h.val,0);
-  _v$('hb').innerHTML=_VH.map((h,i)=>{
-    const wt=(h.val/tv*100).toFixed(1),rc=h.ret>=0?'g':'r',dc=h.dc>=0?'g':'r';
+  var hb=_v$('hb');
+  if(!hb)return;
+  if(!_VH.length){
+    hb.innerHTML='<tr><td colspan="10" style="text-align:center;color:#9ca3af;padding:24px">No holdings yet. Tap “Import Excel” and choose your Vested file.</td></tr>';
+    vRK();return;
+  }
+  hb.innerHTML=_VH.map((h,i)=>{
+    const wt=tv>0?(h.val/tv*100).toFixed(1):'0.0',rc=h.ret>=0?'g':'r',dc=h.dc>=0?'g':'r';
     return `<tr>
-      <td><span class="tk">${h.t}</span><span class="lt">LIVE</span></td>
-      <td style="color:#6b7280;font-size:11px">${h.n}</td>
-      <td style="color:#9ca3af;font-size:10px">${h.sec}</td>
+      <td><span class="tk">${_vesc(h.t)}</span><span class="lt">LIVE</span></td>
+      <td style="color:#6b7280;font-size:11px">${_vesc(h.n)}</td>
+      <td style="color:#9ca3af;font-size:10px">${_vesc(h.sec)}</td>
       <td>${h.s.toFixed(4)}</td><td>${_vff(h.b)}</td>
       <td><input class="pinp" type="number" value="${h.c.toFixed(2)}" step="0.01" min="0" onchange="vUP(${i},this.value)"></td>
       <td style="font-weight:700">${_vff(h.val)}<br><span style="font-size:9px;color:#9ca3af">${wt}%</span></td>
@@ -2517,53 +3225,68 @@ function vRH(){
   vRK();
 }
 function vUP(i,v){
-  var p=parseFloat(v);if(!p||p<=0)return;
-  _VH[i].c=p;_VH[i].val=+(_VH[i].s*p).toFixed(2);
-  _VH[i].ret=+(_VH[i].val-_VH[i].inv).toFixed(2);_VH[i].rp=+(_VH[i].ret/_VH[i].inv*100).toFixed(2);
-  vRH();if(_v$('pg-vn').classList.contains('von'))vRNR();if(_v$('pg-vc').classList.contains('von'))vRCh();
+  var p=parseFloat(v),h=_VH[i];if(!p||p<=0||!h)return;
+  h.c=p;h.val=+(h.s*p).toFixed(2);
+  h.ret=+(h.val-h.inv).toFixed(2);h.rp=h.inv>0?+(h.ret/h.inv*100).toFixed(2):0;
+  vRH();
+  var vn=_v$('pg-vn'),vc=_v$('pg-vc');
+  if(vn&&vn.classList.contains('von'))vRNR();
+  if(vc&&vc.classList.contains('von'))vRCh();
 }
 function vRK(){
-  var tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),ret=tv-tc,rp=ret/tc*100;
-  _v$('kpis').innerHTML=`
-    <div class="kpi"><label>Portfolio value</label><div class="v g">${_vff(tv)}</div><div class="s">Jun 2, 2026 live</div></div>
-    <div class="kpi"><label>Total invested</label><div class="v">${_vff(tc)}</div><div class="s">12 open positions</div></div>
-    <div class="kpi"><label>Unrealized P&L</label><div class="v ${ret>=0?'g':'r'}">${ret>=0?'+':'-'}${_vff(ret)}</div><div class="s ${ret>=0?'g':'r'}">${_vfp(rp)}</div></div>
-    <div class="kpi"><label>Realized gain</label><div class="v g">+${_vff(_VREAL)}</div><div class="s">BNO · 3 trades</div></div>
+  var k=_v$('kpis');if(!k)return;
+  var tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),ret=tv-tc,rp=tc>0?ret/tc*100:0,c=vCounts();
+  k.innerHTML=`
+    <div class="kpi"><label>Portfolio value</label><div class="v g">${_vff(tv)}</div><div class="s">${_VH.length?'Latest prices':'No data yet'}</div></div>
+    <div class="kpi"><label>Total invested</label><div class="v">${_vff(tc)}</div><div class="s">${vPl(_VH.length,'open position','open positions')}</div></div>
+    <div class="kpi"><label>Unrealized P&L</label><div class="v ${ret>=0?'g':'r'}">${_vsg(ret)}${_vff(ret)}</div><div class="s ${ret>=0?'g':'r'}">${_vfp(rp)}</div></div>
+    <div class="kpi"><label>Realized gain</label><div class="v ${_VREAL>=0?'g':'r'}">${_vsg(_VREAL)}${_vff(_VREAL)}</div><div class="s">${vPl(c.sells,'sell trade','sell trades')}</div></div>
     <div class="kpi"><label>Cash balance</label><div class="v b">${_vff(_VCASH)}</div></div>
-    <div class="kpi"><label>Commission paid</label><div class="v r">−${_vff(_VCOMM)}</div><div class="s">All 20 trades</div></div>`;
+    <div class="kpi"><label>Commission paid</label><div class="v r">−${_vff(_VCOMM)}</div><div class="s">All ${vPl(c.trades,'trade','trades')}</div></div>`;
 }
 function vRT(){
-  var lb={CSR:'dp',SPUR:'by',SSAL:'sl'},lt={CSR:'Deposit',SPUR:'Buy',SSAL:'Sell'};
-  _v$('tb').innerHTML=_VTX.map(t=>`<tr>
-    <td>${t.d}</td><td><span class="bd ${lb[t.tp]||''}">${lt[t.tp]||t.tp}</span></td>
-    <td style="color:#6b7280">${t.ds}</td>
-    <td class="${t.tp==='SSAL'||t.tp==='CSR'?'g':'r'}" style="font-weight:600">${t.tp==='SSAL'||t.tp==='CSR'?'+':'-'}${_vff(t.a)}</td>
+  var lb={CSR:'dp',SPUR:'by',SSAL:'sl'},lt={CSR:'Deposit',SPUR:'Buy',SSAL:'Sell',DIV:'Dividend',DIVTAX:'Div. tax'};
+  var plus={CSR:1,SSAL:1,DIV:1};
+  var c=vCounts();
+  var kp=_v$('vt-kpis');
+  if(kp)kp.innerHTML=`
+    <div class="kpi"><label>Total deposited</label><div class="v b">${_vff(_VDEPS)}</div><div class="s">${vPl(c.deps,'transfer','transfers')}</div></div>
+    <div class="kpi"><label>Cash balance</label><div class="v">${_vff(_VCASH)}</div></div>
+    <div class="kpi"><label>Commission paid</label><div class="v r">−${_vff(_VCOMM)}</div><div class="s">${vPl(c.trades,'trade','trades')}</div></div>
+    <div class="kpi"><label>Realized gain</label><div class="v ${_VREAL>=0?'g':'r'}">${_vsg(_VREAL)}${_vff(_VREAL)}</div><div class="s">${vPl(c.sells,'sell trade','sell trades')}</div></div>`;
+  var cnt=_v$('vt-count');if(cnt)cnt.textContent='All Transactions ('+_VTX.length+')';
+  var tb=_v$('tb');if(!tb)return;
+  tb.innerHTML=_VTX.length?_VTX.map(t=>`<tr>
+    <td>${_vesc(t.d)}</td><td><span class="bd ${lb[t.tp]||''}">${_vesc(lt[t.tp]||t.tp)}</span></td>
+    <td style="color:#6b7280">${_vesc(t.ds)}</td>
+    <td class="${plus[t.tp]?'g':'r'}" style="font-weight:600">${plus[t.tp]?'+':'-'}${_vff(t.a)}</td>
     <td style="color:#6b7280">${_vff(t.bl)}</td>
     <td style="color:#9ca3af;font-size:10px">Settled</td>
-  </tr>`).join('');
+  </tr>`).join(''):'<tr><td colspan="6" style="text-align:center;color:#9ca3af;padding:24px">No transactions yet.</td></tr>';
 }
 function vRNR(){
   var br=parseInt(_v$('tbr').value),cess=_v$('cess').checked;
   var rate=parseFloat(_v$('inr').value)||84,af=parseFloat(_v$('aum').value)||0;
-  var eff=br*(cess?1.04:1)/100;
+  var eff=br*(cess?1.04:1)/100,c=vCounts();
   var tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),unr=tv-tc;
-  var rTax=_VREAL*eff,uTax=Math.max(0,unr)*eff,nn=tv+_VCASH-uTax-rTax-af,roc=(nn-_VDEPS)/_VDEPS*100;
+  var rTax=Math.max(0,_VREAL)*eff,uTax=Math.max(0,unr)*eff,nn=tv+_VCASH-uTax-rTax-af;
+  var roc=_VDEPS>0?(nn-_VDEPS)/_VDEPS*100:0;
   var wr=(ic,lbl,sub,amt,cls,bg)=>`<div class="wr">
     <div class="wi" style="background:${bg}">${ic}</div>
     <div class="wl"><strong>${lbl}</strong>${sub}</div>
     <div class="wa ${cls}">${amt}</div></div>`;
   _v$('wfin').innerHTML=
-    wr('💰','Total LRS deposits (6 remittances)','FY 2023-24 · FY 2025-26 · FY 2026-27 (4 transfers)',_vff(_VDEPS),'g','#dcfce7')+
-    wr('📝','Commission charges — all 20 trades',`Avg $0.74/trade · ${_vfi(_VCOMM,rate)}`,'-'+_vff(_VCOMM),'r','#fee2e2')+
-    wr('✅','Realized gain — BNO (3 completed trades)',`All STCG (held < 24 months) · ${_vfi(_VREAL,rate)}`,'+'+_vff(_VREAL),'g','#dcfce7')+
-    wr('🏦',`STCG tax on BNO gain @ ${(eff*100).toFixed(1)}%`,`Reportable in Schedule FA · ${_vfi(rTax,rate)}`,'-'+_vff(rTax),'r','#fef3c7');
+    wr('💰','Total LRS deposits ('+vPl(c.deps,'remittance','remittances')+')',c.fys.length?c.fys.join(' · '):'No deposits yet',_vff(_VDEPS),'g','#dcfce7')+
+    wr('📝','Commission charges — all '+vPl(c.trades,'trade','trades'),`Avg ${_vff(c.trades?_VCOMM/c.trades:0)}/trade · ${_vfi(_VCOMM,rate)}`,'-'+_vff(_VCOMM),'r','#fee2e2')+
+    wr('✅','Realized gain — closed positions ('+vPl(c.sells,'sell','sells')+')',`Taxed by holding period · ${_vfi(_VREAL,rate)}`,_vsg(_VREAL)+_vff(_VREAL),_VREAL>=0?'g':'r','#dcfce7')+
+    wr('🏦',`STCG tax on realized gain @ ${(eff*100).toFixed(1)}%`,`Reportable in Schedule FA · ${_vfi(rTax,rate)}`,'-'+_vff(rTax),'r','#fef3c7');
   _v$('wfg').innerHTML=
-    wr('📈','Unrealized gain — 12 open positions (live prices)',`${_vfi(unr,rate)} · All STCG if sold today`,'+'+_vff(unr),'g','#dcfce7')+
+    wr('📈','Unrealized gain — '+vPl(_VH.length,'open position','open positions')+' (live prices)',`${_vfi(unr,rate)} · STCG if sold within 24 months`,_vsg(unr)+_vff(unr),unr>=0?'g':'r','#dcfce7')+
     wr('🏦',`Est. STCG tax if all sold today @ ${(eff*100).toFixed(1)}%`,`Effective rate · ${_vfi(uTax,rate)}`,'-'+_vff(uTax),'r','#fef3c7')+
     wr('💵','Cash remaining in Vested account','Uninvested balance',_vff(_VCASH),'b','#dbeafe');
   _v$('nnb').innerHTML=`
     <div>
-      <div style="font-size:11px;color:#6b7280">Net-net if all 12 positions sold today — after all taxes &amp; fees</div>
+      <div style="font-size:11px;color:#6b7280">Net-net if all ${_VH.length} positions sold today — after all taxes &amp; fees</div>
       <div class="big">${_vff(nn)} &nbsp;·&nbsp; ${_vfi(nn,rate)}</div>
       <div style="font-size:11px;color:#6b7280;margin-top:2px">After ${(eff*100).toFixed(1)}% STCG + ${_vff(_VCOMM)} commission + ${_vff(af)} platform fee · Deposited ${_vff(_VDEPS)}</div>
     </div>
@@ -2573,59 +3296,59 @@ function vRNR(){
       <div style="font-size:10px;color:#9ca3af">after all Indian taxes</div>
     </div>`;
   _v$('scg').innerHTML=[{l:'20% + 4% cess',e:.208},{l:'30% + 4% cess',e:.312},{l:'Gross (pre-tax)',e:0}].map(sc=>{
-    const v=tv+_VCASH-Math.max(0,unr)*sc.e-_VREAL*sc.e-af,r=(v-_VDEPS)/_VDEPS*100;
+    const v=tv+_VCASH-Math.max(0,unr)*sc.e-Math.max(0,_VREAL)*sc.e-af,r=_VDEPS>0?(v-_VDEPS)/_VDEPS*100:0;
     return `<div class="sc"><div class="sl">${sc.l}</div><div class="sv ${v>=_VDEPS?'g':'r'}">${_vff(v)}</div>
       <div style="font-size:10px;color:#6b7280;margin-top:3px">${_vfp(r)} ROC</div>
       <div style="font-size:10px;color:#9ca3af">${_vfi(v,rate)}</div></div>`;
   }).join('');
 }
 function vRCh(){
-  if(_vPC)_v_vPC.destroy();if(_vSC)_v_vSC.destroy();if(_vPLC)_v_vPLC.destroy();
+  if(typeof Chart==='undefined')return;
+  if(_vPC){_vPC.destroy();_vPC=null;}if(_vSC){_vSC.destroy();_vSC=null;}if(_vPLC){_vPLC.destroy();_vPLC=null;}
   var tv=_VH.reduce((s,h)=>s+h.val,0);
   var so=[..._VH].sort((a,b)=>b.val-a.val);
-  _v_vPC=new Chart(_v$('piec'),{type:'doughnut',data:{labels:so.map(h=>h.t),datasets:[{data:so.map(h=>+(h.val/tv*100).toFixed(1)),backgroundColor:_VCLR,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
-  _v$('pl').innerHTML=so.map((h,i)=>`<span><span class="ld" style="background:${_VCLR[i]}"></span>${h.t} ${(h.val/tv*100).toFixed(1)}%</span>`).join('');
+  _vPC=new Chart(_v$('piec'),{type:'doughnut',data:{labels:so.map(h=>h.t),datasets:[{data:so.map(h=>tv>0?+(h.val/tv*100).toFixed(1):0),backgroundColor:_VCLR,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
+  _v$('pl').innerHTML=so.map((h,i)=>`<span><span class="ld" style="background:${_VCLR[i%_VCLR.length]}"></span>${_vesc(h.t)} ${tv>0?(h.val/tv*100).toFixed(1):'0.0'}%</span>`).join('');
   var sm={};_VH.forEach(function(h){sm[h.sec]=(sm[h.sec]||0)+h.val;});
   var sk=Object.keys(sm).sort((a,b)=>sm[b]-sm[a]);
-  _v_vSC=new Chart(_v$('secc'),{type:'bar',data:{labels:sk,datasets:[{data:sk.map(s=>+(sm[s]/tv*100).toFixed(1)),backgroundColor:['#2563eb','#16a34a','#ea580c','#9333ea'],borderRadius:6,borderSkipped:false}]},
+  _vSC=new Chart(_v$('secc'),{type:'bar',data:{labels:sk,datasets:[{data:sk.map(s=>tv>0?+(sm[s]/tv*100).toFixed(1):0),backgroundColor:['#2563eb','#16a34a','#ea580c','#9333ea'],borderRadius:6,borderSkipped:false}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:11}},grid:{color:'#f3f4f6'}},y:{ticks:{callback:v=>v+'%',font:{size:11}},grid:{color:'#f3f4f6'}}}}});
   var sp=[..._VH].sort((a,b)=>b.ret-a.ret);
   _v$('pw').style.height=Math.max(260,_VH.length*40+60)+'px';
-  _v_vPLC=new Chart(_v$('pnlc'),{type:'bar',data:{labels:sp.map(h=>h.t),datasets:[{data:sp.map(h=>h.ret),backgroundColor:sp.map(h=>h.ret>=0?'#16a34a':'#dc2626'),borderRadius:4,borderSkipped:false}]},
+  _vPLC=new Chart(_v$('pnlc'),{type:'bar',data:{labels:sp.map(h=>h.t),datasets:[{data:sp.map(h=>h.ret),backgroundColor:sp.map(h=>h.ret>=0?'#16a34a':'#dc2626'),borderRadius:4,borderSkipped:false}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${_vff(ctx.raw)} (${_vfp(sp[ctx.dataIndex].rp)})`}}},
       scales:{x:{ticks:{callback:v=>'$'+v,font:{size:11}},grid:{color:'#f3f4f6'}},y:{ticks:{font:{size:11,weight:'bold'}},grid:{display:false}}}}});
 }
-async function vRAI(type){
-  ['ba','bb','bc','bd'].forEach(function(b){var el=_v$(b);if(el)el.disabled=true;});
-  var o=_v$('ao');o.style.color='#6b7280';
-  o.textContent={analyze:'🔍 Analyzing your portfolio…',rebalance:'⚖️ Building rebalancing plan…',risk:'🛡️ Running risk assessment…',trends:'📈 Fetching market trends…'}[type];
-  var tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0);
-  var sum=`Vested portfolio (live Jun 2 2026) — Ramnath Udai Shirodkar, Pune, India. VSUT000394.
-12 holdings · Value:${_vff(tv)} · Invested:${_vff(tc)} · Unrealized:+${_vff(tv-tc)}(+${((tv-tc)/tc*100).toFixed(2)}%)
-Deposits:${_vff(_VDEPS)} Cash:${_vff(_VCASH)} Commission:-${_vff(_VCOMM)} Realized(BNO):+${_vff(_VREAL)} STCG
-${_VH.map(h=>`${h.t}@$${h.c}|${h.ret>=0?'+':''}${_vff(h.ret)}(${_vfp(h.rp)})|today:${h.dc>=0?'+':''}$${h.dc.toFixed(2)}`).join(' ')}
-Sectors: Tech ~77% | Healthcare ~11% | Consumer Disc ~6% | Energy ~4%
-All STCG (<24mo). Only NVO in loss (-3.51%).`;
+// AI advisor: builds an anonymous prompt from the data on screen and copies it.
+// Nothing is sent to any server from here (a browser page must never hold an API key).
+function vAiPrompt(type){
+  var tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),unr=tv-tc,n=_VH.length;
+  var sm={};_VH.forEach(h=>{sm[h.sec]=(sm[h.sec]||0)+h.val;});
+  var secs=Object.keys(sm).sort((a,b)=>sm[b]-sm[a]);
+  var secTxt=secs.map(s=>s+' ~'+(tv>0?(sm[s]/tv*100).toFixed(0):0)+'%').join(' | ');
+  var losers=_VH.filter(h=>h.ret<0).map(h=>h.t+' ('+_vfp(h.rp)+')').join(', ')||'none';
+  var top=secs.length?secs[0]+' ~'+(tv>0?(sm[secs[0]]/tv*100).toFixed(0):0)+'%':'n/a';
+  var when=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  var sum='Portfolio snapshot ('+when+') — Indian investor holding US stocks via Vested.\n'
+    +n+' holdings · Value:'+_vff(tv)+' · Invested:'+_vff(tc)+' · Unrealized:'+_vsg(unr)+_vff(unr)+' ('+(tc>0?(unr/tc*100).toFixed(2):'0.00')+'%)\n'
+    +'Deposits:'+_vff(_VDEPS)+' Cash:'+_vff(_VCASH)+' Commission:-'+_vff(_VCOMM)+' Realized:'+_vsg(_VREAL)+_vff(_VREAL)+'\n'
+    +_VH.map(h=>h.t+'@$'+h.c+'|'+_vsg(h.ret)+_vff(h.ret)+'('+_vfp(h.rp)+')').join(' ')+'\n'
+    +'Sectors: '+secTxt+'\nPositions in loss: '+losers+'.';
   var P={
-    analyze:`${sum}\n\n1)Overall health 2)Best/worst performers 3)Sector concentration risk 4)Buy/Hold/Sell each of 12 stocks 5)Top 3 priority actions. Note STCG tax cost of selling.`,
-    rebalance:`${sum}\n\nRebalancing: 1)Current vs ideal weights 2)Positions to trim vs add 3)Specific $ amounts 4)STCG tax-efficient rebalancing order.`,
-    risk:`${sum}\n\nRisk: 1)Tech concentration (77%) 2)NVO loss -3.51% 3)EOSE/CLPT small-cap risk 4)USD/INR for Indian LRS investor 5)Downside -20% and -40% scenarios 6)Risk score 1-10.`,
-    trends:`${sum}\n\nTrends Jun 2026: 1)AI/chips (NVDA,AMD,PLTR) 2)Enterprise SaaS (NOW,MSFT) 3)GLP-1/NVO 4)TSLA/EV 5)USD/INR outlook 6)H2 2026 macro risks for LRS investors.`
+    analyze:sum+'\n\n1)Overall health 2)Best/worst performers 3)Sector concentration risk 4)Buy/Hold/Sell each of '+n+' stocks 5)Top 3 priority actions. Note Indian STCG/LTCG tax cost of selling.',
+    rebalance:sum+'\n\nRebalancing: 1)Current vs ideal weights 2)Positions to trim vs add 3)Specific $ amounts 4)Tax-efficient rebalancing order for an Indian investor.',
+    risk:sum+'\n\nRisk: 1)Concentration ('+top+') 2)Positions in loss 3)Small-cap / volatile holdings 4)USD/INR exposure for an Indian investor 5)Downside -20% and -40% scenarios 6)Risk score 1-10.',
+    trends:sum+'\n\nTrends '+when+': 1)Outlook for the sectors held ('+(secs.join(', ')||'n/a')+') 2)Outlook for the largest holdings 3)USD/INR outlook 4)Macro risks for Indian investors in US stocks.'
   };
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1200,
-        tools:[{type:'web_search_20250305',name:'web_search'}],
-        system:'Expert analyst for Indian investors in US stocks via Vested. Concise, specific, actionable. ✅=positive ⚠️=caution 🔴=risk/sell. Note Indian STCG tax implications.',
-        messages:[{role:'user',content:P[type]}]})});
-    const d=await r.json();
-    o.style.color='';
-    o.textContent=(d.content||[]).filter(c=>c.type==='text').map(c=>c.text).join('')||'No response.';
-  }catch(e){
-    o.style.color='';
-    o.textContent=`Network error: ${e.message}\n\nTip: Paste your portfolio into the Claude chat above for analysis.`;
-  }
-  ['ba','bb','bc','bd'].forEach(function(b){var el=_v$(b);if(el)el.disabled=false;});
+  return P[type]||P.analyze;
+}
+async function vRAI(type){
+  var o=_v$('ao');if(!o)return;
+  if(!_VH.length){o.style.color='#6b7280';o.textContent='Import your Vested file first (Portfolio tab → Import Excel).';return;}
+  var text=vAiPrompt(type),copied=false;
+  try{await navigator.clipboard.writeText(text);copied=true;}catch(e){}
+  o.style.color='';
+  o.textContent=(copied?'✅ Copied. Paste this into a Claude chat:\n\n':'Copy this and paste it into a Claude chat:\n\n')+text;
 }
 // init moved to initVestedModule()
 
@@ -2634,7 +3357,7 @@ All STCG (<24mo). Only NVO in loss (-3.51%).`;
 async function savePortfolioToSupabase(){
   try{
     var payload={
-      id:1,
+      user_id:_uid(),
       holdings:_VH,
       transactions:_VTX,
       deps:_VDEPS,
@@ -2652,7 +3375,7 @@ async function savePortfolioToSupabase(){
 
 async function loadPortfolioFromSupabase(){
   try{
-    var rows=await sbGet('invest_portfolio?id=eq.1');
+    var rows=await sbGet('invest_portfolio?user_id=eq.'+_uid());
     if(!Array.isArray(rows)||!rows.length)return false;
     var row=rows[0];
     if(!row.holdings||!row.holdings.length)return false;
@@ -2679,7 +3402,7 @@ async function loadPortfolioFromSupabase(){
 
 async function saveLivePricesToSupabase(prices){
   try{
-    await fetch(SB_URL+'invest_portfolio?id=eq.1',{
+    await fetch(SB_URL+'invest_portfolio?user_id=eq.'+_uid(),{
       method:'PATCH',
       headers:sbH(),
       body:JSON.stringify({prices:Object.assign({ts:Date.now()},prices)})
@@ -2689,10 +3412,32 @@ async function saveLivePricesToSupabase(prices){
 
 // ── VESTED XLSX IMPORTER ─────────────────────────────────────────────────
 var V_SECTOR_MAP={
-  PLTR:'Technology',NVDA:'Technology',MSFT:'Technology',NOW:'Technology',
-  NVO:'Healthcare',AMD:'Technology',EOSE:'Energy',GOOGL:'Communication',
-  AMZN:'Consumer',TSLA:'Consumer',META:'Communication',CLPT:'Healthcare',
-  BNO:'Energy'
+  AAPL:'Technology',MSFT:'Technology',NVDA:'Technology',AMD:'Technology',
+  INTC:'Technology',AVGO:'Technology',ORCL:'Technology',CRM:'Technology',
+  ADBE:'Technology',NOW:'Technology',PLTR:'Technology',CSCO:'Technology',
+  QCOM:'Technology',TXN:'Technology',MU:'Technology',IBM:'Technology',
+  SNOW:'Technology',PANW:'Technology',CRWD:'Technology',NET:'Technology',
+  DDOG:'Technology',TSM:'Technology',ASML:'Technology',ARM:'Technology',
+  SMCI:'Technology',GOOGL:'Communication',GOOG:'Communication',META:'Communication',
+  NFLX:'Communication',DIS:'Communication',T:'Communication',VZ:'Communication',
+  TMUS:'Communication',SPOT:'Communication',AMZN:'Consumer',TSLA:'Consumer',
+  HD:'Consumer',NKE:'Consumer',SBUX:'Consumer',MCD:'Consumer',
+  KO:'Consumer',PEP:'Consumer',PG:'Consumer',WMT:'Consumer',
+  COST:'Consumer',TGT:'Consumer',LULU:'Consumer',ABNB:'Consumer',
+  BKNG:'Consumer',JNJ:'Healthcare',UNH:'Healthcare',PFE:'Healthcare',
+  LLY:'Healthcare',NVO:'Healthcare',MRK:'Healthcare',ABBV:'Healthcare',
+  TMO:'Healthcare',ABT:'Healthcare',AMGN:'Healthcare',ISRG:'Healthcare',
+  CLPT:'Healthcare',JPM:'Financials',BAC:'Financials',V:'Financials',
+  MA:'Financials',GS:'Financials',MS:'Financials',PYPL:'Financials',
+  COIN:'Financials',SCHW:'Financials',XOM:'Energy',CVX:'Energy',
+  COP:'Energy',SLB:'Energy',OXY:'Energy',EOSE:'Energy',
+  BNO:'Energy',USO:'Energy',XLE:'Energy',ENPH:'Energy',
+  FSLR:'Energy',BA:'Industrials',CAT:'Industrials',GE:'Industrials',
+  LMT:'Industrials',RTX:'Industrials',UPS:'Industrials',HON:'Industrials',
+  DE:'Industrials',UBER:'Industrials',SPY:'ETF',QQQ:'ETF',
+  VOO:'ETF',VTI:'ETF',IVV:'ETF',DIA:'ETF',
+  IWM:'ETF',VT:'ETF',VXUS:'ETF',GLD:'ETF',
+  SLV:'ETF'
 };
 
 async function parseVestedFile(evt){
@@ -2712,6 +3457,8 @@ async function parseVestedFile(evt){
       // ── Parse Trades sheet → calculate holdings ───────────────────────
       var tradesWS=wb.Sheets['Trades'];
       var trades=XLSX.utils.sheet_to_json(tradesWS);
+      // Process oldest -> newest so average-cost / realized P&L are correct (the sheet is newest-first)
+      trades.sort(function(x,y){var a=_vTimeKey(x),b=_vTimeKey(y);return a<b?-1:(a>b?1:0);});
       var holdMap={};
 
       trades.forEach(function(row){
@@ -2769,13 +3516,17 @@ async function parseVestedFile(evt){
       var txRows=XLSX.utils.sheet_to_json(txWS);
       var newTX=txRows.map(function(row){
         return {
-          d:row['Date']||'',
-          tp:row['Type']||'',
-          amt:parseFloat(row['Amount'])||0,
-          bal:parseFloat(row['Account Balance ']||row['Account Balance'])||0,
-          comment:row['Comment  ']||row['Comment']||''
+          k:_vTimeKey(row),
+          d:String(row['Date']||''),
+          tp:String(row['Type']||''),
+          a:parseFloat(row['Amount'])||0,
+          bl:parseFloat(row['Account Balance ']||row['Account Balance'])||0,
+          ds:String(row['Comment  ']||row['Comment']||'')
         };
       }).filter(function(r){return r.d&&r.tp;});
+      newTX.sort(function(x,y){return x.k<y.k?1:(x.k>y.k?-1:0);});   // newest first
+      var newCash=newTX.length?newTX[0].bl:0;                           // latest balance
+      newTX.forEach(function(r){delete r.k;});
 
       // ── Parse Transfers → _VDEPS ──────────────────────────────────────
       var trWS=wb.Sheets['Transfers'];
@@ -2797,15 +3548,18 @@ async function parseVestedFile(evt){
       _VTX=newTX;
       _VDEPS=+totalDeps.toFixed(2);
       _VCOMM=+Object.values(holdMap).reduce(function(s,h){return s+h.commissions;},0).toFixed(2);
+      _VREAL=+Object.values(holdMap).reduce(function(s,h){return s+h.realizedPL;},0).toFixed(2);
+      _VCASH=+newCash.toFixed(2);
 
-      // ── Persist to localStorage ───────────────────────────────────────
+      // ── Persist: your own Supabase row (protected by RLS) + a per-user local cache ──
       try{
-        localStorage.setItem('km_vested_data',JSON.stringify({
-          VH:_VH, VTX:_VTX, DEPS:_VDEPS, COMM:_VCOMM,
+        localStorage.setItem(_vKey(),JSON.stringify({
+          VH:_VH, VTX:_VTX, DEPS:_VDEPS, COMM:_VCOMM, REAL:_VREAL, CASH:_VCASH,
           DIV:+totalDiv.toFixed(2), DIVTAX:+totalDivTax.toFixed(2),
           importedAt:Date.now()
         }));
       }catch(e){}
+      savePortfolioToSupabase();
 
       // ── Re-render ─────────────────────────────────────────────────────
       vRH(); vRT(); vRNR();
@@ -2827,15 +3581,18 @@ async function parseVestedFile(evt){
   reader.readAsArrayBuffer(file);
 }
 
-// Load persisted vested data from localStorage
+// Local cache is keyed by user id, so a second person on the same browser never sees it
+function _vKey(){return 'km_vested_data_'+(_uid()||'x');}
 function loadPersistedVestedData(){
   try{
-    var saved=JSON.parse(localStorage.getItem('km_vested_data')||'null');
+    var saved=JSON.parse(localStorage.getItem(_vKey())||'null');
     if(saved&&saved.VH&&saved.VH.length>0){
       _VH=saved.VH;
-      _VTX=saved.VTX||_VTX;
-      _VDEPS=saved._VDEPS||_VDEPS;
-      _VCOMM=saved._VCOMM||_VCOMM;
+      _VTX=saved.VTX||[];
+      _VDEPS=saved.DEPS||0;
+      _VCOMM=saved.COMM||0;
+      _VREAL=saved.REAL||0;
+      _VCASH=saved.CASH||0;
       var age=Math.round((Date.now()-saved.importedAt)/60000);
       var lbl=document.getElementById('v-last-update');
       if(lbl)lbl.textContent='Data from '+age+'m ago · click Refresh for live prices';
@@ -2853,6 +3610,7 @@ var AV_CACHE_TTL=60*60*1000; // 1 hour cache
 async function fetchLivePrices(){
   var btn=document.getElementById('v-refresh-btn');
   var lbl=document.getElementById('v-last-update');
+  if(!_VH.length){if(lbl)lbl.textContent='Import your Vested file first';return;}
 
   // Check cache first
   try{
@@ -2865,7 +3623,7 @@ async function fetchLivePrices(){
   }catch(e){}
 
   // Start fetching
-  if(btn){btn.disabled=true;btn.textContent='⏳ 0/12';}
+  if(btn){btn.disabled=true;btn.textContent='⏳ 0/'+_VH.length;}
   if(lbl)lbl.textContent='Fetching live prices...';
 
   var symbols=_VH.map(function(h){return h.t;});
@@ -2974,6 +3732,7 @@ async function initVestedModule(){
         // Valid session — show app immediately, no flicker
         _show('app-wrap');
         _hide('login-screen');
+        document.documentElement.classList.add('km-quick');   // the login screen is further down the page: hide it by CSS
         window._quickAuth=true;
       }
     }
@@ -2981,7 +3740,12 @@ async function initVestedModule(){
 })();
 
 // ── App entry point ──────────────────────────────────────────────────────
-(async function(){
+// Runs fn once the whole page has been parsed (the login-screen markup comes after this script)
+function _kmWhenReady(fn){
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){fn();},{once:true});
+  else fn();
+}
+_kmWhenReady(async function(){
   if(checkRecoveryToken())return;
 
   if(window._quickAuth){
@@ -2990,8 +3754,9 @@ async function initVestedModule(){
     if(!ok){
       // Token expired and refresh failed — back to login
       _hide('app-wrap');
+      document.documentElement.classList.remove('km-quick');
       _show('login-screen','flex');
-      var _le=document.getElementById('login-email');if(_le)_le.value='ruteshshirodkar@outlook.com';
+      startLoginScreen();
       window._quickAuth=false;
       return;
     }
@@ -3007,9 +3772,9 @@ async function initVestedModule(){
     _show('mfa-btn');
     try{await _runApp();}catch(e){console.error(e);}
   }else{
-    var _le=document.getElementById('login-email');if(_le)_le.value='ruteshshirodkar@outlook.com';
+    startLoginScreen();
   }
-})();
+});
 
 
 // Called from login flow — show app then run init
@@ -3024,6 +3789,8 @@ async function _runApp(){
   if(window._appInited)return;
   window._appInited=true;
   // Each step independent — one failure won't block the rest
+  try{await loadMyProfile();}catch(e){console.error('profile load failed:',e);}
+  if(!firstAllowedTab()){setSyncStatus('ok','');return;}   // waiting for approval / no features: nothing to load
   try{await initData();}catch(e){console.error('initData failed:',e);}
   try{setToday('d-date');}catch(e){}
   try{checkAutoFillYesterday();}catch(e){}
@@ -3118,6 +3885,21 @@ async function _runApp(){
     </svg></span>
     <span>Invest</span>
   </button>
+  <button id="admin-nav-btn-mobile" data-tab="admin" onclick="sw('admin')" style="display:none"><span class="adm-badge bn" id="adm-badge-mobile" style="display:none"></span>
+    <span class="bn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      <circle cx="19" cy="7" r="2"/><line x1="19" y1="5" x2="19" y2="9"/>
+      <line x1="17" y1="7" x2="21" y2="7"/>
+    </svg></span>
+    <span>Admin</span>
+  </button>
+  <button data-tab="admin" onclick="sw('admin')" style="display:none">
+    <span class="bn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+      <path d="M5 21v-2a7 7 0 0 1 14 0v2"/>
+    </svg></span>
+    <span>Admin</span>
+  </button>
 </div>
 
 <!-- BARCODE SCANNER MODAL -->
@@ -3179,7 +3961,7 @@ async function _runApp(){
 <div id="pg-vp" class="vpg von">
   <div class="kpis" id="kpis"></div>
   <div class="vpanel">
-    <div class="vph"><span>Open Positions — 12 Holdings</span><div style="display:flex;align-items:center;gap:8px"><span class="gt" id="v-last-update">Static prices · click Refresh</span><button id="v-refresh-btn" onclick="fetchLivePrices()" style="background:#1a6b4a;color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600">🔄 Refresh</button>
+    <div class="vph"><span>Open Positions</span><div style="display:flex;align-items:center;gap:8px"><span class="gt" id="v-last-update">No data yet</span><button id="v-refresh-btn" onclick="fetchLivePrices()" style="background:#1a6b4a;color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600">🔄 Refresh</button>
 <button onclick="document.getElementById('v-upload-input').click()" style="background:#4f46e5;color:#fff;border:none;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:600">📤 Import Excel</button>
 <input type="file" id="v-upload-input" accept=".xlsx,.xls" style="display:none" onchange="parseVestedFile(event)">
 </div></div>
@@ -3189,48 +3971,23 @@ async function _runApp(){
       <th style="width:9%">Value</th><th style="width:9%">Return $</th><th style="width:9%">Return %</th><th style="width:12%">Today $/(%)</th>
     </tr></thead><tbody id="hb"></tbody></table></div>
   </div>
-  <div class="vpanel">
-    <div class="vph">Closed Positions — BNO (US Brent Oil Fund)</div>
-    <div class="tbl-wrap"><table><thead><tr><th>Buy</th><th>Sell</th><th>Shares</th><th>Cost</th><th>Proceeds</th><th>Gain</th><th>Type</th><th>Held</th></tr></thead>
-    <tbody>
-      <tr><td>2023-07-26</td><td>2023-11-07</td><td>5.3</td><td>$148.61</td><td>$155.31</td><td class="g">+$6.70</td><td><span class="bd sc">STCG</span></td><td>104 days</td></tr>
-      <tr><td>2023-11-14</td><td>2024-06-21</td><td>5</td><td>$148.89</td><td>$160.28</td><td class="g">+$11.39</td><td><span class="bd sc">STCG</span></td><td>220 days</td></tr>
-      <tr><td>2025-04-01</td><td>2026-03-18</td><td>5</td><td>$155.67</td><td>$256.39</td><td class="g">+$100.72</td><td><span class="bd sc">STCG</span></td><td>351 days</td></tr>
-      <tr style="background:#f9fafb"><td colspan="5" style="font-size:9.5px;text-transform:uppercase;color:#9ca3af;font-weight:700;letter-spacing:.4px">Total realized gain</td><td class="g" style="font-weight:800">+$118.81</td><td colspan="2" style="font-size:10px;color:#9ca3af">All STCG — held &lt; 24 months</td></tr>
-    </tbody></table></div>
-  </div>
 </div>
 
 <div id="pg-vt" class="vpg">
-  <div class="kpis">
-    <div class="kpi"><label>Total deposited</label><div class="v b">$5,121.46</div><div class="s">6 LRS transfers</div></div>
-    <div class="kpi"><label>Cash balance</label><div class="v">$13.52</div></div>
-    <div class="kpi"><label>Commission paid</label><div class="v r">−$14.83</div><div class="s">20 trades</div></div>
-    <div class="kpi"><label>Realized gain</label><div class="v g">+$118.81</div><div class="s">3 BNO trades</div></div>
-  </div>
+  <div class="kpis" id="vt-kpis"></div>
   <div class="vpanel">
-    <div class="vph">All Transactions (26)</div>
+    <div class="vph" id="vt-count">All Transactions</div>
     <div class="tbl-wrap"><table><thead><tr><th style="width:13%">Date</th><th style="width:8%">Type</th><th style="width:42%">Description</th><th style="width:13%">Amount</th><th style="width:13%">Balance</th><th style="width:11%">Status</th></tr></thead>
     <tbody id="tb"></tbody></table></div>
-  </div>
-  <div class="vpanel">
-    <div class="vph">LRS Deposits &amp; TCS Status</div>
-    <div class="tbl-wrap"><table><thead><tr><th>Date</th><th>USD</th><th>Est. INR (₹84)</th><th>FY</th><th>TCS Status</th></tr></thead>
-    <tbody>
-      <tr><td>2023-07-26</td><td>$150.00</td><td>₹12,600</td><td>FY 2023-24</td><td class="g">None — below ₹7L</td></tr>
-      <tr><td>2026-03-30</td><td>$1,008.00</td><td>₹84,672</td><td>FY 2025-26</td><td class="g">None — below ₹7L</td></tr>
-      <tr><td>2026-04-15 to 06-01</td><td>$3,963.46</td><td>₹3,32,930</td><td>FY 2026-27</td><td class="g">None — ₹3.33L cumulative, below ₹7L</td></tr>
-      <tr style="background:#f9fafb"><td style="font-weight:700">Total</td><td style="font-weight:700">$5,121.46</td><td style="font-weight:700">₹4,30,203</td><td></td><td class="g" style="font-weight:700">₹0 TCS — all FYs below ₹7L</td></tr>
-    </tbody></table></div>
   </div>
 </div>
 
 <div id="pg-vn" class="vpg">
   <div class="nrbar">
-    <label>Tax bracket: <select id="tbr" onchange="rNR()"><option value="20">20% slab</option><option value="30" selected>30% slab</option></select></label>
-    <label><input type="checkbox" id="cess" checked onchange="rNR()"> + 4% H&amp;E cess</label>
-    <label>USD/INR: <input type="number" id="inr" value="84" min="1" style="width:58px" oninput="rNR()"> ₹</label>
-    <label>Platform fee: <input type="number" id="aum" value="0" min="0" style="width:52px" oninput="rNR()"> $</label>
+    <label>Tax bracket: <select id="tbr" onchange="vRNR()"><option value="20">20% slab</option><option value="30" selected>30% slab</option></select></label>
+    <label><input type="checkbox" id="cess" checked onchange="vRNR()"> + 4% H&amp;E cess</label>
+    <label>USD/INR: <input type="number" id="inr" value="84" min="1" style="width:58px" oninput="vRNR()"> ₹</label>
+    <label>Platform fee: <input type="number" id="aum" value="0" min="0" style="width:52px" oninput="vRNR()"> $</label>
   </div>
   <div class="sh">Capital Deployed</div><div id="wfin"></div>
   <div class="sh">Gains &amp; Tax Deductions</div><div id="wfg"></div>
@@ -3241,10 +3998,10 @@ async function _runApp(){
   <div class="vpanel" style="padding:0"><table>
     <thead><tr><th style="width:28%">Item</th><th>Details</th></tr></thead>
     <tbody>
-      <tr><td>STCG — all 12 holdings</td><td>All held &lt; 24 months → taxed at slab rate + 4% cess. Earliest LTCG eligibility: Mar 2028 (EOSE/CLPT).</td></tr>
-      <tr><td>LTCG (≥ 24 months)</td><td>12.5% flat (Finance Act 2024, no indexation). None qualify yet.</td></tr>
+      <tr><td>STCG (&lt; 24 months)</td><td>Gains on holdings sold within 24 months are taxed at your slab rate + 4% cess.</td></tr>
+      <tr><td>LTCG (≥ 24 months)</td><td>12.5% flat (Finance Act 2024, no indexation).</td></tr>
       <tr><td>ITR / Schedule FA</td><td>Declare all foreign stocks in Schedule FA of ITR-2/3 every year, even with no gains.</td></tr>
-      <tr><td>LRS / TCS</td><td>20% TCS above ₹7L/FY under LRS. FY 2026-27 total ₹3.33L — below threshold, ₹0 TCS deducted.</td></tr>
+      <tr><td>LRS / TCS</td><td>TCS applies to remittances above the annual LRS threshold in a financial year. Confirm the current threshold and rate with your bank or CA.</td></tr>
       <tr><td>DTAA India-US</td><td>US dividend withholding (25%) claimable as foreign tax credit via Form 67 + ITR filing.</td></tr>
     </tbody>
   </table></div></div>
@@ -3260,7 +4017,7 @@ async function _runApp(){
 <div id="pg-va" class="vpg">
   <div class="vpanel" style="padding:16px">
     <div style="font-size:15px;font-weight:700;margin-bottom:3px">🤖 AI Portfolio Advisor</div>
-    <div style="font-size:11.5px;color:#6b7280;margin-bottom:13px">Uses your live Vested data — 12 holdings · $6,262 value · +20.43% returns · Jun 2, 2026</div>
+    <div style="font-size:11.5px;color:#6b7280;margin-bottom:13px">Builds a ready-to-paste prompt from your current Vested data. Nothing is sent anywhere.</div>
     <div>
       <button class="aib" id="ba" onclick="vRAI('analyze')">🧠 Full analysis ↗</button>
       <button class="aib g2" id="bb" onclick="vRAI('rebalance')">⚖️ Rebalancing ↗</button>
@@ -3268,204 +4025,11 @@ async function _runApp(){
       <button class="aib g3" id="bd" onclick="vRAI('trends')">📈 Market trends ↗</button>
     </div>
     <div style="height:1px;background:#e2e4e8;margin:12px 0"></div>
-    <div class="aiout" id="ao">Pick an analysis type above — uses your live Vested portfolio data.</div>
+    <div class="aiout" id="ao">Pick an analysis type above. It builds a prompt from your Vested data and copies it so you can paste it into a Claude chat.</div>
   </div>
 </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script>
-var _VH=[
-  {t:'PLTR',n:'Palantir Technologies',  s:8.05527001,  b:135.82,inv:1094.05,sec:'Technology',   c:160.65,ret:200.03, rp:18.28, dc:33.11, dcp:2.63,  val:1294.08},
-  {t:'NVDA',n:'NVIDIA Corporation',      s:5.41103441,  b:215.87,inv:1168.08,sec:'Technology',   c:224.36,ret:45.94,  rp:3.93,  dc:71.53, dcp:6.26,  val:1214.02},
-  {t:'MSFT',n:'Microsoft Corp',          s:1.87293099,  b:401.61,inv:752.18, sec:'Technology',   c:460.52,ret:110.34, rp:14.67, dc:19.25, dcp:2.28,  val:862.52},
-  {t:'NOW', n:'ServiceNow Inc.',         s:5.72082585,  b:100.51,inv:575.00, sec:'Technology',   c:135.86,ret:202.23, rp:35.17, dc:65.73, dcp:9.24,  val:777.23},
-  {t:'NVO', n:'Novo Nordisk A/S',        s:11.14442493, b:45.67, inv:509.00, sec:'Healthcare',   c:44.07, ret:-17.87, rp:-3.51, dc:-16.83,dcp:-3.31, val:491.13},
-  {t:'AMD', n:'Adv. Micro Devices',      s:0.8210111,   b:205.83,inv:168.99, sec:'Technology',   c:510.13,ret:249.83, rp:147.84,dc:-4.90, dcp:-1.16, val:418.82},
-  {t:'EOSE',n:'Eos Energy Enterprises',  s:25.28154571, b:5.57,  inv:140.88, sec:'Energy',       c:8.97,  ret:85.90,  rp:60.97, dc:13.65, dcp:6.41,  val:226.78},
-  {t:'GOOGL',n:'Alphabet Inc.',          s:0.62640936,  b:277.41,inv:173.77, sec:'Technology',   c:376.37,ret:61.99,  rp:35.67, dc:-2.49, dcp:-1.04, val:235.76},
-  {t:'AMZN',n:'Amazon.com Inc.',         s:0.75915892,  b:201.67,inv:153.10, sec:'Consumer Disc',c:261.26,ret:45.24,  rp:29.55, dc:-7.12, dcp:-3.47, val:198.34},
-  {t:'TSLA',n:'Tesla Inc.',              s:0.47078267,  b:366.96,inv:172.76, sec:'Consumer Disc',c:415.88,ret:23.03,  rp:13.33, dc:-9.37, dcp:-4.57, val:195.79},
-  {t:'META',n:'Meta Platforms Inc',      s:0.30310663,  b:537.27,inv:162.85, sec:'Technology',   c:600.48,ret:19.16,  rp:11.77, dc:-9.71, dcp:-5.07, val:182.01},
-  {t:'CLPT',n:'ClearPoint Neuro Inc',    s:13.1080806,  b:9.85,  inv:129.12, sec:'Healthcare',   c:12.64, ret:36.57,  rp:28.32, dc:-0.39, dcp:-0.24, val:165.69},
-];
-var _VTX=[
-  {d:'2026-06-01',tp:'CSR', a:1179.36,bl:1184.44,ds:'Deposit'},
-  {d:'2026-06-01',tp:'SPUR',a:1171,   bl:13.52,  ds:'NVIDIA Corporation Market Buy'},
-  {d:'2026-05-29',tp:'CSR', a:514.08, bl:514.08, ds:'Deposit'},
-  {d:'2026-05-29',tp:'SPUR',a:509,    bl:5.08,   ds:'Novo Nordisk A/S Market Buy'},
-  {d:'2026-05-20',tp:'CSR', a:1738.8, bl:1736.49,ds:'Deposit'},
-  {d:'2026-05-20',tp:'SPUR',a:575,    bl:588.80, ds:'ServiceNow Inc. Market Buy'},
-  {d:'2026-05-20',tp:'SPUR',a:575,    bl:13.80,  ds:'Microsoft Corporation Market Buy'},
-  {d:'2026-05-20',tp:'SPUR',a:572.69, bl:1163.80,ds:'Palantir Technologies Market Buy'},
-  {d:'2026-04-15',tp:'CSR', a:531.22, bl:523.25, ds:'Deposit'},
-  {d:'2026-04-15',tp:'SPUR',a:521.36, bl:1.89,   ds:'Palantir Technologies Market Buy'},
-  {d:'2026-03-30',tp:'CSR', a:1008,   bl:1008.65,ds:'Deposit'},
-  {d:'2026-03-30',tp:'SPUR',a:172.76, bl:835.89, ds:'Tesla Inc. Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:177.18, bl:658.71, ds:'Microsoft Corporation Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:168.99, bl:489.72, ds:'Advanced Micro Devices Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:173.77, bl:315.95, ds:'Alphabet Inc. Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:162.85, bl:153.10, ds:'Meta Platforms Inc Market Buy'},
-  {d:'2026-03-30',tp:'SPUR',a:153.10, bl:0,      ds:'Amazon.com Inc. Market Buy'},
-  {d:'2026-03-18',tp:'SSAL',a:256.39, bl:270.65, ds:'BNO Market Sell'},
-  {d:'2026-03-18',tp:'SPUR',a:140.88, bl:0.65,   ds:'Eos Energy Enterprises Market Buy'},
-  {d:'2026-03-18',tp:'SPUR',a:129.12, bl:141.53, ds:'ClearPoint Neuro Market Buy'},
-  {d:'2025-04-01',tp:'SPUR',a:155.67, bl:13.95,  ds:'BNO Market Buy'},
-  {d:'2024-06-21',tp:'SSAL',a:160.28, bl:168.21, ds:'BNO Market Sell'},
-  {d:'2023-11-14',tp:'SPUR',a:148.89, bl:7.82,   ds:'BNO Market Buy'},
-  {d:'2023-11-07',tp:'SSAL',a:155.31, bl:156.71, ds:'BNO Market Sell'},
-  {d:'2023-07-26',tp:'CSR', a:150,    bl:150,    ds:'Deposit'},
-  {d:'2023-07-26',tp:'SPUR',a:148.61, bl:1.39,   ds:'BNO Market Buy'},
-];
-var _VDEPS=5121.46,_VCOMM=14.83,_VREAL=118.81,_VCASH=13.52;
-var _VCLR=['#2563eb','#16a34a','#9333ea','#ea580c','#0891b2','#ca8a04','#16a34a','#7c3aed','#db2777','#059669','#d97706','#64748b'];
-let PC,SC,PLC;
-var _v$=function(id){return document.getElementById(id);};
-var _vff=n=>'$'+Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-var _vfp=n=>(n>=0?'+':'')+n.toFixed(2)+'%';
-var _vfi=(n,r)=>'₹'+Math.round(n*r).toLocaleString('en-IN');
-
-function vSw(name,btn){
-  document.querySelectorAll('#sec-invest .vpg').forEach(function(p){p.classList.remove('von');});
-  document.querySelectorAll('#sec-invest .vnb').forEach(function(b){b.classList.remove('active');});
-  var pg=document.getElementById('pg-'+name);
-  if(pg)pg.classList.add('von');
-  if(btn)btn.classList.add('active');
-  if(name==='vc')vRCh();
-  if(name==='vn')vRNR();
-}
-function vRH(){
-  const tv=_VH.reduce((s,h)=>s+h.val,0);
-  _v$('hb').innerHTML=_VH.map((h,i)=>{
-    const wt=(h.val/tv*100).toFixed(1),rc=h.ret>=0?'g':'r',dc=h.dc>=0?'g':'r';
-    return `<tr>
-      <td><span class="tk">${h.t}</span><span class="lt">LIVE</span></td>
-      <td style="color:#6b7280;font-size:11px">${h.n}</td>
-      <td style="color:#9ca3af;font-size:10px">${h.sec}</td>
-      <td>${h.s.toFixed(4)}</td><td>${_vff(h.b)}</td>
-      <td><input class="pinp" type="number" value="${h.c.toFixed(2)}" step="0.01" min="0" onchange="vUP(${i},this.value)"></td>
-      <td style="font-weight:700">${_vff(h.val)}<br><span style="font-size:9px;color:#9ca3af">${wt}%</span></td>
-      <td class="${rc}" style="font-weight:700">${h.ret>=0?'+':'-'}${_vff(h.ret)}</td>
-      <td class="${rc}" style="font-weight:700">${_vfp(h.rp)}</td>
-      <td class="${dc}">${h.dc>=0?'+':''}${h.dc.toFixed(2)}<br><span style="font-size:9px">${_vfp(h.dcp)}</span></td>
-    </tr>`;
-  }).join('');
-  vRK();
-}
-function vUP(i,v){
-  const p=parseFloat(v);if(!p||p<=0)return;
-  _VH[i].c=p;_VH[i].val=+(_VH[i].s*p).toFixed(2);
-  _VH[i].ret=+(_VH[i].val-_VH[i].inv).toFixed(2);_VH[i].rp=+(_VH[i].ret/_VH[i].inv*100).toFixed(2);
-  vRH();if(_v$('pg-n').classList.contains('von'))vRNR();if(_v$('pg-c').classList.contains('von'))vRCh();
-}
-function vRK(){
-  const tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),ret=tv-tc,rp=ret/tc*100;
-  _v$('kpis').innerHTML=`
-    <div class="kpi"><label>Portfolio value</label><div class="v g">${_vff(tv)}</div><div class="s">Jun 2, 2026 live</div></div>
-    <div class="kpi"><label>Total invested</label><div class="v">${_vff(tc)}</div><div class="s">12 open positions</div></div>
-    <div class="kpi"><label>Unrealized P&L</label><div class="v ${ret>=0?'g':'r'}">${ret>=0?'+':'-'}${_vff(ret)}</div><div class="s ${ret>=0?'g':'r'}">${_vfp(rp)}</div></div>
-    <div class="kpi"><label>Realized gain</label><div class="v g">+${_vff(_VREAL)}</div><div class="s">BNO · 3 trades</div></div>
-    <div class="kpi"><label>Cash balance</label><div class="v b">${_vff(_VCASH)}</div></div>
-    <div class="kpi"><label>Commission paid</label><div class="v r">−${_vff(_VCOMM)}</div><div class="s">All 20 trades</div></div>`;
-}
-function vRT(){
-  const lb={CSR:'dp',SPUR:'by',SSAL:'sl'},lt={CSR:'Deposit',SPUR:'Buy',SSAL:'Sell'};
-  _v$('tb').innerHTML=_VTX.map(t=>`<tr>
-    <td>${t.d}</td><td><span class="bd ${lb[t.tp]||''}">${lt[t.tp]||t.tp}</span></td>
-    <td style="color:#6b7280">${t.ds}</td>
-    <td class="${t.tp==='SSAL'||t.tp==='CSR'?'g':'r'}" style="font-weight:600">${t.tp==='SSAL'||t.tp==='CSR'?'+':'-'}${_vff(t.a)}</td>
-    <td style="color:#6b7280">${_vff(t.bl)}</td>
-    <td style="color:#9ca3af;font-size:10px">Settled</td>
-  </tr>`).join('');
-}
-function vRNR(){
-  const br=parseInt(_v$('tbr').value),cess=_v$('cess').checked;
-  const rate=parseFloat(_v$('inr').value)||84,af=parseFloat(_v$('aum').value)||0;
-  const eff=br*(cess?1.04:1)/100;
-  const tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0),unr=tv-tc;
-  const rTax=_VREAL*eff,uTax=Math.max(0,unr)*eff,nn=tv+_VCASH-uTax-rTax-af,roc=(nn-_VDEPS)/_VDEPS*100;
-  const wr=(ic,lbl,sub,amt,cls,bg)=>`<div class="wr">
-    <div class="wi" style="background:${bg}">${ic}</div>
-    <div class="wl"><strong>${lbl}</strong>${sub}</div>
-    <div class="wa ${cls}">${amt}</div></div>`;
-  _v$('wfin').innerHTML=
-    wr('💰','Total LRS deposits (6 remittances)','FY 2023-24 · FY 2025-26 · FY 2026-27 (4 transfers)',_vff(_VDEPS),'g','#dcfce7')+
-    wr('📝','Commission charges — all 20 trades',`Avg $0.74/trade · ${_vfi(_VCOMM,rate)}`,'-'+_vff(_VCOMM),'r','#fee2e2')+
-    wr('✅','Realized gain — BNO (3 completed trades)',`All STCG (held < 24 months) · ${_vfi(_VREAL,rate)}`,'+'+_vff(_VREAL),'g','#dcfce7')+
-    wr('🏦',`STCG tax on BNO gain @ ${(eff*100).toFixed(1)}%`,`Reportable in Schedule FA · ${_vfi(rTax,rate)}`,'-'+_vff(rTax),'r','#fef3c7');
-  _v$('wfg').innerHTML=
-    wr('📈','Unrealized gain — 12 open positions (live prices)',`${_vfi(unr,rate)} · All STCG if sold today`,'+'+_vff(unr),'g','#dcfce7')+
-    wr('🏦',`Est. STCG tax if all sold today @ ${(eff*100).toFixed(1)}%`,`Effective rate · ${_vfi(uTax,rate)}`,'-'+_vff(uTax),'r','#fef3c7')+
-    wr('💵','Cash remaining in Vested account','Uninvested balance',_vff(_VCASH),'b','#dbeafe');
-  _v$('nnb').innerHTML=`
-    <div>
-      <div style="font-size:11px;color:#6b7280">Net-net if all 12 positions sold today — after all taxes &amp; fees</div>
-      <div class="big">${_vff(nn)} &nbsp;·&nbsp; ${_vfi(nn,rate)}</div>
-      <div style="font-size:11px;color:#6b7280;margin-top:2px">After ${(eff*100).toFixed(1)}% STCG + ${_vff(_VCOMM)} commission + ${_vff(af)} platform fee · Deposited ${_vff(_VDEPS)}</div>
-    </div>
-    <div style="margin-left:auto;text-align:right;flex-shrink:0">
-      <div style="font-size:11px;color:#6b7280">Return on capital</div>
-      <div style="font-size:22px;font-weight:800;color:${roc>=0?'#16a34a':'#dc2626'};letter-spacing:-.5px">${(roc>=0?'+':'')+roc.toFixed(2)}%</div>
-      <div style="font-size:10px;color:#9ca3af">after all Indian taxes</div>
-    </div>`;
-  _v$('scg').innerHTML=[{l:'20% + 4% cess',e:.208},{l:'30% + 4% cess',e:.312},{l:'Gross (pre-tax)',e:0}].map(sc=>{
-    const v=tv+_VCASH-Math.max(0,unr)*sc.e-_VREAL*sc.e-af,r=(v-_VDEPS)/_VDEPS*100;
-    return `<div class="sc"><div class="sl">${sc.l}</div><div class="sv ${v>=_VDEPS?'g':'r'}">${_vff(v)}</div>
-      <div style="font-size:10px;color:#6b7280;margin-top:3px">${_vfp(r)} ROC</div>
-      <div style="font-size:10px;color:#9ca3af">${_vfi(v,rate)}</div></div>`;
-  }).join('');
-}
-function vRCh(){
-  if(_vPC)_vPC.destroy();if(_vSC)_vSC.destroy();if(_vPLC)_vPLC.destroy();
-  const tv=_VH.reduce((s,h)=>s+h.val,0);
-  const so=[..._VH].sort((a,b)=>b.val-a.val);
-  _vPC=new Chart(_v$('piec'),{type:'doughnut',data:{labels:so.map(h=>h.t),datasets:[{data:so.map(h=>+(h.val/tv*100).toFixed(1)),backgroundColor:CLR,borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{display:false}}}});
-  _v$('pl').innerHTML=so.map((h,i)=>`<span><span class="ld" style="background:${_VCLR[i]}"></span>${h.t} ${(h.val/tv*100).toFixed(1)}%</span>`).join('');
-  const sm={};_VH.forEach(function(h){sm[h.sec]=(sm[h.sec]||0)+h.val;});
-  const sk=Object.keys(sm).sort((a,b)=>sm[b]-sm[a]);
-  _vSC=new Chart(_v$('secc'),{type:'bar',data:{labels:sk,datasets:[{data:sk.map(s=>+(sm[s]/tv*100).toFixed(1)),backgroundColor:['#2563eb','#16a34a','#ea580c','#9333ea'],borderRadius:6,borderSkipped:false}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{font:{size:11}},grid:{color:'#f3f4f6'}},y:{ticks:{callback:v=>v+'%',font:{size:11}},grid:{color:'#f3f4f6'}}}}});
-  const sp=[..._VH].sort((a,b)=>b.ret-a.ret);
-  _v$('pw').style.height=Math.max(260,_VH.length*40+60)+'px';
-  _vPLC=new Chart(_v$('pnlc'),{type:'bar',data:{labels:sp.map(h=>h.t),datasets:[{data:sp.map(h=>h.ret),backgroundColor:sp.map(h=>h.ret>=0?'#16a34a':'#dc2626'),borderRadius:4,borderSkipped:false}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${_vff(ctx.raw)} (${_vfp(sp[ctx.dataIndex].rp)})`}}},
-      scales:{x:{ticks:{callback:v=>'$'+v,font:{size:11}},grid:{color:'#f3f4f6'}},y:{ticks:{font:{size:11,weight:'bold'}},grid:{display:false}}}}});
-}
-async function vRAI(type){
-  ['ba','bb','bc','bd'].forEach(function(b){var el=_v$(b);if(el)el.disabled=true;});
-  const o=_v$('ao');o.style.color='#6b7280';
-  o.textContent={analyze:'🔍 Analyzing your portfolio…',rebalance:'⚖️ Building rebalancing plan…',risk:'🛡️ Running risk assessment…',trends:'📈 Fetching market trends…'}[type];
-  const tv=_VH.reduce((s,h)=>s+h.val,0),tc=_VH.reduce((s,h)=>s+h.inv,0);
-  const sum=`Vested portfolio (live Jun 2 2026) — Ramnath Udai Shirodkar, Pune, India. VSUT000394.
-12 holdings · Value:${_vff(tv)} · Invested:${_vff(tc)} · Unrealized:+${_vff(tv-tc)}(+${((tv-tc)/tc*100).toFixed(2)}%)
-Deposits:${_vff(_VDEPS)} Cash:${_vff(_VCASH)} Commission:-${_vff(_VCOMM)} Realized(BNO):+${_vff(_VREAL)} STCG
-${_VH.map(h=>`${h.t}@$${h.c}|${h.ret>=0?'+':''}${_vff(h.ret)}(${_vfp(h.rp)})|today:${h.dc>=0?'+':''}$${h.dc.toFixed(2)}`).join(' ')}
-Sectors: Tech ~77% | Healthcare ~11% | Consumer Disc ~6% | Energy ~4%
-All STCG (<24mo). Only NVO in loss (-3.51%).`;
-  const P={
-    analyze:`${sum}\n\n1)Overall health 2)Best/worst performers 3)Sector concentration risk 4)Buy/Hold/Sell each of 12 stocks 5)Top 3 priority actions. Note STCG tax cost of selling.`,
-    rebalance:`${sum}\n\nRebalancing: 1)Current vs ideal weights 2)Positions to trim vs add 3)Specific $ amounts 4)STCG tax-efficient rebalancing order.`,
-    risk:`${sum}\n\nRisk: 1)Tech concentration (77%) 2)NVO loss -3.51% 3)EOSE/CLPT small-cap risk 4)USD/INR for Indian LRS investor 5)Downside -20% and -40% scenarios 6)Risk score 1-10.`,
-    trends:`${sum}\n\nTrends Jun 2026: 1)AI/chips (NVDA,AMD,PLTR) 2)Enterprise SaaS (NOW,MSFT) 3)GLP-1/NVO 4)TSLA/EV 5)USD/INR outlook 6)H2 2026 macro risks for LRS investors.`
-  };
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1200,
-        tools:[{type:'web_search_20250305',name:'web_search'}],
-        system:'Expert analyst for Indian investors in US stocks via Vested. Concise, specific, actionable. ✅=positive ⚠️=caution 🔴=risk/sell. Note Indian STCG tax implications.',
-        messages:[{role:'user',content:P[type]}]})});
-    const d=await r.json();
-    o.style.color='';
-    o.textContent=(d.content||[]).filter(c=>c.type==='text').map(c=>c.text).join('')||'No response.';
-  }catch(e){
-    o.style.color='';
-    o.textContent=`Network error: ${e.message}\n\nTip: Paste your portfolio into the Claude chat above for analysis.`;
-  }
-  ['ba','bb','bc','bd'].forEach(function(b){var el=_v$(b);if(el)el.disabled=false;});
-}
-// init handled by initVestedModule()
-</script>
 
 <!-- BUDGET / EXPENSE PLANNER -->
 <div class="sec" id="sec-budget">
@@ -3576,6 +4140,30 @@ All STCG (<24mo). Only NVO in loss (-3.51%).`;
   </div>
 </div>
 
+<!-- ADMIN PORTAL -->
+<div class="sec" id="sec-admin">
+  <div class="adm-tabs" id="adm-tabs">
+    <button type="button" class="adm-tab active" data-adm="requests">Requests<span class="adm-badge" id="adm-tab-badge" style="display:none"></span></button>
+    <button type="button" class="adm-tab" data-adm="users">Users</button>
+    <button type="button" class="adm-tab" data-adm="settings">Settings</button>
+  </div>
+  <div class="adm-msg" id="adm-msg" role="status"></div>
+  <div class="panel" id="adm-pane-requests">
+    <div class="panel-title">Access requests</div>
+    <p class="adm-help">People who asked for an account on the Request access page. Nobody can use the app until you approve them. Approved people get <b>Health Tracking</b> only (change that under Settings), and they only ever see their own data. You can switch features on or off later under Users.</p>
+    <div id="admin-request-list"><div class="adm-empty">Loading…</div></div>
+  </div>
+  <div class="panel" id="adm-pane-users" style="display:none">
+    <div class="panel-title">User access</div>
+    <p class="adm-help">Approved accounts. Switch features on or off for each person and press Save. Remove deletes the login and all of that person’s data.</p>
+    <div id="admin-user-list"><div class="adm-empty">Loading…</div></div>
+  </div>
+  <div class="panel" id="adm-pane-settings" style="display:none">
+    <div class="panel-title">Settings</div>
+    <div id="admin-settings"><div class="adm-empty">Loading…</div></div>
+  </div>
+</div>
+
 </main>
 </div>
 
@@ -3609,7 +4197,59 @@ All STCG (<24mo). Only NVO in loss (-3.51%).`;
       </label>
       <button class="primary" onclick="doLogin()">Sign In</button>
       <div class="login-forgot-link"><button onclick="showForgotForm()">Forgot password?</button></div>
+      <div class="login-request-link" id="request-link-wrap" style="display:none">New here? <button onclick="showRequestForm()">Request access</button></div>
       <div class="login-err" id="login-err"></div>
+      <div class="login-success" id="login-info" style="display:none"></div>
+    </div>
+
+    <!-- Step 1a: Request access (a new person asks for an account) -->
+    <div id="request-form" style="display:none">
+      <div id="req-closed" style="display:none">
+        <div class="mfa-icon">&#128274;</div>
+        <div class="mfa-title">Requests are closed</div>
+        <div class="mfa-sub">The owner is not accepting new access requests right now.</div>
+        <button class="login-back" onclick="showLoginForm()">&#8592; Back to login</button>
+      </div>
+      <div id="req-fields" style="display:none">
+        <div class="mfa-title" style="margin-bottom:6px">Request access</div>
+        <div class="mfa-sub" style="margin-bottom:14px">Create your login. The owner reviews every request, and you can sign in once it is approved. You will get Health Tracking with your own private data.</div>
+        <div class="fg">
+          <label>Your name</label>
+          <input type="text" id="req-name" maxlength="60" placeholder="Full name" autocomplete="name">
+        </div>
+        <div class="fg">
+          <label>Email</label>
+          <input type="email" id="req-email" placeholder="your@email.com" autocomplete="email">
+        </div>
+        <div class="fg">
+          <label>Password</label>
+          <div class="pass-wrap">
+            <input type="password" id="req-pass" placeholder="At least 12 characters" autocomplete="new-password" oninput="checkStrength('req-pass','req-strength')">
+            <button class="pass-eye" type="button" onclick="togglePassId('req-pass')">&#128065;</button>
+          </div>
+          <div class="pass-strength" id="req-strength"></div>
+        </div>
+        <div class="fg">
+          <label>Confirm password</label>
+          <div class="pass-wrap">
+            <input type="password" id="req-pass2" placeholder="Repeat password" autocomplete="new-password">
+            <button class="pass-eye" type="button" onclick="togglePassId('req-pass2')">&#128065;</button>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Why do you want access? (optional)</label>
+          <textarea id="req-note" maxlength="300" rows="2" placeholder="A line for the owner, e.g. who you are"></textarea>
+        </div>
+        <button class="primary" id="req-submit" onclick="doRequestAccess()">Send request</button>
+        <button class="login-back" onclick="showLoginForm()">&#8592; Back to login</button>
+        <div class="login-err" id="req-err"></div>
+      </div>
+      <div id="req-done" style="display:none">
+        <div class="mfa-icon">&#10003;</div>
+        <div class="mfa-title">Request sent</div>
+        <div class="mfa-sub" id="req-done-text"></div>
+        <button class="login-back" onclick="showLoginForm()">&#8592; Back to login</button>
+      </div>
     </div>
 
     <!-- Step 1b: Forgot password -->
@@ -3629,7 +4269,7 @@ All STCG (<24mo). Only NVO in loss (-3.51%).`;
     <!-- Step 1c: Set new password (after clicking reset email link) -->
     <div id="reset-form" style="display:none">
       <div class="mfa-icon">&#128274;</div>
-      <div class="mfa-title">Set New Password</div>
+      <div class="mfa-title" id="reset-title">Set New Password</div>
       <div class="mfa-sub" style="margin-bottom:16px">Choose a strong password for your account.</div>
       <div class="fg">
         <label>New password</label>
