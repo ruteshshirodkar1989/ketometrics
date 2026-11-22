@@ -809,8 +809,11 @@ html.km-quick #login-screen{display:none}   /* remembered session: keep the logi
 .gym-row-sub{font-size:11.5px;color:var(--text3);margin-top:2px;overflow-wrap:anywhere}
 .gym-row-sub small{color:var(--text3)}
 .gym-row-act{display:flex;gap:6px;align-items:center;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
-.gym-rt-combo{font-size:12px;color:var(--text2);margin-top:3px;overflow-wrap:anywhere}
-.gym-rt-combo b{font-weight:500;color:var(--text)}
+.gym-rt-group{font-size:12px;color:var(--text2);margin-top:3px;overflow-wrap:anywhere}
+.gym-rt-group b{font-weight:500;color:var(--text)}
+.gym-pick-row input[type=text]{flex:1;min-width:0;font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);max-width:100%}
+.gym-mg-rename{width:100%;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:6px 9px;border:1px solid var(--accent);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);box-sizing:border-box}
+.gym-mg-editing{background:var(--accent-light)}
 .gym-pill{font-size:11px;color:var(--accent);background:var(--accent-light);padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0}
 .gym-draft{list-style:none;margin:0;padding:0;border:1px solid var(--border);border-radius:var(--radius-sm);counter-reset:gd}
 .gym-draft li{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid rgba(0,0,0,.05);font-size:13px;counter-increment:gd}
@@ -1040,14 +1043,14 @@ html.km-quick #login-screen{display:none}   /* remembered session: keep the logi
   <div class="gym-tabs" id="gym-tabs" role="tablist" aria-label="Exercise sections">
     <button type="button" class="gym-tab active" data-gact="view" data-gview="log">Workout</button>
     <button type="button" class="gym-tab" data-gact="view" data-gview="ex">Exercises</button>
-    <button type="button" class="gym-tab" data-gact="view" data-gview="combos">Combos</button>
+    <button type="button" class="gym-tab" data-gact="view" data-gview="groups">Muscle groups</button>
     <button type="button" class="gym-tab" data-gact="view" data-gview="routines">Routines</button>
     <button type="button" class="gym-tab" data-gact="view" data-gview="stats">Analytics</button>
   </div>
   <div id="gym-load-msg"></div>
   <div id="gym-pane-log"></div>
   <div id="gym-pane-ex" style="display:none"></div>
-  <div id="gym-pane-combos" style="display:none"></div>
+  <div id="gym-pane-groups" style="display:none"></div>
   <div id="gym-pane-routines" style="display:none"></div>
   <div id="gym-pane-stats" style="display:none"></div>
 </div>
@@ -2223,29 +2226,30 @@ async function fCopyFromDate(){
 
 // =====================================================================
 // EXERCISE MODULE (part of Health Tracking)
-//   Workout   - log sets (weight x reps) per day; load a routine or single exercises
-//   Exercises - your exercise list
-//   Combos    - groups of exercises
-//   Routines  - groups of combos
-//   Analytics - progress per exercise + overall training trends
+//   Workout       - log sets (weight x reps) per day; load a routine or single exercises
+//   Exercises     - your exercise list, each in one of your muscle groups
+//   Muscle groups - your own groups (add, rename, delete)
+//   Routines      - an ordered list of muscle groups; "Start today" loads every exercise in them
+//   Analytics     - progress per exercise + overall training trends
 // Everything is stored per account; the database only shows your own rows.
 // =====================================================================
-var GYM={loaded:false,loading:null,error:null,ex:[],combos:[],routines:[],sets:[]};
+var GYM={loaded:false,loading:null,error:null,muscles:[],ex:[],routines:[],sets:[]};
 var GYM_VIEW='log';
 var GYM_DATE=null;
 var GYM_CH={};
-var GYM_EDIT={ex:null,combo:null,routine:null};
-var GYM_DRAFT={combo:[],comboName:'',comboNotes:'',routine:[],routineName:'',routineNotes:''};
+var GYM_EDIT={ex:null,routine:null,muscle:null};
+var GYM_DRAFT={routine:[],routineName:'',routineNotes:''};
 var GYM_STATS_EX=null;
 var GYM_PLAN_MEM={};
-var GYM_MUSCLES=['Chest','Back','Shoulders','Arms','Legs','Glutes','Core','Full body','Cardio','Other'];
-var GYM_COLORS={'Chest':'#1a6b4a','Back':'#1a4b8c','Shoulders':'#c47b1a','Arms':'#6b1a8c','Legs':'#c43a1a',
-  'Glutes':'#d4618c','Core':'#2a9d8f','Full body':'#5a6b7a','Cardio':'#e9a23b','Other':'#9a9a9a'};
+var GYM_LAST_MUSCLE=null;
+var GYM_NO_GROUP='No group';
+var GYM_USUAL_GROUPS=['Chest','Back','Shoulders','Biceps','Triceps','Legs','Glutes','Core'];
+var GYM_PALETTE=['#1a6b4a','#1a4b8c','#c47b1a','#6b1a8c','#c43a1a','#d4618c','#2a9d8f','#5a6b7a','#e9a23b','#7a8c1a','#1a8c8c','#8c1a4b'];
 var GYM_STARTER=[
   {name:'Bench Press',muscle:'Chest'},{name:'Incline Dumbbell Press',muscle:'Chest'},{name:'Push-up',muscle:'Chest'},
   {name:'Pull-up',muscle:'Back'},{name:'Lat Pulldown',muscle:'Back'},{name:'Seated Cable Row',muscle:'Back'},{name:'Deadlift',muscle:'Back'},
   {name:'Overhead Press',muscle:'Shoulders'},{name:'Lateral Raise',muscle:'Shoulders'},
-  {name:'Bicep Curl',muscle:'Arms'},{name:'Tricep Pushdown',muscle:'Arms'},
+  {name:'Bicep Curl',muscle:'Biceps'},{name:'Tricep Pushdown',muscle:'Triceps'},
   {name:'Squat',muscle:'Legs'},{name:'Leg Press',muscle:'Legs'},{name:'Romanian Deadlift',muscle:'Legs'},{name:'Calf Raise',muscle:'Legs'},
   {name:'Hip Thrust',muscle:'Glutes'},{name:'Hanging Leg Raise',muscle:'Core'},{name:'Cable Crunch',muscle:'Core'}
 ];
@@ -2265,16 +2269,32 @@ function gymIds(v){
 }
 function gymFind(list,id){for(var i=0;i<list.length;i++)if(list[i].id===id)return list[i];return null;}
 function gymEx(id){return gymFind(GYM.ex,id);}
-function gymCombo(id){return gymFind(GYM.combos,id);}
+function gymMuscle(id){return id==null?null:gymFind(GYM.muscles,id);}
 function gymRoutine(id){return gymFind(GYM.routines,id);}
+function gymMuscleName(e){var m=e?gymMuscle(e.muscle_id):null;return m?m.name:GYM_NO_GROUP;}
+function gymByNameCI(a,b){return String(a.name).localeCompare(String(b.name),undefined,{sensitivity:'base'});}
+function gymMusclesSorted(){return GYM.muscles.slice().sort(gymByNameCI);}
+function gymGroupExercises(mid){return GYM.ex.filter(function(e){return e.muscle_id===mid;}).sort(gymByName);}
+// group names in display order: your groups A-Z, then "No group"
+function gymGroupOrder(present){
+  var names=gymMusclesSorted().map(function(m){return m.name;}).filter(function(n){return present[n];});
+  if(present[GYM_NO_GROUP])names.push(GYM_NO_GROUP);
+  return names;
+}
+function gymColor(name){
+  if(name===GYM_NO_GROUP)return '#9a9a9a';
+  var i=gymMusclesSorted().map(function(m){return m.name;}).indexOf(name);
+  return GYM_PALETTE[(i<0?0:i)%GYM_PALETTE.length];
+}
 function gymSetFromDB(r){return{id:Number(r.id),date:r.date,exercise_id:Number(r.exercise_id),weight:gymNum(r.weight),reps:parseInt(r.reps,10)||0};}
+function gymExFromDB(e){return{id:Number(e.id),name:e.name,muscle_id:e.muscle_id==null?null:Number(e.muscle_id),notes:e.notes||''};}
 function gymByName(a,b){return String(a.name).localeCompare(String(b.name));}
 function gymErr(e){
   var m=(e&&e.message)||String(e||'');
   try{var j=JSON.parse(m);
     if(j&&j.code==='23505')return 'That name is already used';
     if(j&&(j.code==='42501'||/row-level security/i.test(j.message||'')))return 'Not allowed — Health Tracking must be switched on for your account';
-    if(j&&j.code==='23503')return 'That exercise no longer exists — reload the page';
+    if(j&&j.code==='23503')return /muscle/i.test(j.message||'')?'That muscle group no longer exists — reload the page':'That exercise no longer exists — reload the page';
     if(j&&j.message)return 'Could not save: '+j.message;
   }catch(x){}
   if(/HTTP 409/.test(m))return 'That name is already used';
@@ -2295,9 +2315,8 @@ function gymChart(id,cfg){
   GYM_CH[id]=new Chart(c,cfg);
 }
 function gymExOptions(placeholder,skip){
-  var groups={};GYM.ex.forEach(function(e){var m=e.muscle||'Other';(groups[m]=groups[m]||[]).push(e);});
-  var order=GYM_MUSCLES.concat(Object.keys(groups).filter(function(k){return GYM_MUSCLES.indexOf(k)<0;}));
-  return '<option value="">'+escHtml(placeholder)+'</option>'+order.filter(function(m){return groups[m];}).map(function(m){
+  var groups={};GYM.ex.forEach(function(e){var m=gymMuscleName(e);(groups[m]=groups[m]||[]).push(e);});
+  return '<option value="">'+escHtml(placeholder)+'</option>'+gymGroupOrder(groups).map(function(m){
     return '<optgroup label="'+escHtml(m)+'">'+groups[m].slice().sort(gymByName).map(function(e){
       return '<option value="'+e.id+'"'+(skip&&skip.indexOf(e.id)>=0?' disabled':'')+'>'+escHtml(e.name)+'</option>';}).join('')+'</optgroup>';
   }).join('');
@@ -2309,14 +2328,14 @@ function gymLoad(force){
   if(GYM.loaded&&!force)return Promise.resolve();
   GYM.error=null;
   GYM.loading=Promise.all([
+    sbGetAll('gym_muscles?order=name.asc,id.asc'),
     sbGetAll('gym_exercises?order=name.asc,id.asc'),
-    sbGetAll('gym_combos?order=name.asc,id.asc'),
     sbGetAll('gym_routines?order=name.asc,id.asc'),
     sbGetAll('gym_sets?order=date.asc,id.asc')
   ]).then(function(r){
-    GYM.ex=(r[0]||[]).map(function(e){return{id:Number(e.id),name:e.name,muscle:e.muscle||'Other',notes:e.notes||''};});
-    GYM.combos=(r[1]||[]).map(function(c){return{id:Number(c.id),name:c.name,notes:c.notes||'',exercise_ids:gymIds(c.exercise_ids)};});
-    GYM.routines=(r[2]||[]).map(function(x){return{id:Number(x.id),name:x.name,notes:x.notes||'',combo_ids:gymIds(x.combo_ids)};});
+    GYM.muscles=(r[0]||[]).map(function(m){return{id:Number(m.id),name:m.name};});
+    GYM.ex=(r[1]||[]).map(gymExFromDB);
+    GYM.routines=(r[2]||[]).map(function(x){return{id:Number(x.id),name:x.name,notes:x.notes||'',muscle_ids:gymIds(x.muscle_ids)};});
     GYM.sets=(r[3]||[]).map(gymSetFromDB);
     GYM.loaded=true;
   }).catch(function(e){GYM.error=e;console.error('Exercise data could not be loaded:',e);})
@@ -2330,7 +2349,7 @@ function renderGym(){
   gymBind();
   if(!GYM_DATE)GYM_DATE=today();
   sec.querySelectorAll('.gym-tab').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-gview')===GYM_VIEW);});
-  ['log','ex','combos','routines','stats'].forEach(function(v){var p=document.getElementById('gym-pane-'+v);if(p)p.style.display=(v===GYM_VIEW&&GYM.loaded)?'':'none';});
+  ['log','ex','groups','routines','stats'].forEach(function(v){var p=document.getElementById('gym-pane-'+v);if(p)p.style.display=(v===GYM_VIEW&&GYM.loaded)?'':'none';});
   var note=document.getElementById('gym-load-msg');
   if(!GYM.loaded){
     if(GYM.error){
@@ -2350,7 +2369,7 @@ function renderGym(){
   if(GYM_VIEW!=='stats')gymDestroyCharts();
   if(GYM_VIEW==='log')gymRenderLog();
   else if(GYM_VIEW==='ex')gymRenderExercises();
-  else if(GYM_VIEW==='combos')gymRenderCombos();
+  else if(GYM_VIEW==='groups')gymRenderGroups();
   else if(GYM_VIEW==='routines')gymRenderRoutines();
   else gymRenderStats();
 }
@@ -2418,12 +2437,13 @@ function gymPlanAdd(date,exId,from){var p=gymPlanGet(date);if(!p.some(function(x
 function gymPlanRemove(date,exId){gymPlanSet(date,gymPlanGet(date).filter(function(x){return x.id!==exId;}));}
 function gymLoadRoutine(rid){
   var r=gymRoutine(rid);if(!r)return;
-  var date=GYM_DATE||today(),added=0;
-  r.combo_ids.forEach(function(cid){
-    var c=gymCombo(cid);if(!c)return;
-    c.exercise_ids.forEach(function(eid){if(gymEx(eid)&&gymPlanAdd(date,eid,c.name))added++;});
+  var date=GYM_DATE||today(),added=0,total=0;
+  r.muscle_ids.forEach(function(mid){
+    if(!gymMuscle(mid))return;
+    gymGroupExercises(mid).forEach(function(e){total++;if(gymPlanAdd(date,e.id,r.name))added++;});
   });
-  gymToast(added?('Loaded '+r.name+': '+gymOne(added,'exercise')):(r.name+' is already on this day'));
+  gymToast(added?('Loaded '+r.name+': '+gymOne(added,'exercise'))
+    :(total?(r.name+' is already on this day'):('No exercises in the muscle groups of '+r.name+' yet')),!total);
   gymRenderLog();
 }
 
@@ -2475,7 +2495,7 @@ function gymCardHtml(id,date,plan){
   }).join('');
   return '<div class="gym-card" data-ex="'+id+'">'+
     '<div class="gym-card-head"><div class="gym-card-tt"><div class="gym-card-title">'+escHtml(e.name)+'</div>'+
-      '<div class="gym-card-sub">'+escHtml(e.muscle||'Other')+(from?' · '+escHtml(from):'')+'</div></div>'+
+      '<div class="gym-card-sub">'+escHtml(gymMuscleName(e))+(from?' · '+escHtml(from):'')+'</div></div>'+
       (sets.length?'<span class="gym-pill">'+gymOne(sets.length,'set')+'</span>':'<button type="button" class="ghost gym-sm" data-gact="plan-rm" data-id="'+id+'">Remove</button>')+'</div>'+
     '<div class="gym-hint">'+escHtml(hint)+'</div>'+
     (rows?'<table class="gym-sets"><thead><tr><th>Set</th><th>kg</th><th>Reps</th><th>Volume</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>':'')+
@@ -2534,22 +2554,25 @@ function gymRenderExercises(){
   var ed=GYM_EDIT.ex!=null?gymEx(GYM_EDIT.ex):null;
   if(GYM_EDIT.ex!=null&&!ed)GYM_EDIT.ex=null;
   var count={};GYM.sets.forEach(function(s){var c=count[s.exercise_id]||(count[s.exercise_id]={n:0,last:''});c.n++;if(s.date>c.last)c.last=s.date;});
-  var mus=ed?ed.muscle:'Chest';
-  var opts=GYM_MUSCLES.concat(GYM_MUSCLES.indexOf(mus)<0?[mus]:[]).map(function(m){return '<option'+(m===mus?' selected':'')+'>'+escHtml(m)+'</option>';}).join('');
+  var sorted=gymMusclesSorted();
+  var mid=ed?ed.muscle_id:(gymMuscle(GYM_LAST_MUSCLE)?GYM_LAST_MUSCLE:(sorted.length?sorted[0].id:null));
+  var opts=sorted.map(function(m){return '<option value="'+m.id+'"'+(m.id===mid?' selected':'')+'>'+escHtml(m.name)+'</option>';}).join('')+
+    '<option value=""'+(mid==null||!gymMuscle(mid)?' selected':'')+'>'+GYM_NO_GROUP+'</option>';
   var html='<div class="panel" id="gym-ex-form"><div class="panel-title">'+(ed?'Edit exercise':'Add an exercise')+'</div>'+
     '<div class="form-grid">'+
       '<div class="fg"><label for="gym-ex-name">Name</label><input type="text" id="gym-ex-name" maxlength="80" placeholder="e.g. Bench Press" value="'+escHtml(ed?ed.name:'')+'"></div>'+
       '<div class="fg"><label for="gym-ex-muscle">Muscle group</label><select id="gym-ex-muscle">'+opts+'</select></div>'+
       '<div class="fg"><label for="gym-ex-notes">Notes (optional)</label><input type="text" id="gym-ex-notes" maxlength="300" placeholder="e.g. grip, machine settings" value="'+escHtml(ed?ed.notes:'')+'"></div>'+
-    '</div><div class="btn-row"><button type="button" class="primary" data-gact="ex-save">'+(ed?'Save changes':'Add exercise')+'</button>'+
+    '</div>'+
+    (sorted.length?'':'<div class="gym-hint">No muscle groups yet. <button type="button" class="ghost gym-xs" data-gact="view" data-gview="groups">Set up muscle groups</button></div>')+
+    '<div class="btn-row"><button type="button" class="primary" data-gact="ex-save">'+(ed?'Save changes':'Add exercise')+'</button>'+
     (ed?'<button type="button" class="ghost" data-gact="ex-cancel">Cancel</button>':'')+'</div></div>';
   if(!GYM.ex.length){
-    html+='<div class="gym-empty">No exercises yet. Add your own above, or start with a list of common gym exercises you can rename or delete later.'+
+    html+='<div class="gym-empty">No exercises yet. Add your own above, or start with a list of common gym exercises (and their muscle groups) that you can rename or delete later.'+
       ' <button type="button" class="ghost gym-sm" data-gact="starter">Add starter list</button></div>';
   }else{
-    var groups={};GYM.ex.forEach(function(e){var m=e.muscle||'Other';(groups[m]=groups[m]||[]).push(e);});
-    var order=GYM_MUSCLES.concat(Object.keys(groups).filter(function(k){return GYM_MUSCLES.indexOf(k)<0;}));
-    html+=order.filter(function(m){return groups[m];}).map(function(m){
+    var groups={};GYM.ex.forEach(function(e){var m=gymMuscleName(e);(groups[m]=groups[m]||[]).push(e);});
+    html+=gymGroupOrder(groups).map(function(m){
       return '<div class="sh">'+escHtml(m)+' &middot; '+groups[m].length+'</div><div class="gym-list">'+groups[m].slice().sort(gymByName).map(function(e){
         var c=count[e.id];
         return '<div class="gym-row"><div class="gym-row-main"><div class="gym-row-name">'+escHtml(e.name)+'</div>'+
@@ -2564,20 +2587,22 @@ function gymRenderExercises(){
 async function gymSaveExercise(){
   var nameEl=document.getElementById('gym-ex-name');if(!nameEl)return;
   var name=(nameEl.value||'').trim().replace(/\s+/g,' ');
-  var muscle=document.getElementById('gym-ex-muscle').value||'Other';
+  var mv=parseInt(document.getElementById('gym-ex-muscle').value,10);
+  var muscle_id=gymMuscle(mv)?mv:null;
   var notes=(document.getElementById('gym-ex-notes').value||'').trim();
   if(!name){gymToast('Enter a name for the exercise',true);nameEl.focus();return;}
   var editing=GYM_EDIT.ex;
   if(GYM.ex.some(function(e){return e.id!==editing&&e.name.toLowerCase()===name.toLowerCase();})){gymToast('You already have "'+name+'"',true);return;}
   try{
     if(editing!=null){
-      await sbPatch('gym_exercises','id=eq.'+editing,{name:name,muscle:muscle,notes:notes});
-      var e=gymEx(editing);if(e){e.name=name;e.muscle=muscle;e.notes=notes;}
+      await sbPatch('gym_exercises','id=eq.'+editing,{name:name,muscle_id:muscle_id,notes:notes});
+      var e=gymEx(editing);if(e){e.name=name;e.muscle_id=muscle_id;e.notes=notes;}
       GYM_EDIT.ex=null;gymToast('Saved');
     }else{
-      var saved=await sbPost('gym_exercises',{name:name,muscle:muscle,notes:notes,user_id:_uid()});
+      var saved=await sbPost('gym_exercises',{name:name,muscle_id:muscle_id,notes:notes,user_id:_uid()});
       var row=Array.isArray(saved)?saved[0]:saved;
-      if(row)GYM.ex.push({id:Number(row.id),name:row.name,muscle:row.muscle||muscle,notes:row.notes||''});
+      if(row)GYM.ex.push(gymExFromDB(row));
+      GYM_LAST_MUSCLE=muscle_id;
       gymToast('Added '+name);
     }
     GYM.ex.sort(gymByName);
@@ -2588,22 +2613,14 @@ async function gymSaveExercise(){
 async function gymDeleteExercise(id){
   var e=gymEx(id);if(!e)return;
   var n=GYM.sets.filter(function(s){return s.exercise_id===id;}).length;
-  var inCombos=GYM.combos.filter(function(c){return c.exercise_ids.indexOf(id)>=0;});
   var q='Delete "'+e.name+'"?';
   if(n)q+='\n\nThis also deletes its '+gymOne(n,'logged set')+'. This cannot be undone.';
-  if(inCombos.length)q+='\n\nIt will be taken out of '+gymOne(inCombos.length,'combo')+': '+inCombos.map(function(c){return c.name;}).join(', ')+'.';
   if(!confirm(q))return;
   try{
-    for(var i=0;i<inCombos.length;i++){
-      var c=inCombos[i],keep=c.exercise_ids.filter(function(x){return x!==id;});
-      await sbPatch('gym_combos','id=eq.'+c.id,{exercise_ids:keep});
-      c.exercise_ids=keep;
-    }
     await sbDel('gym_exercises','id=eq.'+id);          // its logged sets are deleted with it (database rule)
     GYM.ex=GYM.ex.filter(function(x){return x.id!==id;});
     GYM.sets=GYM.sets.filter(function(s){return s.exercise_id!==id;});
     Object.keys(GYM_PLAN_MEM).forEach(function(d){gymPlanSet(d,GYM_PLAN_MEM[d].filter(function(x){return x.id!==id;}));});
-    GYM_DRAFT.combo=GYM_DRAFT.combo.filter(function(x){return x!==id;});
     if(GYM_EDIT.ex===id)GYM_EDIT.ex=null;
     if(GYM_STATS_EX===id)GYM_STATS_EX=null;
     gymToast('Deleted '+e.name);
@@ -2612,157 +2629,226 @@ async function gymDeleteExercise(id){
 }
 async function gymAddStarter(){
   if(GYM.ex.length)return;
-  if(!confirm('Add '+GYM_STARTER.length+' common gym exercises?\n\nYou can rename or delete any of them later.'))return;
+  if(!confirm('Add '+GYM_STARTER.length+' common gym exercises (and the muscle groups they need)?\n\nYou can rename or delete any of them later.'))return;
   try{
-    var saved=await sbPost('gym_exercises',GYM_STARTER.map(function(s){return{name:s.name,muscle:s.muscle,notes:'',user_id:_uid()};}));
-    (Array.isArray(saved)?saved:[]).forEach(function(r){GYM.ex.push({id:Number(r.id),name:r.name,muscle:r.muscle||'Other',notes:r.notes||''});});
+    await gymEnsureGroups(GYM_STARTER.map(function(s){return s.muscle;}));
+    var byName={};GYM.muscles.forEach(function(m){byName[m.name.toLowerCase()]=m.id;});
+    var saved=await sbPost('gym_exercises',GYM_STARTER.map(function(s){return{name:s.name,muscle_id:byName[s.muscle.toLowerCase()]||null,notes:'',user_id:_uid()};}));
+    (Array.isArray(saved)?saved:[]).forEach(function(r){GYM.ex.push(gymExFromDB(r));});
     GYM.ex.sort(gymByName);
     gymToast('Added '+gymOne(GYM.ex.length,'exercise'));
     gymRenderExercises();
+  }catch(err){gymToast(gymErr(err),true);gymRenderExercises();}
+}
+// adds the named groups you do not have yet (one request); keeps the ones you have
+async function gymEnsureGroups(names){
+  var have={};GYM.muscles.forEach(function(m){have[m.name.toLowerCase()]=1;});
+  var add=[];names.forEach(function(n){var k=n.toLowerCase();if(!have[k]){have[k]=1;add.push(n);}});
+  if(!add.length)return 0;
+  var saved=await sbPost('gym_muscles',add.map(function(n){return{name:n,user_id:_uid()};}));
+  (Array.isArray(saved)?saved:[]).forEach(function(r){GYM.muscles.push({id:Number(r.id),name:r.name});});
+  return add.length;
+}
+
+// ── Muscle groups (your own list: add, rename, delete) ──────────────────
+function gymRenderGroups(){
+  var p=document.getElementById('gym-pane-groups');if(!p)return;
+  var sorted=gymMusclesSorted();
+  var inR={};GYM.routines.forEach(function(r){r.muscle_ids.forEach(function(m){inR[m]=(inR[m]||0)+1;});});
+  var html='<div class="panel" id="gym-mg-form"><div class="panel-title">Add a muscle group</div>'+
+    '<div class="gym-pick-row"><input type="text" id="gym-mg-name" maxlength="40" placeholder="e.g. Biceps" aria-label="Muscle group name">'+
+    '<button type="button" class="primary" data-gact="mg-add">Add group</button></div>'+
+    '<div class="gym-hint">Put each exercise in a group under Exercises, then build routines from groups.</div></div>';
+  if(!sorted.length){
+    html+='<div class="gym-empty">No muscle groups yet. Add your own above, or start with the usual ones ('+GYM_USUAL_GROUPS.join(', ')+') and rename or delete them later.'+
+      ' <button type="button" class="ghost gym-sm" data-gact="mg-usual">Add the usual groups</button></div>';
+  }else{
+    html+='<div class="sh">Your muscle groups &middot; '+sorted.length+'</div><div class="gym-list">'+sorted.map(function(m){
+      var exs=gymGroupExercises(m.id);
+      var sub=(exs.length?gymOne(exs.length,'exercise')+': '+exs.map(function(e){return escHtml(e.name);}).join(', '):'No exercises yet')+
+        (inR[m.id]?' &middot; in '+gymOne(inR[m.id],'routine'):'');
+      if(GYM_EDIT.muscle===m.id){
+        return '<div class="gym-row gym-mg-editing"><div class="gym-row-main"><input type="text" class="gym-mg-rename" id="gym-mg-rename" maxlength="40" value="'+escHtml(m.name)+'" aria-label="New name for '+escHtml(m.name)+'">'+
+          '<div class="gym-row-sub">'+sub+'</div></div>'+
+          '<div class="gym-row-act"><button type="button" class="primary gym-sm" data-gact="mg-save" data-id="'+m.id+'">Save</button>'+
+          '<button type="button" class="ghost gym-sm" data-gact="mg-cancel">Cancel</button></div></div>';
+      }
+      return '<div class="gym-row"><div class="gym-row-main"><div class="gym-row-name">'+escHtml(m.name)+'</div><div class="gym-row-sub">'+sub+'</div></div>'+
+        '<div class="gym-row-act"><button type="button" class="ghost gym-sm" data-gact="mg-edit" data-id="'+m.id+'">Rename</button>'+
+        '<button type="button" class="del-btn" data-gact="mg-del" data-id="'+m.id+'" aria-label="Delete '+escHtml(m.name)+'">&#215;</button></div></div>';
+    }).join('')+'</div>';
+    var loose=GYM.ex.filter(function(e){return !gymMuscle(e.muscle_id);}).sort(gymByName);
+    if(loose.length)html+='<div class="sh">'+GYM_NO_GROUP+' &middot; '+loose.length+'</div><div class="gym-list"><div class="gym-row"><div class="gym-row-main"><div class="gym-row-sub">'+
+      loose.map(function(e){return escHtml(e.name);}).join(', ')+' &middot; '+(loose.length===1?'give it':'give them')+' a group under Exercises (Edit)</div></div></div></div>';
+  }
+  p.innerHTML=html;
+}
+function gymCheckGroupName(name,exceptId){
+  if(!name){gymToast('Enter a name for the muscle group',true);return false;}
+  if(name.length>40){gymToast('Keep the name to 40 characters',true);return false;}
+  if(GYM.muscles.some(function(m){return m.id!==exceptId&&m.name.toLowerCase()===name.toLowerCase();})){gymToast('You already have "'+name+'"',true);return false;}
+  return true;
+}
+async function gymAddGroup(){
+  var el=document.getElementById('gym-mg-name');if(!el)return;
+  var name=(el.value||'').trim().replace(/\s+/g,' ');
+  if(!gymCheckGroupName(name,null)){el.focus();return;}
+  try{
+    var saved=await sbPost('gym_muscles',{name:name,user_id:_uid()});
+    var row=Array.isArray(saved)?saved[0]:saved;
+    if(row)GYM.muscles.push({id:Number(row.id),name:row.name});
+    gymToast('Added '+name);
+    gymRenderGroups();
+    var e2=document.getElementById('gym-mg-name');if(e2)e2.focus();
+  }catch(err){gymToast(gymErr(err),true);}
+}
+async function gymAddUsualGroups(){
+  try{
+    var n=await gymEnsureGroups(GYM_USUAL_GROUPS);
+    gymToast(n?('Added '+gymOne(n,'muscle group')):'You already have these groups');
+    gymRenderGroups();
+  }catch(err){gymToast(gymErr(err),true);}
+}
+async function gymRenameGroup(id){
+  var m=gymMuscle(id),el=document.getElementById('gym-mg-rename');if(!m||!el)return;
+  var name=(el.value||'').trim().replace(/\s+/g,' ');
+  if(name===m.name){GYM_EDIT.muscle=null;gymRenderGroups();return;}
+  if(!gymCheckGroupName(name,id)){el.focus();return;}
+  try{
+    await sbPatch('gym_muscles','id=eq.'+id,{name:name});
+    var old=m.name;m.name=name;GYM_EDIT.muscle=null;
+    gymToast('Renamed '+old+' to '+name);
+    gymRenderGroups();
+  }catch(err){gymToast(gymErr(err),true);}
+}
+async function gymDeleteGroup(id){
+  var m=gymMuscle(id);if(!m)return;
+  var exs=gymGroupExercises(id);
+  var inR=GYM.routines.filter(function(r){return r.muscle_ids.indexOf(id)>=0;});
+  var q='Delete muscle group "'+m.name+'"?';
+  q+=exs.length?('\n\nIts '+gymOne(exs.length,'exercise')+' and their logged sets are kept; they will have no group until you pick another one.'):'';
+  if(inR.length)q+='\n\nIt will be taken out of '+gymOne(inR.length,'routine')+': '+inR.map(function(r){return r.name;}).join(', ')+'.';
+  if(!confirm(q))return;
+  try{
+    await sbDel('gym_muscles','id=eq.'+id);            // the database keeps its exercises (no group)
+    GYM.muscles=GYM.muscles.filter(function(x){return x.id!==id;});
+    GYM.ex.forEach(function(e){if(e.muscle_id===id)e.muscle_id=null;});
+    if(GYM_EDIT.muscle===id)GYM_EDIT.muscle=null;
+    if(GYM_LAST_MUSCLE===id)GYM_LAST_MUSCLE=null;
+    GYM_DRAFT.routine=GYM_DRAFT.routine.filter(function(x){return x!==id;});
+    for(var i=0;i<inR.length;i++){                     // tidy routines; an id left behind is ignored anyway
+      var r=inR[i],keep=r.muscle_ids.filter(function(x){return x!==id;});
+      try{await sbPatch('gym_routines','id=eq.'+r.id,{muscle_ids:keep});r.muscle_ids=keep;}catch(e){console.warn('Routine not updated:',e);}
+    }
+    gymToast('Deleted '+m.name);
+    gymRenderGroups();
   }catch(err){gymToast(gymErr(err),true);}
 }
 
-// ── Combos and Routines (same editor, different building blocks) ─────────
-function gymDraftRead(kind){
-  var n=document.getElementById('gym-'+kind+'-name'),no=document.getElementById('gym-'+kind+'-notes');
-  if(n)GYM_DRAFT[kind+'Name']=n.value;
-  if(no)GYM_DRAFT[kind+'Notes']=no.value;
+// ── Routines (an ordered list of your muscle groups) ────────────────────
+function gymDraftRead(){
+  var n=document.getElementById('gym-routine-name'),no=document.getElementById('gym-routine-notes');
+  if(n)GYM_DRAFT.routineName=n.value;
+  if(no)GYM_DRAFT.routineNotes=no.value;
 }
-function gymRenderKind(kind){if(kind==='combo')gymRenderCombos();else gymRenderRoutines();}
-function gymDraftAdd(kind){
-  gymDraftRead(kind);
-  var sel=document.getElementById('gym-'+kind+'-pick');var v=parseInt(sel&&sel.value,10);
-  if(!v){gymToast(kind==='combo'?'Pick an exercise to add':'Pick a combo to add',true);return;}
-  if(GYM_DRAFT[kind].indexOf(v)>=0){gymToast('Already in the list',true);return;}
-  GYM_DRAFT[kind].push(v);gymRenderKind(kind);
-  var s2=document.getElementById('gym-'+kind+'-pick');if(s2)s2.focus();
+function gymDraftAdd(){
+  gymDraftRead();
+  var sel=document.getElementById('gym-routine-pick');var v=parseInt(sel&&sel.value,10);
+  if(!v||!gymMuscle(v)){gymToast('Pick a muscle group to add',true);return;}
+  if(GYM_DRAFT.routine.indexOf(v)>=0){gymToast('Already in the list',true);return;}
+  GYM_DRAFT.routine.push(v);gymRenderRoutines();
+  var s2=document.getElementById('gym-routine-pick');if(s2)s2.focus();
 }
-function gymDraftMove(kind,i,d){gymDraftRead(kind);var a=GYM_DRAFT[kind],j=i+d;if(i<0||j<0||i>=a.length||j>=a.length)return;var t=a[i];a[i]=a[j];a[j]=t;gymRenderKind(kind);}
-function gymDraftRm(kind,i){gymDraftRead(kind);if(i>=0&&i<GYM_DRAFT[kind].length)GYM_DRAFT[kind].splice(i,1);gymRenderKind(kind);}
-function gymStartEdit(kind,id){
-  var obj=kind==='combo'?gymCombo(id):gymRoutine(id);if(!obj)return;
-  GYM_EDIT[kind]=id;
-  GYM_DRAFT[kind]=(kind==='combo'?obj.exercise_ids:obj.combo_ids).slice();
-  GYM_DRAFT[kind+'Name']=obj.name;GYM_DRAFT[kind+'Notes']=obj.notes||'';
-  gymRenderKind(kind);
-  var f=document.getElementById('gym-'+kind+'-form');if(f&&f.scrollIntoView)f.scrollIntoView({block:'start',behavior:'smooth'});
+function gymDraftMove(i,d){gymDraftRead();var a=GYM_DRAFT.routine,j=i+d;if(i<0||j<0||i>=a.length||j>=a.length)return;var t=a[i];a[i]=a[j];a[j]=t;gymRenderRoutines();}
+function gymDraftRm(i){gymDraftRead();if(i>=0&&i<GYM_DRAFT.routine.length)GYM_DRAFT.routine.splice(i,1);gymRenderRoutines();}
+function gymStartEdit(id){
+  var r=gymRoutine(id);if(!r)return;
+  GYM_EDIT.routine=id;
+  GYM_DRAFT.routine=r.muscle_ids.filter(function(m){return gymMuscle(m);});
+  GYM_DRAFT.routineName=r.name;GYM_DRAFT.routineNotes=r.notes||'';
+  gymRenderRoutines();
+  var f=document.getElementById('gym-routine-form');if(f&&f.scrollIntoView)f.scrollIntoView({block:'start',behavior:'smooth'});
 }
-function gymCancelEdit(kind){GYM_EDIT[kind]=null;GYM_DRAFT[kind]=[];GYM_DRAFT[kind+'Name']='';GYM_DRAFT[kind+'Notes']='';gymRenderKind(kind);}
-function gymEditorHtml(kind){
-  var isCombo=kind==='combo';
-  var editing=GYM_EDIT[kind]!=null;
-  var items=GYM_DRAFT[kind].filter(function(id){return isCombo?gymEx(id):gymCombo(id);});
-  GYM_DRAFT[kind]=items;
-  var pick=isCombo?gymExOptions('Choose an exercise…',items)
-    :'<option value="">'+(GYM.combos.length?'Choose a combo…':'No combos yet')+'</option>'+GYM.combos.slice().sort(gymByName).map(function(c){
-        return '<option value="'+c.id+'"'+(items.indexOf(c.id)>=0?' disabled':'')+'>'+escHtml(c.name)+'</option>';}).join('');
+function gymCancelEdit(){GYM_EDIT.routine=null;GYM_DRAFT.routine=[];GYM_DRAFT.routineName='';GYM_DRAFT.routineNotes='';gymRenderRoutines();}
+function gymGroupLine(mid){
+  var m=gymMuscle(mid);if(!m)return '';
+  var names=gymGroupExercises(mid).map(function(e){return escHtml(e.name);});
+  return '<div class="gym-rt-group"><b>'+escHtml(m.name)+'</b>'+(names.length?': '+names.join(', '):': <i>no exercises yet</i>')+'</div>';
+}
+function gymEditorHtml(){
+  var editing=GYM_EDIT.routine!=null;
+  var items=GYM_DRAFT.routine.filter(function(id){return gymMuscle(id);});
+  GYM_DRAFT.routine=items;
+  var sorted=gymMusclesSorted();
+  var pick='<option value="">Choose a muscle group…</option>'+sorted.map(function(m){
+    var n=gymGroupExercises(m.id).length;
+    return '<option value="'+m.id+'"'+(items.indexOf(m.id)>=0?' disabled':'')+'>'+escHtml(m.name)+' ('+n+')</option>';}).join('');
   var list=items.length?'<ol class="gym-draft">'+items.map(function(id,i){
-      var label=isCombo?gymEx(id).name:gymCombo(id).name;
-      var sub=isCombo?(gymEx(id).muscle||''):gymCombo(id).exercise_ids.map(function(x){var e=gymEx(x);return e?e.name:null;}).filter(Boolean).join(', ');
-      return '<li><div class="gym-draft-txt"><span>'+escHtml(label)+'</span><small>'+escHtml(sub)+'</small></div><span class="gym-draft-act">'+
-        '<button type="button" class="ghost gym-xs" data-gact="'+kind+'-up" data-idx="'+i+'" aria-label="Move up"'+(i===0?' disabled':'')+'>&#8593;</button>'+
-        '<button type="button" class="ghost gym-xs" data-gact="'+kind+'-down" data-idx="'+i+'" aria-label="Move down"'+(i===items.length-1?' disabled':'')+'>&#8595;</button>'+
-        '<button type="button" class="del-btn" data-gact="'+kind+'-rm" data-idx="'+i+'" aria-label="Remove">&#215;</button></span></li>';
+      var m=gymMuscle(id),exs=gymGroupExercises(id).map(function(e){return e.name;});
+      return '<li><div class="gym-draft-txt"><span>'+escHtml(m.name)+'</span><small>'+(exs.length?escHtml(exs.join(', ')):'no exercises yet')+'</small></div><span class="gym-draft-act">'+
+        '<button type="button" class="ghost gym-xs" data-gact="routine-up" data-idx="'+i+'" aria-label="Move up"'+(i===0?' disabled':'')+'>&#8593;</button>'+
+        '<button type="button" class="ghost gym-xs" data-gact="routine-down" data-idx="'+i+'" aria-label="Move down"'+(i===items.length-1?' disabled':'')+'>&#8595;</button>'+
+        '<button type="button" class="del-btn" data-gact="routine-rm" data-idx="'+i+'" aria-label="Remove">&#215;</button></span></li>';
     }).join('')+'</ol>'
-    :'<div class="gym-hint">'+(isCombo?'No exercises added yet.':'No combos added yet.')+'</div>';
-  return '<div class="panel" id="gym-'+kind+'-form"><div class="panel-title">'+(editing?(isCombo?'Edit combo':'Edit routine'):(isCombo?'Create a combo':'Create a routine'))+'</div>'+
+    :'<div class="gym-hint">No muscle groups added yet.</div>';
+  return '<div class="panel" id="gym-routine-form"><div class="panel-title">'+(editing?'Edit routine':'Create a routine')+'</div>'+
     '<div class="form-grid">'+
-      '<div class="fg"><label for="gym-'+kind+'-name">Name</label><input type="text" id="gym-'+kind+'-name" maxlength="80" placeholder="'+(isCombo?'e.g. Chest &amp; triceps superset':'e.g. Push day')+'" value="'+escHtml(GYM_DRAFT[kind+'Name'])+'"></div>'+
-      '<div class="fg"><label for="gym-'+kind+'-notes">Notes (optional)</label><input type="text" id="gym-'+kind+'-notes" maxlength="300" value="'+escHtml(GYM_DRAFT[kind+'Notes'])+'"></div>'+
+      '<div class="fg"><label for="gym-routine-name">Name</label><input type="text" id="gym-routine-name" maxlength="80" placeholder="e.g. Push day" value="'+escHtml(GYM_DRAFT.routineName)+'"></div>'+
+      '<div class="fg"><label for="gym-routine-notes">Notes (optional)</label><input type="text" id="gym-routine-notes" maxlength="300" value="'+escHtml(GYM_DRAFT.routineNotes)+'"></div>'+
     '</div>'+
-    '<div class="gym-pick-row"><select id="gym-'+kind+'-pick" aria-label="'+(isCombo?'Exercise':'Combo')+'">'+pick+'</select>'+
-      '<button type="button" class="ghost" data-gact="'+kind+'-pick">'+(isCombo?'Add exercise':'Add combo')+'</button></div>'+
+    '<div class="gym-pick-row"><select id="gym-routine-pick" aria-label="Muscle group">'+pick+'</select>'+
+      '<button type="button" class="ghost" data-gact="routine-pick">Add group</button></div>'+
     list+
-    '<div class="btn-row" style="margin-top:10px"><button type="button" class="primary" data-gact="'+kind+'-save">'+(editing?'Save changes':(isCombo?'Save combo':'Save routine'))+'</button>'+
-      (editing||items.length||GYM_DRAFT[kind+'Name']?'<button type="button" class="ghost" data-gact="'+kind+'-cancel">'+(editing?'Cancel':'Clear')+'</button>':'')+'</div></div>';
-}
-function gymRenderCombos(){
-  var p=document.getElementById('gym-pane-combos');if(!p)return;
-  if(!GYM.ex.length){p.innerHTML='<div class="gym-empty">A combo is a group of exercises (for example a superset). Add exercises first. <button type="button" class="primary gym-sm" data-gact="view" data-gview="ex">Go to Exercises</button></div>';return;}
-  var used={};GYM.routines.forEach(function(r){r.combo_ids.forEach(function(c){used[c]=(used[c]||0)+1;});});
-  var html=gymEditorHtml('combo');
-  html+='<div class="sh">Your combos &middot; '+GYM.combos.length+'</div>';
-  if(!GYM.combos.length)html+='<div class="gym-empty">No combos yet.</div>';
-  else html+='<div class="gym-list">'+GYM.combos.slice().sort(gymByName).map(function(c){
-    var names=c.exercise_ids.map(function(x){var e=gymEx(x);return e?e.name:null;}).filter(Boolean);
-    return '<div class="gym-row"><div class="gym-row-main"><div class="gym-row-name">'+escHtml(c.name)+'</div>'+
-      '<div class="gym-row-sub">'+(names.length?names.map(escHtml).join(' &rarr; '):'<i>no exercises</i>')+(used[c.id]?' &middot; in '+gymOne(used[c.id],'routine'):'')+(c.notes?' &middot; '+escHtml(c.notes):'')+'</div></div>'+
-      '<div class="gym-row-act"><button type="button" class="ghost gym-sm" data-gact="combo-edit" data-id="'+c.id+'">Edit</button>'+
-      '<button type="button" class="del-btn" data-gact="combo-del" data-id="'+c.id+'" aria-label="Delete '+escHtml(c.name)+'">&#215;</button></div></div>';
-  }).join('')+'</div>';
-  p.innerHTML=html;
+    '<div class="btn-row" style="margin-top:10px"><button type="button" class="primary" data-gact="routine-save">'+(editing?'Save changes':'Save routine')+'</button>'+
+      (editing||items.length||GYM_DRAFT.routineName?'<button type="button" class="ghost" data-gact="routine-cancel">'+(editing?'Cancel':'Clear')+'</button>':'')+'</div></div>';
 }
 function gymRenderRoutines(){
   var p=document.getElementById('gym-pane-routines');if(!p)return;
-  if(!GYM.combos.length){p.innerHTML='<div class="gym-empty">A routine is built from combos. Create a combo first. <button type="button" class="primary gym-sm" data-gact="view" data-gview="combos">Go to Combos</button></div>';return;}
-  var html=gymEditorHtml('routine');
+  if(!GYM.muscles.length){p.innerHTML='<div class="gym-empty">A routine is a list of muscle groups (for example Push day = Chest, Shoulders, Triceps). Set up your muscle groups first. <button type="button" class="primary gym-sm" data-gact="view" data-gview="groups">Go to Muscle groups</button></div>';return;}
+  var html=gymEditorHtml();
   html+='<div class="sh">Your routines &middot; '+GYM.routines.length+'</div>';
   if(!GYM.routines.length)html+='<div class="gym-empty">No routines yet.</div>';
   else html+='<div class="gym-list">'+GYM.routines.slice().sort(gymByName).map(function(r){
-    var parts=r.combo_ids.map(function(cid){var c=gymCombo(cid);if(!c)return '';
-      var names=c.exercise_ids.map(function(x){var e=gymEx(x);return e?e.name:null;}).filter(Boolean);
-      return '<div class="gym-rt-combo"><b>'+escHtml(c.name)+'</b>'+(names.length?': '+names.map(escHtml).join(', '):'')+'</div>';}).join('');
+    var parts=r.muscle_ids.map(gymGroupLine).join('');
     return '<div class="gym-row gym-row-tall"><div class="gym-row-main"><div class="gym-row-name">'+escHtml(r.name)+'</div>'+
-      (parts||'<div class="gym-row-sub"><i>no combos</i></div>')+(r.notes?'<div class="gym-row-sub">'+escHtml(r.notes)+'</div>':'')+'</div>'+
+      (parts||'<div class="gym-row-sub"><i>no muscle groups</i></div>')+(r.notes?'<div class="gym-row-sub">'+escHtml(r.notes)+'</div>':'')+'</div>'+
       '<div class="gym-row-act"><button type="button" class="primary gym-sm" data-gact="rt-start" data-id="'+r.id+'">Start today</button>'+
       '<button type="button" class="ghost gym-sm" data-gact="routine-edit" data-id="'+r.id+'">Edit</button>'+
       '<button type="button" class="del-btn" data-gact="routine-del" data-id="'+r.id+'" aria-label="Delete '+escHtml(r.name)+'">&#215;</button></div></div>';
   }).join('')+'</div>';
   p.innerHTML=html;
 }
-async function gymSaveKind(kind){
-  gymDraftRead(kind);
-  var isCombo=kind==='combo',table=isCombo?'gym_combos':'gym_routines',field=isCombo?'exercise_ids':'combo_ids';
-  var list=isCombo?GYM.combos:GYM.routines;
-  var name=(GYM_DRAFT[kind+'Name']||'').trim().replace(/\s+/g,' ');
-  var notes=(GYM_DRAFT[kind+'Notes']||'').trim();
-  var ids=GYM_DRAFT[kind].filter(function(id){return isCombo?gymEx(id):gymCombo(id);});
-  var editing=GYM_EDIT[kind];
-  if(!name){gymToast('Enter a name',true);var n=document.getElementById('gym-'+kind+'-name');if(n)n.focus();return;}
-  if(!ids.length){gymToast(isCombo?'Add at least one exercise':'Add at least one combo',true);return;}
-  if(list.some(function(x){return x.id!==editing&&x.name.toLowerCase()===name.toLowerCase();})){gymToast('You already have "'+name+'"',true);return;}
-  var body={name:name,notes:notes};body[field]=ids;
+async function gymSaveRoutine(){
+  gymDraftRead();
+  var name=(GYM_DRAFT.routineName||'').trim().replace(/\s+/g,' ');
+  var notes=(GYM_DRAFT.routineNotes||'').trim();
+  var ids=GYM_DRAFT.routine.filter(function(id){return gymMuscle(id);});
+  var editing=GYM_EDIT.routine;
+  if(!name){gymToast('Enter a name',true);var n=document.getElementById('gym-routine-name');if(n)n.focus();return;}
+  if(!ids.length){gymToast('Add at least one muscle group',true);return;}
+  if(GYM.routines.some(function(x){return x.id!==editing&&x.name.toLowerCase()===name.toLowerCase();})){gymToast('You already have "'+name+'"',true);return;}
+  var body={name:name,notes:notes,muscle_ids:ids};
   try{
     if(editing!=null){
-      await sbPatch(table,'id=eq.'+editing,body);
-      var o=gymFind(list,editing);if(o){o.name=name;o.notes=notes;o[field]=ids.slice();}
+      await sbPatch('gym_routines','id=eq.'+editing,body);
+      var o=gymRoutine(editing);if(o){o.name=name;o.notes=notes;o.muscle_ids=ids.slice();}
     }else{
       body.user_id=_uid();
-      var saved=await sbPost(table,body);
+      var saved=await sbPost('gym_routines',body);
       var row=Array.isArray(saved)?saved[0]:saved;
-      if(row){var item={id:Number(row.id),name:row.name,notes:row.notes||''};item[field]=gymIds(row[field]);list.push(item);}
+      if(row)GYM.routines.push({id:Number(row.id),name:row.name,notes:row.notes||'',muscle_ids:gymIds(row.muscle_ids)});
     }
     gymToast((editing!=null?'Saved ':'Created ')+name);
-    gymCancelEdit(kind);
-  }catch(err){gymToast(gymErr(err),true);}
-}
-async function gymDeleteCombo(id){
-  var c=gymCombo(id);if(!c)return;
-  var inR=GYM.routines.filter(function(r){return r.combo_ids.indexOf(id)>=0;});
-  var q='Delete combo "'+c.name+'"?\n\nYour exercises and logged sets are kept.';
-  if(inR.length)q+='\n\nIt will be taken out of '+gymOne(inR.length,'routine')+': '+inR.map(function(r){return r.name;}).join(', ')+'.';
-  if(!confirm(q))return;
-  try{
-    for(var i=0;i<inR.length;i++){
-      var r=inR[i],keep=r.combo_ids.filter(function(x){return x!==id;});
-      await sbPatch('gym_routines','id=eq.'+r.id,{combo_ids:keep});
-      r.combo_ids=keep;
-    }
-    await sbDel('gym_combos','id=eq.'+id);
-    GYM.combos=GYM.combos.filter(function(x){return x.id!==id;});
-    GYM_DRAFT.routine=GYM_DRAFT.routine.filter(function(x){return x!==id;});
-    if(GYM_EDIT.combo===id){gymCancelEdit('combo');}
-    gymToast('Deleted '+c.name);
-    gymRenderCombos();
+    gymCancelEdit();
   }catch(err){gymToast(gymErr(err),true);}
 }
 async function gymDeleteRoutine(id){
   var r=gymRoutine(id);if(!r)return;
-  if(!confirm('Delete routine "'+r.name+'"?\n\nIts combos, exercises and your logged sets are kept.'))return;
+  if(!confirm('Delete routine "'+r.name+'"?\n\nYour muscle groups, exercises and logged sets are kept.'))return;
   try{
     await sbDel('gym_routines','id=eq.'+id);
     GYM.routines=GYM.routines.filter(function(x){return x.id!==id;});
-    if(GYM_EDIT.routine===id){gymCancelEdit('routine');}
+    if(GYM_EDIT.routine===id){gymCancelEdit();}
     gymToast('Deleted '+r.name);
     gymRenderRoutines();
   }catch(err){gymToast(gymErr(err),true);}
@@ -2881,24 +2967,24 @@ function gymDrawOverall(events){
   weeks.forEach(function(w){dayByWeek[w]={};});
   GYM.sets.forEach(function(s){
     if(s.date<first||s.date>last)return;
-    var w=gymWeekStart(s.date),e=gymEx(s.exercise_id),m=e?(e.muscle||'Other'):'Other';
+    var w=gymWeekStart(s.date),e=gymEx(s.exercise_id),m=gymMuscleName(e);
     mus[m]=mus[m]||weeks.map(function(){return 0;});
     mus[m][weeks.indexOf(w)]+=s.weight*s.reps;
     if(dayByWeek[w])dayByWeek[w][s.date]=1;
   });
-  var order=GYM_MUSCLES.concat(Object.keys(mus).filter(function(k){return GYM_MUSCLES.indexOf(k)<0;})).filter(function(m){return mus[m];});
+  var order=gymGroupOrder(mus);
   var labels=weeks.map(function(w){return fmtS(w);});
-  gymChart('gym-c-wk',{type:'bar',data:{labels:labels,datasets:order.map(function(m){return{label:m,data:mus[m].map(function(v){return Math.round(v);}),backgroundColor:GYM_COLORS[m]||'#9a9a9a',borderRadius:2,stack:'v'};})},
+  gymChart('gym-c-wk',{type:'bar',data:{labels:labels,datasets:order.map(function(m){return{label:m,data:mus[m].map(function(v){return Math.round(v);}),backgroundColor:gymColor(m),borderRadius:2,stack:'v'};})},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10}}}},
       scales:{x:{stacked:true,ticks:{maxTicksLimit:12,font:{size:10}},grid:{display:false}},y:{stacked:true,ticks:{font:{size:10}},grid:{color:'rgba(0,0,0,.05)'}}}}});
   gymChart('gym-c-freq',{type:'bar',data:{labels:labels,datasets:[{data:weeks.map(function(w){return Object.keys(dayByWeek[w]).length;}),backgroundColor:'rgba(26,107,74,.55)',borderRadius:3}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{maxTicksLimit:6,font:{size:10}},grid:{display:false}},y:{beginAtZero:true,suggestedMax:4,ticks:{precision:0,font:{size:10}},grid:{color:'rgba(0,0,0,.05)'}}}}});
   var d30=gymAddDays(td,-29),split={};
-  GYM.sets.forEach(function(s){if(s.date<d30||s.date>td)return;var e=gymEx(s.exercise_id),m=e?(e.muscle||'Other'):'Other';split[m]=(split[m]||0)+1;});
+  GYM.sets.forEach(function(s){if(s.date<d30||s.date>td)return;var e=gymEx(s.exercise_id),m=gymMuscleName(e);split[m]=(split[m]||0)+1;});
   var sk=Object.keys(split).sort(function(a,b){return split[b]-split[a];});
   var splitWrap=document.getElementById('gym-c-split');
   if(sk.length){
-    gymChart('gym-c-split',{type:'doughnut',data:{labels:sk.map(function(m){return m+' ('+split[m]+')';}),datasets:[{data:sk.map(function(m){return split[m];}),backgroundColor:sk.map(function(m){return GYM_COLORS[m]||'#9a9a9a';}),borderWidth:1}]},
+    gymChart('gym-c-split',{type:'doughnut',data:{labels:sk.map(function(m){return m+' ('+split[m]+')';}),datasets:[{data:sk.map(function(m){return split[m];}),backgroundColor:sk.map(function(m){return gymColor(m);}),borderWidth:1}]},
       options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'right',labels:{boxWidth:10,font:{size:10}}}}}});
   }else if(splitWrap){splitWrap.parentNode.innerHTML='<div class="gym-hint" style="padding:20px 0">No sets in the last 30 days.</div>';}
   var list=document.getElementById('gym-pr-list');
@@ -2935,21 +3021,19 @@ function gymBind(){
       case 'ex-cancel':GYM_EDIT.ex=null;gymRenderExercises();break;
       case 'ex-del':gymDeleteExercise(id);break;
       case 'starter':gymAddStarter();break;
-      case 'combo-pick':gymDraftAdd('combo');break;
-      case 'combo-up':gymDraftMove('combo',idx,-1);break;
-      case 'combo-down':gymDraftMove('combo',idx,1);break;
-      case 'combo-rm':gymDraftRm('combo',idx);break;
-      case 'combo-save':gymSaveKind('combo');break;
-      case 'combo-cancel':gymCancelEdit('combo');break;
-      case 'combo-edit':gymStartEdit('combo',id);break;
-      case 'combo-del':gymDeleteCombo(id);break;
-      case 'routine-pick':gymDraftAdd('routine');break;
-      case 'routine-up':gymDraftMove('routine',idx,-1);break;
-      case 'routine-down':gymDraftMove('routine',idx,1);break;
-      case 'routine-rm':gymDraftRm('routine',idx);break;
-      case 'routine-save':gymSaveKind('routine');break;
-      case 'routine-cancel':gymCancelEdit('routine');break;
-      case 'routine-edit':gymStartEdit('routine',id);break;
+      case 'mg-add':gymAddGroup();break;
+      case 'mg-usual':gymAddUsualGroups();break;
+      case 'mg-edit':GYM_EDIT.muscle=id;gymRenderGroups();var rn=document.getElementById('gym-mg-rename');if(rn){rn.focus();rn.select();}break;
+      case 'mg-save':gymRenameGroup(id);break;
+      case 'mg-cancel':GYM_EDIT.muscle=null;gymRenderGroups();break;
+      case 'mg-del':gymDeleteGroup(id);break;
+      case 'routine-pick':gymDraftAdd();break;
+      case 'routine-up':gymDraftMove(idx,-1);break;
+      case 'routine-down':gymDraftMove(idx,1);break;
+      case 'routine-rm':gymDraftRm(idx);break;
+      case 'routine-save':gymSaveRoutine();break;
+      case 'routine-cancel':gymCancelEdit();break;
+      case 'routine-edit':gymStartEdit(id);break;
       case 'routine-del':gymDeleteRoutine(id);break;
       case 'rt-start':GYM_VIEW='log';GYM_DATE=today();renderGym();gymLoadRoutine(id);break;
       case 'log-day':gymShiftDay(parseInt(t.getAttribute('data-d'),10)||0);break;
@@ -2971,6 +3055,8 @@ function gymBind(){
     if(t.classList&&(t.classList.contains('gym-in-w')||t.classList.contains('gym-in-r'))){
       ev.preventDefault();var card=t.closest('.gym-card'),b=card&&card.querySelector('[data-gact="set-add"]');if(b&&!b.disabled)b.click();
     }else if(t.id==='gym-ex-name'||t.id==='gym-ex-notes'){ev.preventDefault();gymSaveExercise();}
+    else if(t.id==='gym-mg-name'){ev.preventDefault();gymAddGroup();}
+    else if(t.id==='gym-mg-rename'){ev.preventDefault();gymRenameGroup(GYM_EDIT.muscle);}
   });
 }
 
